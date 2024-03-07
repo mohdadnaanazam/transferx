@@ -1,13 +1,15 @@
 "use client"
 import React from "react"
 import { BackgroundGradient } from "../../../ui/background-gradient"
+import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 
-export const BackgroundGradientCard = () => {
+export const UploadCard = () => {
   return (
-    <BackgroundGradient className="rounded-[22px] max-w-sm p-2 sm:p-10 bg-white dark:bg-zinc-900">
-      <div className="h-48 border rounded-[22px]">
-      upload icon
+    <BackgroundGradient className="rounded-[22px] p-1 sm:p-5 border bg-zinc-900">
+      <div className="h-56 border rounded-[22px] flex justify-center items-center">
+        <CloudUploadOutlinedIcon sx={{ fontSize: '150px', color: 'white' }} />
       </div>
+
       <p className="text-base sm:text-xl mt-4 mb-2 text-neutral-200">
         Upload files
       </p>
