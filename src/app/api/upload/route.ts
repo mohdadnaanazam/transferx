@@ -4,7 +4,9 @@ import { v4 as uuidv4 } from 'uuid'
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 
 export async function POST(request: Request) {
-  const { filename, contentType } = await request.json()
+  const { contentType } = await request.json()
+
+  const objectKey = uuidv4()
 
   try {
     const client = new S3Client({
@@ -17,13 +19,13 @@ export async function POST(request: Request) {
 
     const putObjectCommand = new PutObjectCommand({
       Bucket: 'transferr.me',
-      Key: uuidv4(),
+      Key: objectKey,
       ContentType: contentType
     })
     
     const url = await getSignedUrl(client, putObjectCommand)
 
-    return Response.json({ url })
+    return Response.json({ url, key: objectKey })
   } catch (error: any) {
     return Response.json({ error: error.message })
   }

@@ -5,6 +5,7 @@ import { useState } from 'react'
 export default function Page() {
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
+  const [shareLink, setShareLink] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -20,23 +21,30 @@ export default function Page() {
       process.env.NEXT_PUBLIC_BASE_URL + '/api/upload',
       {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ filename: file.name, contentType: file.type }),
       }
     )
 
-    const signedURLResponse = await response.json()
+    const signedUploadResponse = await response.json()
 
-    const signedURL = signedURLResponse.url
+    const signedURL = signedUploadResponse.url
+    const objectKey = signedUploadResponse.key
 
     await fetch(signedURL, {
       method: 'PUT',
       body: file,
       headers: { "Content-Type": file.type }
     })
-    setUploading(false)
+
+    const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
+      method: 'GET'
+    })
+
+    const shareableURL = await getSignedURL.json()
+
+    setShareLink(shareableURL.url)
+    
   }
 
   return (
@@ -52,12 +60,14 @@ export default function Page() {
               setFile(files[0])
             }
           }}
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, application/pdf"
         />
         <button type="submit" disabled={uploading}>
           Upload
         </button>
       </form>
+
+      {shareLink && <a  target='_blank' href={shareLink}>here is your link</a>}
     </main>
   )
 }
