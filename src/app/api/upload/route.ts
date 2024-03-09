@@ -11,7 +11,6 @@ export async function POST(request: Request) {
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 1);
 
-
   try {
     const client = new S3Client({
       credentials: {
@@ -24,11 +23,10 @@ export async function POST(request: Request) {
     const putObjectCommand = new PutObjectCommand({
       Bucket: 'transferr.me',
       Key: objectKey,
-      ContentType: contentType,
-      Expires: expirationDate
+      ContentType: contentType
     })
 
-    const url = await getSignedUrl(client, putObjectCommand)
+    const url = await getSignedUrl(client, putObjectCommand, { expiresIn: 24 * 60 * 60 })
 
     return Response.json({ url, key: objectKey })
   } catch (error: any) {
