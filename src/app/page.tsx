@@ -1,11 +1,13 @@
 'use client'
 
+import axios from 'axios'
 import { useState } from 'react'
 
 export default function Page() {
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
   const [shareLink, setShareLink] = useState('')
+  const [progress, setProgress] = useState<null | number>(0)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -31,11 +33,26 @@ export default function Page() {
     const signedURL = signedUploadResponse.url
     const objectKey = signedUploadResponse.key
 
-    await fetch(signedURL, {
-      method: 'PUT',
-      body: file,
-      headers: { "Content-Type": file.type }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    await axios.put(signedURL, file, {
+      headers: {
+        'Content-Type': file.type
+      },
+      onUploadProgress: (progressEvent: any) => {
+        if (progressEvent.bytes) {
+          setProgress(Math.round((progressEvent.loaded / progressEvent.total) * 100))
+        }
+      },
     })
+      .then(response => {
+        console.log('File uploaded successfully:', response);
+      })
+      .catch(error => {
+        console.error('Error uploading file:', error);
+      });
 
     const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
       method: 'GET'
@@ -44,8 +61,10 @@ export default function Page() {
     const shareableURL = await getSignedURL.json()
 
     setShareLink(shareableURL.url)
-    
+
   }
+
+  console.log(shareLink)
 
   return (
     <main>
@@ -67,7 +86,8 @@ export default function Page() {
         </button>
       </form>
 
-      {shareLink && <a  target='_blank' href={shareLink}>here is your link</a>}
+      {shareLink && <a target='_blank' href={shareLink}>here is your link</a>}
+      {progress && <p>{progress}%</p>}
     </main>
   )
 }
