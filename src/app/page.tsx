@@ -79,7 +79,7 @@ export default function Page() {
               setFile(files[0])
             }
           }}
-          accept="image/png, image/jpeg, application/pdf"
+          accept="image/png, image/jpeg, application/pdf, video/mp4, video/mpeg, video/quicktime"
         />
         <button type="submit" disabled={uploading}>
           Upload
