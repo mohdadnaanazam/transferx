@@ -17,7 +17,7 @@ export const CardWithForm = () => {
 
   // states
   const [file, setFile] = useState<File | null>(null)
-  const [uploading, setUploading] = useState(false)
+  const [uplaodedFileName, setUplaodedFileName] = useState('')
   const [shareLink, setShareLink] = useState('')
   const [progress, setProgress] = useState<null | number>(0)
 
@@ -27,8 +27,6 @@ export const CardWithForm = () => {
       alert('Please select a file to upload.')
       return
     }
-
-    setUploading(true)
 
     const response = await fetch(
       process.env.NEXT_PUBLIC_BASE_URL + '/api/upload',
@@ -59,7 +57,8 @@ export const CardWithForm = () => {
       },
     })
       .then(response => {
-        console.log('File uploaded successfully:', response)
+        setUplaodedFileName(response?.config?.data?.name || 'unknown')
+        console.log('File uploaded successfully:', response.config.data.name)
       })
       .catch(error => {
         console.error('Error uploading file:', error)
@@ -98,7 +97,7 @@ export const CardWithForm = () => {
 
 
         {shareLink && <a target='_blank' href={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}>{`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}</a>}
-        
+
         <div className="flex items-center gap-4">
           <Progress value={progress} />
           <p className="font-bold">{progress}%</p>
@@ -110,7 +109,7 @@ export const CardWithForm = () => {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-2">
               <Label htmlFor="name">Filename</Label>
-              <Input id="name" placeholder="filename" />
+              <Input id="name" placeholder="filename" value={uplaodedFileName} />
             </div>
             <div className="flex flex-col space-y-2">
               <Label htmlFor="framework">Expiry</Label>
