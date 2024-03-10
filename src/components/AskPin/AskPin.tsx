@@ -29,10 +29,6 @@ export const AskPin = (props: Props): JSX.Element => {
     setIsMounted(true)
   }, []);
 
-  if (!isMounted) {
-    return <></>
-  }
-
   /**
    * @description Handle to unlock pin
    * @returns void
@@ -53,6 +49,11 @@ export const AskPin = (props: Props): JSX.Element => {
     }
 
     setIsLoading(false)
+  }
+
+  // for hydration issue
+  if (!isMounted) {
+    return <></>
   }
 
   return (
