@@ -15,11 +15,7 @@ export async function POST(request: Request) {
     }
     const shorten_slug = generateUniqueSlug();
 
-    const newEntry = new ShareableLink({
-      s3_url,
-      shorten_slug,
-      pin: 123456
-    })
+    const newEntry = new ShareableLink({ s3_url, shorten_slug })
 
     try {
       await newEntry.save()
