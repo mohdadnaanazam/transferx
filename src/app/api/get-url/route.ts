@@ -24,6 +24,23 @@ export async function GET(request: Request) {
 
     const url = await getSignedUrl(client, getObjectCommand)
 
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ s3_url: url }),
+      });
+
+      if (response.ok) {
+        const { url } = await response.json()
+        return Response.json({ url })
+      } else {
+        console.error('Error:', response.status)
+      }
+    } catch (error) {
+      console.error('Error:', error)
+    }
+
     return Response.json({ url })
   } catch (error: any) {
     return Response.json({ error: error.message })

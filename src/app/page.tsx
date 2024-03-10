@@ -64,7 +64,7 @@ export default function Page() {
 
   }
 
-  console.log(shareLink)
+  console.log(`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`)
 
   return (
     <main>
@@ -86,7 +86,7 @@ export default function Page() {
         </button>
       </form>
 
-      {shareLink && <a target='_blank' href={shareLink}>here is your link</a>}
+      {shareLink && <a target='_blank' href={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}>{`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}</a>}
       {progress && <p>{progress}%</p>}
     </main>
   )
