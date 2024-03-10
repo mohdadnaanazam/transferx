@@ -3,7 +3,7 @@ import connectToDatabase from "../../../config/mongodb";
 import ShareableLink from "@/models/shareableSchema";
 
 async function redirectUser(shorten_slug: string) {
-  await connectToDatabase();
+  await connectToDatabase()
 
   try {
     const shareableLink = await ShareableLink.findOne({ shorten_slug }).exec();
