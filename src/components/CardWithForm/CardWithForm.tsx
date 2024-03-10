@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Progress } from "../ui/progress"
 
+export const runtime = 'nodejs'
+
 export const CardWithForm = () => {
   // init
   const inputRef = useRef<HTMLInputElement>(null)
@@ -65,9 +67,13 @@ export const CardWithForm = () => {
         console.error('Error uploading file:', error)
       })
 
-    const getSignedURLResponse = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`)
+    const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
+      method: 'GET',
+    })
 
-    setShareLink(getSignedURLResponse?.data?.url)
+    const shareableURL = await getSignedURL.json()
+    setShareLink(shareableURL.url)
+
   }
 
   return (
