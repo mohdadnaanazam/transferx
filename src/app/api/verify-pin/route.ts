@@ -5,10 +5,9 @@ export async function POST(request: Request) {
   try {
     const data = await request.json()
 
-    const shareableLink = await shareableLinkSchema.findById(data.linkId)
+    const shareableLink = await shareableLinkSchema.findById(data.linkId).select('pin')
 
     let isCorrectPin = false
-    // console.log(shareableLink.pin data.pin)
 
     if (shareableLink.pin.toString() === data.pin.toString()) {
       isCorrectPin = true

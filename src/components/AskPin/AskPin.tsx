@@ -41,7 +41,7 @@ export const AskPin = (props: Props): JSX.Element => {
     })
 
     const jsonResponse = await response.json()
-
+    
     if (!jsonResponse.is_pin_matched) {
       toast({ title: "Wrong PIN", description: "Please enter correct pin" })
     } else {
