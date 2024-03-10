@@ -1,13 +1,14 @@
 'use client'
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { DatePicker } from "../DatePicker"
 import { CirclePlus, Lock } from "lucide-react"
 import { useRef, useState } from "react"
 import axios from "axios"
+
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { DatePicker } from "../DatePicker"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Progress } from "../ui/progress"
 
 export const CardWithForm = () => {
@@ -58,11 +59,11 @@ export const CardWithForm = () => {
       },
     })
       .then(response => {
-        console.log('File uploaded successfully:', response);
+        console.log('File uploaded successfully:', response)
       })
       .catch(error => {
-        console.error('Error uploading file:', error);
-      });
+        console.error('Error uploading file:', error)
+      })
 
     const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
       method: 'GET'
