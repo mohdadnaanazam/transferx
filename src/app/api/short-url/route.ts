@@ -1,8 +1,6 @@
-import mongoose from 'mongoose';
-
-import connectToDatabase from "../../../../config/mongodb";
-import ShareableLink from '@/models/shareableSchema';
-import { generateUniqueKey as generateUniqueSlug } from "@/app/utils/generateUniqueKey";
+import connectToDatabase from "../../../../config/mongodb"
+import ShareableLink from '@/models/shareableSchema'
+import { generateUniqueKey as generateUniqueSlug } from "@/app/utils/generateUniqueKey"
 
 export async function POST(request: Request) {
   try {
@@ -19,11 +17,13 @@ export async function POST(request: Request) {
 
     const newEntry = new ShareableLink({
       s3_url,
-      shorten_slug
-    });
+      shorten_slug,
+      pin: 123456
+    })
 
     try {
-      await newEntry.save();
+      await newEntry.save()
+
       return Response.json({ url: shorten_slug });
     } catch (saveError) {
       console.error('Error saving entry:', saveError);
