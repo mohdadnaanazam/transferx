@@ -65,13 +65,9 @@ export const CardWithForm = () => {
         console.error('Error uploading file:', error)
       })
 
-    const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
-      method: 'GET'
-    })
+    const getSignedURLResponse = await axios.get(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`)
 
-    const shareableURL = await getSignedURL.json()
-    setShareLink(shareableURL.url)
-
+    setShareLink(getSignedURLResponse?.data?.url)
   }
 
   return (

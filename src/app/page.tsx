@@ -1,6 +1,4 @@
 import { CardWithForm } from '@/components/CardWithForm'
-import axios from 'axios'
-import { useState } from 'react'
 
 export default function Page() {
   return (
