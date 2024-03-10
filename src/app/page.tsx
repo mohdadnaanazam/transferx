@@ -59,7 +59,6 @@ export default function Page() {
     })
 
     const shareableURL = await getSignedURL.json()
-
     setShareLink(shareableURL.url)
 
   }

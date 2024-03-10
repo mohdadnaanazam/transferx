@@ -1,27 +1,25 @@
-import { Db, MongoClient } from "mongodb"
+import mongoose from 'mongoose';
 
-let cachedDB: Db | null = null
+let cachedDB: mongoose.Connection | null = null;
 
-export default async function connectToDatabase(): Promise<Db> {
+export default async function connectToDatabase(): Promise<mongoose.Connection> {
   if (cachedDB) {
-    console.info("Using cached client!")
-    return cachedDB
+    console.info("Using cached connection!");
+    return cachedDB;
   }
 
-  console.info("No client found! Creating a new one.")
+  console.info("No connection found! Creating a new one.");
 
-  const uri = process.env.MONGOURI as string
-  const dbName = process.env.DB_NAME as string
-
-  const client = new MongoClient(uri)
+  const uri = process.env.MONGOURI as string;
+  const dbName = process.env.DB_NAME as string;
 
   try {
-    await client.connect()
-    const db: Db = client.db(dbName)
-    cachedDB = db
-    return cachedDB
+    const connection = await mongoose.connect(uri, { dbName });
+    console.info(`Connected to MongoDB: ${uri}`);
+    cachedDB = connection.connection;
+    return cachedDB;
   } catch (error) {
-    console.error("Error connecting to MongoDB:", error)
-    throw error
+    console.error("Error connecting to MongoDB:", error);
+    throw error;
   }
 }

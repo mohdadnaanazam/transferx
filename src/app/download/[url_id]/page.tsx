@@ -1,24 +1,33 @@
 import Link from "next/link";
-import { ObjectId } from "mongodb";
+import mongoose from 'mongoose';
 
 import connectToDatabase from "../../../../config/mongodb";
+import ShareableLink from "@/models/shareableSchema";
 
 async function getS3_link(id: string) {
-  const database = await connectToDatabase();
-  const campaign = await database.collection('urls').findOne({_id : new ObjectId(id)});
+  await connectToDatabase();
 
-  if (campaign) {
+  try {
+    const shareableLink = await ShareableLink.findOne({ _id: new mongoose.Types.ObjectId(id) }).exec();
+
+    if (shareableLink) {
+      return {
+        destination: `${shareableLink.s3_url}`,
+      };
+    }
+
     return {
-      destination: `${campaign.s3_url}`,
+      destination: '/404',
+    };
+  } catch (error) {
+    console.error("Error getting S3 link:", error);
+    return {
+      destination: '/404',
     };
   }
-
-  return {
-    destination: '/404',
-  };
 }
 
-export default async function Page({ params }: { params: { url_id: string } }) {
+export default async function Download({ params }: { params: { url_id: string } }) {
   const url = await getS3_link(params.url_id);
 
   return <Link href={url.destination}>Download</Link>;
