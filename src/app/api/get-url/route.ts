@@ -22,7 +22,7 @@ export async function GET(request: Request) {
       Key: objectKey,
     })
 
-    const url = await getSignedUrl(client, getObjectCommand, { expiresIn: 20 })
+    const url = await getSignedUrl(client, getObjectCommand)
 
     return Response.json({ url })
   } catch (error: any) {
