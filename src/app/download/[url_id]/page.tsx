@@ -4,6 +4,11 @@ import mongoose from 'mongoose';
 import connectToDatabase from "../../../../config/mongodb";
 import ShareableLink from "@/models/shareableSchema";
 import { AskPin } from "@/components/AskPin";
+import { PreviewPanel } from "@/components/PreviewPanel";
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { CircleArrowDown } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 async function getS3_link(id: string) {
   await connectToDatabase();
@@ -30,9 +35,29 @@ export default async function Download({ params }: { params: { url_id: string } 
   const url = await getS3_link(params.url_id)
 
   return (
-    <main>
+    <main className="flex mt-36 p-12 overflow-y-hidden">
       {url && <AskPin visible={url.is_pin_protected} linkId={params.url_id} />}
-      <Link href={url.s3_url}>Download</Link>
+      <div className="flex justify-between w-full">
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle className="flex items-center cursor-pointer">
+              <CircleArrowDown size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-700" />
+              Download
+            </CardTitle>
+            <CardDescription>Preview or download youor file</CardDescription>
+
+          </CardHeader>
+          <CardContent className="space-x-6">
+            <PreviewPanel url={url.s3_url} type={url.file_type} />
+            <Button>Download</Button>
+          </CardContent>
+        </Card>
+        <div className='w-1/2 flex justify-center items-center flex-row space-x-5 relative'>
+          <div className='bg-green-700 w-2 h-28 mt-6'></div>
+          <h1 className='text-[120px] font-medium'>transferr</h1>
+          <p className='absolute bottom-0 right-36 text-lg font-normal'>where files fly faster</p>
+        </div>
+      </div>
     </main>
   )
 }

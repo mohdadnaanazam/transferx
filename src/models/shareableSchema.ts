@@ -29,6 +29,10 @@ const shareableLinkSchema = new Schema({
     type: Date,
     default: null
   },
+  file_type: {
+    type: String,
+    default: null
+  },
 }, {
   timestamps: true
 })
@@ -36,7 +40,7 @@ const shareableLinkSchema = new Schema({
 shareableLinkSchema.pre('save', async function (next) {
   // at first time we are passing the field therefore, we can say that we are modifying the field
   if (this.isModified('pin')) {
-    this.is_pin_protected = true
+    (this.pin !== null) ? this.is_pin_protected = true : this.is_pin_protected = false
   }
   next()
 })

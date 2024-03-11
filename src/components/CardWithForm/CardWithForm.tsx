@@ -1,7 +1,7 @@
 'use client'
 
 import axios from "axios"
-import { CirclePlus, Lock } from "lucide-react"
+import { CirclePlus } from "lucide-react"
 import { useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -79,7 +79,7 @@ export const CardWithForm = () => {
       const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ s3_url: s3_url.url, pin: pin }),
+        body: JSON.stringify({ s3_url: s3_url.url, pin: pin, file_type: file.type }),
       });
 
       if (response.ok) {
