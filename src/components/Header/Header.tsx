@@ -1,9 +1,10 @@
 'use client'
-import { Button } from "../ui/button"
 import Link from "next/link"
 
-export const Header = ({ themeIcon, isLight, setIsLight }: any) => {
+import { Button } from "../ui/button"
+import { ThemeToggle } from "../ThemeToggle"
 
+export const Header = () => {
   return (
     <div className="p-3 flex flex-row justify-between">
       <div className='flex justify-center items-center flex-row space-x-2'>
@@ -12,8 +13,10 @@ export const Header = ({ themeIcon, isLight, setIsLight }: any) => {
       </div>
       <div className="flex flex-row justify-around w-1/6 items-center">
         <Link href={'/'}>Pricing</Link>
+        
         <Button>Register</Button>
-        <div onClick={() => setIsLight(!isLight)}>{themeIcon}</div>
+
+        <ThemeToggle />
       </div>
     </div>
   )

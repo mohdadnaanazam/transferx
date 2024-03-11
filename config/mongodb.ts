@@ -10,7 +10,7 @@ export default async function connectToDatabase(): Promise<mongoose.Connection> 
 
   console.info("No connection found! Creating a new one.");
 
-  const uri = process.env.MONGOURI as string;
+  const uri = process.env.DB_URI as string;
   const dbName = process.env.DB_NAME as string;
 
   try {
