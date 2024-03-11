@@ -1,15 +1,17 @@
 'use client'
 
+import axios from "axios"
 import { CirclePlus, Lock } from "lucide-react"
 import { useRef, useState } from "react"
-import axios from "axios"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { DatePicker } from "../DatePicker"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { CopyURLDialog } from "../CopyURLDialog"
+import { DatePicker } from "../DatePicker"
 import { Progress } from "../ui/progress"
+import { SetPin } from "../AskPin/SetPin"
 
 export const runtime = 'nodejs'
 
@@ -22,6 +24,7 @@ export const CardWithForm = () => {
   const [uplaodedFileName, setUplaodedFileName] = useState('')
   const [shareLink, setShareLink] = useState('')
   const [progress, setProgress] = useState<null | number>(0)
+  const [pin, setPin] = useState<null | string>(null)
 
   const handleSubmit = async () => {
 
@@ -70,9 +73,25 @@ export const CardWithForm = () => {
       method: 'GET',
     })
 
-    const shareableURL = await getSignedURL.json()
-    setShareLink(shareableURL.url)
+    const s3_url = await getSignedURL.json()
 
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ s3_url: s3_url.url, pin: pin }),
+      });
+
+      if (response.ok) {
+        const { url } = await response.json()
+        setShareLink(url)
+      } else {
+        console.error('Error:', response.status)
+      }
+
+    } catch (error) {
+      console.error('Error:', error)
+    }
   }
 
   return (
@@ -97,13 +116,10 @@ export const CardWithForm = () => {
           accept="image/png, image/jpeg, application/pdf, video/mp4, video/mpeg, video/quicktime"
         />
 
-
-        {shareLink && <a target='_blank' href={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}>{`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`}</a>}
-
-        <div className="flex items-center gap-4">
+        {file && <div className="flex items-center gap-4">
           <Progress value={progress} />
           <p className="font-bold">{progress}%</p>
-        </div>
+        </div>}
 
       </CardHeader>
       <CardContent>
@@ -121,7 +137,8 @@ export const CardWithForm = () => {
         </form>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant="outline" className="space-x-2 p-3 flex flex-row justify-between w-32"> Lock with pin <Lock size={16} strokeWidth={1.25} /></Button>
+        <CopyURLDialog progress={progress} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`} />
+        <SetPin setPin={setPin} />
         <Button onClick={handleSubmit}>Generate Link</Button>
       </CardFooter>
     </Card>
