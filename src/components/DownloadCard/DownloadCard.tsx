@@ -6,53 +6,48 @@ import { CircleArrowDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 type DownloadCardProps = {
-  url: {
-    s3_url: string
-    file_type: string
-  }
+  s3URL: string
+  fileType: string
+  fileName: string
 }
 
 const handleDownload = async (s3Url: string, filename: string, file_type: string) => {
   try {
-    const res = await fetch(s3Url, {
-      method: 'GET',
-    })
+    const extension = file_type.split('/')[1] || 'unknown';
 
-    const blob = await res.blob()
-    const newBlob = new Blob([blob])
+    const link = document.createElement('a');
+    link.href = s3Url;
+    link.setAttribute('download', ''); // Set download attribute to empty string
+    link.setAttribute('target', '_blank'); // Open link in a new tab/window
 
-    const blobUrl = window.URL.createObjectURL(newBlob)
+    // Set a dummy attribute to force download in Firefox
+    link.setAttribute('rel', 'noopener noreferrer');
 
-    const link = document.createElement('a')
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
-    const extension = file_type.split('/')[1] || 'unknown'
-
-    link.href = blobUrl
-    link.setAttribute('download', `${filename}.${extension}`)
-    document.body.appendChild(link)
-    link.click()
-    link.parentNode?.removeChild(link)
-
-    window.URL.revokeObjectURL(blobUrl)
+    alert('Processed');
   } catch (error: any) {
-    console.error('Error downloading file:', error.message)
+    console.error('Error downloading file:', error.message);
   }
-}
+};
 
-export const DownloadCard: React.FC<DownloadCardProps> = ({ url }) => {
+
+export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fileName }) => {
   return (
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle className="flex items-center cursor-pointer">
-          <CircleArrowDown size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-700" />
+          <CircleArrowDown size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-0" />
           Download
         </CardTitle>
         <CardDescription>Preview or download your file</CardDescription>
       </CardHeader>
+
       <CardContent className="space-x-6">
-        <PreviewPanel url={url.s3_url} type={url.file_type} />
-        {/* TODO: Need to add filename in schema */}
-        <Button onClick={() => handleDownload(url.s3_url, 'xyz', url.file_type)}>Download</Button>
+        <PreviewPanel url={s3URL} type={fileType} />
+        <Button onClick={() => handleDownload(s3URL, fileName, fileType)}>Download</Button>
       </CardContent>
     </Card>
   )

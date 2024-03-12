@@ -33,6 +33,10 @@ const shareableLinkSchema = new Schema({
     type: String,
     default: null
   },
+  file_name: {
+    type: String,
+    required: true
+  }
 }, {
   timestamps: true
 })
