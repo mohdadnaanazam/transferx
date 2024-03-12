@@ -36,6 +36,10 @@ const shareableLinkSchema = new Schema({
   file_name: {
     type: String,
     required: true
+  },
+  downloadable_url: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true

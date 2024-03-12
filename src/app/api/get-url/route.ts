@@ -2,11 +2,9 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
+  const { key, extension, filename } = await request.json();
 
-  const url = request.url
-  
-  const objectKey = url?.split("=")?.[1]
 
   try {
     const client = new S3Client({
@@ -19,13 +17,20 @@ export async function GET(request: Request) {
 
     const getObjectCommand = new GetObjectCommand({
       Bucket: process.env.AWS_S3_BUCKET,
-      Key: objectKey,
-      // ResponseContentDisposition: 'attachment; filename=adnaan.mp4'
+      Key: key,
+    })
+
+    const getObjectCommandAttachment = new GetObjectCommand({
+      Bucket: process.env.AWS_S3_BUCKET,
+      Key: key,
+      ResponseContentDisposition: `attachment; filename=${encodeURIComponent(filename)}.${extension}`
     })
 
     const url = await getSignedUrl(client, getObjectCommand)
 
-    return Response.json({ url })
+    const downloadableURL = await getSignedUrl(client, getObjectCommandAttachment)
+
+    return Response.json({ url, downloadableURL })
   } catch (error: any) {
     return Response.json({ error: error.message })
   }

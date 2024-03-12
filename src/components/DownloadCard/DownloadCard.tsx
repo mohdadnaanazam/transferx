@@ -9,6 +9,7 @@ type DownloadCardProps = {
   s3URL: string
   fileType: string
   fileName: string
+  downloadableURL: string
 }
 
 const handleDownload = async (s3Url: string, filename: string, file_type: string) => {
@@ -34,7 +35,7 @@ const handleDownload = async (s3Url: string, filename: string, file_type: string
 };
 
 
-export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fileName }) => {
+export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fileName, downloadableURL }) => {
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -47,7 +48,8 @@ export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fil
 
       <CardContent className="space-x-6">
         <PreviewPanel url={s3URL} type={fileType} />
-        <Button onClick={() => handleDownload(s3URL, fileName, fileType)}>Download</Button>
+        
+        <Button onClick={() => handleDownload(downloadableURL, fileName, fileType)}>Download</Button>
       </CardContent>
     </Card>
   )

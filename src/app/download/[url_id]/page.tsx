@@ -33,7 +33,8 @@ export default async function Download({ params }: { params: { url_id: string } 
     <main className="flex mt-36 p-12 overflow-y-hidden">
       {url && <AskPin visible={url.is_pin_protected} linkId={params.url_id} />}
       <div className="flex justify-between w-full">
-        <DownloadCard s3URL={url.s3_url} fileType={url.file_type} fileName={url.file_name} />
+        <DownloadCard s3URL={url.s3_url} downloadableURL={url.downloadable_url} fileType={url.file_type} fileName={url.file_name} />
+
         <div className='w-1/2 flex justify-center items-center flex-row space-x-5 relative'>
           <div className='bg-green-0 w-2 h-28 mt-6'></div>
           <h1 className='text-[120px] font-medium'>transferr</h1>

@@ -66,8 +66,13 @@ export const CardWithForm = () => {
         console.error('Error uploading file:', error)
       })
 
-    const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url?key=${objectKey}`, {
-      method: 'GET',
+    const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url`, {
+      method: 'POST',
+      body: JSON.stringify({
+        key: objectKey,
+        extension: mime.getExtension(file.type),
+        filename
+      })
     })
 
     const s3_url = await getSignedURL.json()
@@ -76,7 +81,7 @@ export const CardWithForm = () => {
       const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ s3_url: s3_url.url, pin: pin, file_type: file.type, file_name: filename })
+        body: JSON.stringify({ s3_url: s3_url.url, pin: pin, file_type: file.type, file_name: filename, downloadable_url: s3_url.downloadableURL })
       })
 
       if (response.ok) {
