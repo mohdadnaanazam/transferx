@@ -20,6 +20,7 @@ export async function GET(request: Request) {
     const getObjectCommand = new GetObjectCommand({
       Bucket: process.env.AWS_S3_BUCKET,
       Key: objectKey,
+      // ResponseContentDisposition: 'attachment; filename=adnaan.mp4'
     })
 
     const url = await getSignedUrl(client, getObjectCommand)

@@ -4,7 +4,7 @@ import { generateUniqueKey as generateUniqueSlug } from "@/app/utils/generateUni
 
 export async function POST(request: Request) {
   try {
-    const { s3_url, pin } = await request.json();
+    const { s3_url, pin, file_type, file_name } = await request.json();
 
     await connectToDatabase();
 
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     }
     const shorten_slug = generateUniqueSlug();
 
-    const newEntry = new ShareableLink({ s3_url, shorten_slug, pin })
+    const newEntry = new ShareableLink({ s3_url, shorten_slug, pin, file_type, file_name })
 
     try {
       await newEntry.save()

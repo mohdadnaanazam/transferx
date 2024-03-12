@@ -6,6 +6,8 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
 export async function POST(request: Request) {
   const { contentType } = await request.json()
 
+  console.log(contentType,'this is contentType')
+
   const objectKey = uuidv4()
 
   const expirationDate = new Date();
