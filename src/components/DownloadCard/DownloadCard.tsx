@@ -28,7 +28,6 @@ const handleDownload = async (s3Url: string, filename: string, file_type: string
     link.click();
     document.body.removeChild(link);
 
-    alert('Processed');
   } catch (error: any) {
     console.error('Error downloading file:', error.message);
   }
