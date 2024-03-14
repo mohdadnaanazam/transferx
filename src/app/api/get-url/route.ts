@@ -6,7 +6,6 @@ import { generateContentDisposition } from '@/utils/generate-content-disposition
 export async function POST(request: Request) {
   const { key, extension, filename } = await request.json();
 
-
   try {
     const client = new S3Client({
       credentials: {

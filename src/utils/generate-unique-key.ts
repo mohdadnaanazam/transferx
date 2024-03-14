@@ -10,5 +10,5 @@ export const generateUniqueKey = () => {
     shortUrl += characters.charAt(randomIndex);
   }
 
-  return shortUrl;
+  return 'trnsfr.' + shortUrl;
 }

@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-import connectToDatabase from "../../../../config/mongodb";
-import ShareableLink from "@/models/shareableSchema";
-import { AskPin } from "@/components/AskPin";
-import { DownloadCard } from '@/components/DownloadCard/DownloadCard';
+import connectToDatabase from "../../../../config/mongodb"
+import ShareableLink from "@/models/shareableSchema"
+import { AskPin } from "@/components/AskPin"
+import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
 
 async function getS3_link(id: string) {
   await connectToDatabase();
@@ -22,7 +22,7 @@ async function getS3_link(id: string) {
 
     return {
       destination: '/404'
-    };
+    }
   }
 }
 

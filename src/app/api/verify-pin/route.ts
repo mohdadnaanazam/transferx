@@ -1,6 +1,14 @@
+import { limiter } from '@/utils/limiter'
 import shareableLinkSchema from '../../../models/shareableSchema'
 
 export async function POST(request: Request) {
+  const remaining = await limiter.removeTokens(1)
+
+  if (remaining < 1) {
+    return Response.json({ error: 'Rate limit exceeded' }, { status: 429 })
+  }
+
+  console.log('remaining', remaining)
 
   try {
     const data = await request.json()

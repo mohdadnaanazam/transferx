@@ -34,21 +34,31 @@ export const AskPin = (props: Props): JSX.Element => {
    * @returns void
    */
   const handleUnlockPin = async (): Promise<void> => {
-    setIsLoading(true)
-    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/verify-pin', {
-      method: 'POST',
-      body: JSON.stringify({ pin: userEnteredPin, linkId })
-    })
+    try {
+      setIsLoading(true)
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/verify-pin', {
+        method: 'POST',
+        body: JSON.stringify({ pin: userEnteredPin, linkId })
+      })
 
-    const jsonResponse = await response.json()
-    
-    if (!jsonResponse.is_pin_matched) {
-      toast({ title: "Wrong PIN", description: "Please enter correct pin" })
-    } else {
-      setIsPinMatched(true)
+      const jsonResponse = await response.json()
+
+      // handle rate limit
+      if (response.status === 429) {
+        toast({ title: "Error", description: "Too many request please try again after 5 minutes" })
+        return
+      }
+
+      if (!jsonResponse.is_pin_matched) {
+        toast({ title: "Wrong PIN", description: "Please enter correct pin" })
+      } else {
+        setIsPinMatched(true)
+      }
+    } catch (error) {
+      toast({ title: "Error", description: "Something went wrong" })
+    } finally {
+      setIsLoading(false)
     }
-
-    setIsLoading(false)
   }
 
   // for hydration issue
