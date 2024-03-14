@@ -13,7 +13,7 @@ export const Header = () => {
       </div>
       <div className="flex flex-row justify-around w-1/6 items-center">
         <Link href={'/'}>Pricing</Link>
-        
+
         <Button>Register</Button>
 
         <ThemeToggle />
