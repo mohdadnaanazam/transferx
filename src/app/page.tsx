@@ -11,7 +11,7 @@ export default function Page() {
         </SalesProvider>
       </div>
 
-      <div className='flex-1 flex justify-center items-center relative'>
+      <div className='flex-1 hidden md:flex justify-center items-center relative'>
         <GlobeDemo />
       </div>
     </main>
