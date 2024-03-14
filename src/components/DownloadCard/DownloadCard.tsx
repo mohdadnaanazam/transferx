@@ -29,9 +29,9 @@ const handleDownload = async (s3Url: string, filename: string, file_type: string
     document.body.removeChild(link)
 
   } catch (error: any) {
-    console.error('Error downloading file:', error.message);
+    console.error('Error downloading file:', error.message)
   }
-};
+}
 
 
 export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fileName, downloadableURL }) => {

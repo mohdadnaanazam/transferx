@@ -11,7 +11,7 @@ export const Header = () => {
         <div className='bg-green-0 w-[2px] h-7' />
         <h1 className='text-2xl font-medium'>transferr</h1>
       </div>
-      <div className="flex flex-row justify-around w-1/6 items-center">
+      <div className="flex flex-row justify-end space-x-10 w-2/6 items-center">
         <Link href={'/'}>Pricing</Link>
         
         <Button>Register</Button>
