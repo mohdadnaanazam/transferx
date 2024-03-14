@@ -1,6 +1,7 @@
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { generateContentDisposition } from '@/utils/generate-content-disposition';
 
 export async function POST(request: Request) {
   const { key, extension, filename } = await request.json();
@@ -23,7 +24,7 @@ export async function POST(request: Request) {
     const getObjectCommandAttachment = new GetObjectCommand({
       Bucket: process.env.AWS_S3_BUCKET,
       Key: key,
-      ResponseContentDisposition: `attachment; filename=${encodeURIComponent(filename)}.${extension}`
+      ResponseContentDisposition: `attachment; filename=${generateContentDisposition(filename, extension)}`
     })
 
     const url = await getSignedUrl(client, getObjectCommand)

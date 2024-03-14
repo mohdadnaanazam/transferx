@@ -14,19 +14,19 @@ type DownloadCardProps = {
 
 const handleDownload = async (s3Url: string, filename: string, file_type: string) => {
   try {
-    const extension = file_type.split('/')[1] || 'unknown';
+    const extension = file_type.split('/')[1] || 'unknown'
 
-    const link = document.createElement('a');
-    link.href = s3Url;
-    link.setAttribute('download', ''); // Set download attribute to empty string
-    link.setAttribute('target', '_blank'); // Open link in a new tab/window
+    const link = document.createElement('a')
+    link.href = s3Url
+    link.setAttribute('download', '') // Set download attribute to empty string
+    link.setAttribute('target', '_blank') // Open link in a new tab/window
 
     // Set a dummy attribute to force download in Firefox
-    link.setAttribute('rel', 'noopener noreferrer');
+    link.setAttribute('rel', 'noopener noreferrer')
 
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
 
   } catch (error: any) {
     console.error('Error downloading file:', error.message);

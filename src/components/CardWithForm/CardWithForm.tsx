@@ -125,7 +125,7 @@ export const CardWithForm = () => {
             }
           }}
           className="hidden"
-          accept="image/png, image/jpeg, application/pdf, video/mp4, video/mpeg, video/quicktime"
+          accept="*"
         />
 
         <div className={cn("flex items-center gap-4", { 'hidden': !file || !isUploading })}>

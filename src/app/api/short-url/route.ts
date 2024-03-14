@@ -1,6 +1,6 @@
 import connectToDatabase from "../../../../config/mongodb"
 import ShareableLink from '@/models/shareableSchema'
-import { generateUniqueKey as generateUniqueSlug } from "@/app/utils/generateUniqueKey"
+import { generateUniqueKey as generateUniqueSlug } from "@/utils/generateUniqueKey"
 
 export async function POST(request: Request) {
   try {
