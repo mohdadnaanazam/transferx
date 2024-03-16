@@ -36,7 +36,7 @@ const handleDownload = async (s3Url: string, filename: string, file_type: string
 
 export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fileName, downloadableURL }) => {
   return (
-    <Card className="w-[350px]">
+    <Card className="w-full flex flex-col md:w-[400px]">
       <CardHeader>
         <CardTitle className="flex items-center cursor-pointer">
           <CircleArrowDown size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-0" />
