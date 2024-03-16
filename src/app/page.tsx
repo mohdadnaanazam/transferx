@@ -4,7 +4,7 @@ import { SalesProvider } from '@/context/upload-context'
 
 export default function Page() {
   return (
-    <main className='flex h-[91vh] flex-row'>
+    <main className='flex max-w-7xl md:mx-auto h-[91vh] px-5 flex-row'>
       <div className='flex-1 h-full flex justify-center items-center'>
         <SalesProvider>
           <CardWithForm />

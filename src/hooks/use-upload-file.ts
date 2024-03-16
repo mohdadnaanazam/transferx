@@ -1,16 +1,16 @@
-import { IS_UPLOADING, UploadContext } from "@/context/upload-context"
 import axios from "axios"
 import { useContext, useState } from "react"
 import mime from 'mime'
 
+import { IS_UPLOADING, SET_FILE, UploadContext } from "@/context/upload-context"
+
 export const useUploadFile = () => {
 	// init
-	const [{ file, isUploading, filename, expiryDate, pin }, dispatch] = useContext(UploadContext)
+	const [{ file, filename, pin }, dispatch] = useContext(UploadContext)
 
 	// state
 	const [shareLink, setShareLink] = useState('')
 	const [progress, setProgress] = useState<null | number>(0)
-
 
 	const handleSubmit = async () => {
 		if (!file) {
@@ -74,10 +74,19 @@ export const useUploadFile = () => {
 		}
 	}
 
+	const handleSetFile = (file: any) => {
+		if (file && file?.size <= 15 * 1024 * 1024 * 1024) {
+			dispatch({ type: SET_FILE, payload: file })
+		} else {
+			alert('File size should be less than 15GB')
+		}
+	}
+
 	return {
 		handleSubmit,
 		shareLink,
 		setShareLink,
-		progress
+		progress,
+		handleSetFile
 	}
 }
