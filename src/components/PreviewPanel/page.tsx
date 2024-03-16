@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
+import { Header } from "../Header"
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   if (type.includes('video')) {
@@ -21,24 +22,20 @@ export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
       </SheetTrigger>
 
       <SheetContent className="w-full h-full flex flex-col md:w-[70vw] overflow-y-scroll">
-        <SheetHeader>
-          <SheetTitle>Preview</SheetTitle>
-          <SheetDescription>
-            Preview uploaded file
-          </SheetDescription>
-        </SheetHeader>
-
+        <Header />
         <div className="flex-1">
           <div className="flex relative h-[100%] mt-auto justify-center items-center">
             <RenderPreview url={url} type={type} />
-
           </div>
         </div>
-
-        <SheetFooter>
-          <SheetClose asChild>
+        <SheetFooter className="mt-32 bottom-0">
+          <div className="flex flex-row justify-between w-full mt-5 p-3">
+            <div className="flex flex-col">
+              <p className="font-bold">download.jpg</p>
+              <p className="font-thin">23.2 kb</p>
+            </div>
             <Button type="submit">Download</Button>
-          </SheetClose>
+          </div>
         </SheetFooter>
 
       </SheetContent>
