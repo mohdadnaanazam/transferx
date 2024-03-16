@@ -8,8 +8,6 @@ export async function POST(request: Request) {
     return Response.json({ error: 'Rate limit exceeded' }, { status: 429 })
   }
 
-  console.log('remaining', remaining)
-
   try {
     const data = await request.json()
 

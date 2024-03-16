@@ -1,0 +1,83 @@
+import { IS_UPLOADING, UploadContext } from "@/context/upload-context"
+import axios from "axios"
+import { useContext, useState } from "react"
+import mime from 'mime'
+
+export const useUploadFile = () => {
+	// init
+	const [{ file, isUploading, filename, expiryDate, pin }, dispatch] = useContext(UploadContext)
+
+	// state
+	const [shareLink, setShareLink] = useState('')
+	const [progress, setProgress] = useState<null | number>(0)
+
+
+	const handleSubmit = async () => {
+		if (!file) {
+			alert('Please select a file to upload.')
+			return
+		}
+
+		try {
+			const options = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ filename: file.name, contentType: file.type }),
+			}
+
+			dispatch({ type: IS_UPLOADING, payload: true })
+
+			const uploadResponse = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/upload', options)
+
+			const signedUploadResponse = await uploadResponse.json()
+
+			const signedURL = signedUploadResponse.url
+			const objectKey = signedUploadResponse.key
+
+			const formData = new FormData();
+			formData.append('file', file as unknown as Blob)
+
+			await axios.put(signedURL, file, {
+				headers: { 'Content-Type': file.type },
+				onUploadProgress: (progressEvent: any) => {
+					if (progressEvent.bytes) {
+						setProgress(Math.round((progressEvent.loaded / progressEvent.total) * 100))
+					}
+				}
+			})
+
+			const getSignedURL = await fetch(process.env.NEXT_PUBLIC_BASE_URL + `/api/get-url`, {
+				method: 'POST',
+				body: JSON.stringify({
+					key: objectKey,
+					extension: mime.getExtension(file.type),
+					filename
+				})
+			})
+
+			const s3_url = await getSignedURL.json()
+
+			const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ s3_url: s3_url.url, pin, file_type: file.type, file_name: filename, downloadable_url: s3_url.downloadableURL })
+			})
+
+			if (response.ok) {
+				const { url } = await response.json()
+				setShareLink(url)
+			}
+		} catch (error) {
+			console.log(error)
+		} finally {
+			dispatch({ type: IS_UPLOADING, payload: false })
+		}
+	}
+
+	return {
+		handleSubmit,
+		shareLink,
+		setShareLink,
+		progress
+	}
+}
