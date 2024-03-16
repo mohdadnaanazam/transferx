@@ -42,7 +42,8 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.162.0",
     "three-globe": "^2.31.0",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "video.js": "^8.10.0"
   },
   "devDependencies": {
     "@types/node": "^20",

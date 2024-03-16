@@ -3,6 +3,19 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
+const RenderPreview = ({ url, type }: { url: string, type: string }) => {
+  switch (type) {
+    case 'image':
+      return <Image src={url} alt="preview" fill style={{ 'objectFit': 'contain' }} />
+
+    case 'video':
+      return <video src={url} className="object-contain" height={600} muted autoPlay />
+
+    default:
+      return <Image src={'/folder.png'} alt="preview" height={300} width={300} style={{ 'objectFit': 'contain' }} />
+  }
+}
+
 export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
   return (
     <Sheet>
@@ -20,11 +33,9 @@ export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
 
         <div className="flex-1">
           <div className="flex relative h-[100%] mt-auto justify-center items-center">
-            {type.includes('image') && <Image src={url} alt="preview" fill style={{ 'objectFit': 'contain' }} />}
+            <RenderPreview url={url} type={type} />
 
-            {type.includes('video') && <video src={url} width={700} height={600} />}
           </div>
-
         </div>
 
         <SheetFooter>

@@ -11,7 +11,7 @@ export const Header = () => {
         <Link className="font-medium text-2xl" href='/'>transferr</Link>
       </div>
 
-      <div className="flex flex-row justify-around items-center">
+      <div className="flex flex-row gap-3 justify-around items-center">
         <Link href='/pricing'>Pricing</Link>
 
         <ThemeToggle />

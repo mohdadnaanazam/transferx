@@ -26,9 +26,9 @@ export async function POST(request: Request) {
       ResponseContentDisposition: `attachment; filename=${generateContentDisposition(filename, extension)}`
     })
 
-    const url = await getSignedUrl(client, getObjectCommand)
+    const url = await getSignedUrl(client, getObjectCommand, { expiresIn: 24 * 60 * 60 })
 
-    const downloadableURL = await getSignedUrl(client, getObjectCommandAttachment)
+    const downloadableURL = await getSignedUrl(client, getObjectCommandAttachment, { expiresIn: 24 * 60 * 60 })
 
     return Response.json({ url, downloadableURL })
   } catch (error: any) {
