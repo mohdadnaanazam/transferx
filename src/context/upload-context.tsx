@@ -15,24 +15,28 @@ interface IInitialState {
   isUploading: boolean,
   filename: string,
   expiryDate: Date
+  pin: string
 }
 
 interface IAction {
   type: string,
-  payload: any
+  payload?: any
 }
 
 const INITIAL_STATE = {
   file: null,
   isUploading: false,
   filename: '',
-  expiryDate: addDays(new Date, 6)
+  expiryDate: addDays(new Date, 6),
+  pin: ''
 }
 
 export const SET_FILE = 'SET_FILE'
 export const IS_UPLOADING = 'IS_UPLOADING'
 export const SET_FILE_NAME = 'SET_FILE_NAME'
 export const SET_EXPIRY_DATE = 'SET_EXPIRY_DATE'
+export const SET_PIN = 'SET_PIN'
+export const RESET = 'RESET'
 
 const SalesReducer = (state: IInitialState, action: IAction) => {
   switch (action.type) {
@@ -58,6 +62,16 @@ const SalesReducer = (state: IInitialState, action: IAction) => {
         ...state,
         expiryDate: action.payload
       }
+  
+    case SET_PIN:
+      return {
+        ...state,
+        pin: action.payload
+      }
+  
+    case RESET:
+      return INITIAL_STATE
+
     default:
       return state
   }

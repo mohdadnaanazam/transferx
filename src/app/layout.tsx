@@ -20,8 +20,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={cn("min-h-screen bg-background font-sans antialiased", dmSans.variable)}>
           <Toaster />
           <ThemeProvider attribute="class" defaultTheme={'dark'} enableSystem>
-            <Header />
-            <div className="relative flex min-h-screen flex-col">
+            <div className="relative h-full flex min-h-screen flex-col">
+              <Header />
               <div className="flex-1">{children}</div>
             </div>
           </ThemeProvider>

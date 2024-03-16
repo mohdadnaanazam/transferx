@@ -1,6 +1,6 @@
 import connectToDatabase from "../../../../config/mongodb"
 import ShareableLink from '@/models/shareableSchema'
-import { generateUniqueKey as generateUniqueSlug } from "@/utils/generateUniqueKey"
+import { generateUniqueKey as generateUniqueSlug } from "@/utils/generate-unique-key"
 
 export async function POST(request: Request) {
   try {
@@ -8,10 +8,10 @@ export async function POST(request: Request) {
 
     await connectToDatabase();
 
-    const existingUrl = await ShareableLink.findOne({ s3_url }).exec();
+    const existingUrl = await ShareableLink.findOne({ s3_url }).exec()
 
     if (existingUrl) {
-      return Response.json({ shorten_slug: existingUrl.shorten_slug });
+      return Response.json({ shorten_slug: existingUrl.shorten_slug })
     }
     const shorten_slug = generateUniqueSlug();
 
@@ -20,10 +20,9 @@ export async function POST(request: Request) {
     try {
       await newEntry.save()
 
-      return Response.json({ url: shorten_slug });
+      return Response.json({ url: shorten_slug })
     } catch (saveError) {
-      console.error('Error saving entry:', saveError);
-      return Response.json({ error: 'Error saving entry' });
+      return Response.json({ error: 'Error saving entry' })
     }
 
   } catch (error: any) {

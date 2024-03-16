@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
-import connectToDatabase from "../../../../config/mongodb";
-import ShareableLink from "@/models/shareableSchema";
-import { AskPin } from "@/components/AskPin";
-import { DownloadCard } from '@/components/DownloadCard/DownloadCard';
+import connectToDatabase from "../../../../config/mongodb"
+import ShareableLink from "@/models/shareableSchema"
+import { AskPin } from "@/components/AskPin"
+import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
 
 async function getS3_link(id: string) {
   await connectToDatabase();
@@ -22,7 +22,7 @@ async function getS3_link(id: string) {
 
     return {
       destination: '/404'
-    };
+    }
   }
 }
 
@@ -38,7 +38,6 @@ export default async function Download({ params }: { params: { url_id: string } 
         <div className='w-1/2 flex justify-center items-center flex-row space-x-5 relative'>
           <div className='bg-green-0 w-2 h-28 mt-6'></div>
           <h1 className='text-[120px] font-medium'>transferr</h1>
-          <p className='absolute bottom-0 right-36 text-lg font-normal'>where files fly faster</p>
         </div>
       </div>
     </main>
