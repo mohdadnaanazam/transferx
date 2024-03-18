@@ -4,15 +4,12 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHe
 import Image from "next/image"
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
-  switch (type) {
-    case 'image':
-      return <Image src={url} alt="preview" fill style={{ 'objectFit': 'contain' }} />
-
-    case 'video':
-      return <video src={url} className="object-contain" height={600} muted autoPlay />
-
-    default:
-      return <Image src={'/folder.png'} alt="preview" height={300} width={300} style={{ 'objectFit': 'contain' }} />
+  if (type.includes('video')) {
+    return <video src={url} className="object-contain" height={600} muted autoPlay />;
+  } else if (type.includes('image')) {
+    return <Image src={url} alt="preview" fill style={{ objectFit: 'contain' }} />;
+  } else {
+    return <Image src={'/folder.png'} alt="preview" height={300} width={300} style={{ objectFit: 'contain' }} />;
   }
 }
 
