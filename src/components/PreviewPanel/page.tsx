@@ -5,7 +5,7 @@ import Image from "next/image"
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   if (type.includes('video')) {
-    return <video src={url} className="object-contain" height={600} muted autoPlay />;
+    return <video src={url} className="object-contain" height={600} controls autoPlay />;
   } else if (type.includes('image')) {
     return <Image src={url} alt="preview" fill style={{ objectFit: 'contain' }} />;
   } else {
