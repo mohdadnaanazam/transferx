@@ -5,6 +5,7 @@ import "../app/globals.css"
 import { cn } from "@/lib/utils"
 import { dmSans } from "../lib/fonts"
 import { Header } from "@/components/Header"
+import { Header as DashboardHeader } from "@/components/dashboard/Header"
 import { ThemeProvider } from '../components/Providers/Theme/ProviderTheme'
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/context/auth-context"
@@ -17,6 +18,7 @@ interface RootLayoutProps {
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
+  const isLoggedIn = true // temporary
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -34,6 +36,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
                     {children}
 
                     <Analytics />
+                  </div>
+                  <div className="relative h-full flex min-h-screen flex-col">
+                    {isLoggedIn ? <DashboardHeader /> : <Header />}
+                    <div className="flex-1">{children}</div>
                   </div>
                 </div>
               </AuthProvider>
