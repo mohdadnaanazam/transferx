@@ -4,8 +4,7 @@ import { useState } from 'react'
 import { LampContainer } from '../ui/lamp'
 import { motion } from "framer-motion"
 import { useToast } from "../ui/use-toast"
-import { Button } from '../ui/button'
-import { MailPlus } from 'lucide-react'
+import { CircleArrowRight } from 'lucide-react'
 
 
 
@@ -88,7 +87,7 @@ export const ComingSoon = () => {
               duration: 0.8,
               ease: "easeInOut",
             }}
-            className='mt-3'> <MailPlus strokeWidth={1.5} className="h-7 w-7" />
+            className='mt-3'> <CircleArrowRight size={28} strokeWidth={2.25} className="h-7 w-7" />
           </motion.button>
         </div>
       </motion.form>
