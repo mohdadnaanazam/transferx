@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button"
 
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
-import { Header } from "../Header"
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   if (type.includes('video')) {
