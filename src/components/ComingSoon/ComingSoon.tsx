@@ -23,7 +23,7 @@ export const ComingSoon = () => {
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email, type: 'GENERAL' })
       }
       const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/add-to-waitlist', options)
 
