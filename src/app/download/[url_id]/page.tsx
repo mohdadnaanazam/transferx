@@ -4,14 +4,18 @@ import connectToDatabase from "../../../../config/mongodb"
 import ShareableLink from "@/models/shareableSchema"
 import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
+import { redirect } from 'next/navigation';
 
 async function getS3_link(id: string) {
-  await connectToDatabase();
+  await connectToDatabase()
 
   try {
     const shareableLink = await ShareableLink.findOne({ _id: new mongoose.Types.ObjectId(id) }).exec()
 
     if (shareableLink) {
+      if (shareableLink.expiry < new Date()) {
+        return {destination: '/download/link-expired'}
+      }
       return shareableLink
     }
 
@@ -28,6 +32,10 @@ async function getS3_link(id: string) {
 
 export default async function Download({ params }: { params: { url_id: string } }) {
   const url = await getS3_link(params.url_id)
+
+  if (url && url.destination) {
+    redirect(url.destination)
+  }
 
   return (
     <main className="flex max-w-7xl md:mx-auto px-5 h-[91vh] justify-center items-center overflow-y-hidden">
