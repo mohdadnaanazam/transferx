@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
-import connectToDatabase from "../../../config/mongodb";
-import ShareableLink from "@/models/shareableSchema";
+
+import connectToDatabase from "../../../../config/mongodb"
+import ShareableLink from "@/models/shareableSchema"
 
 async function redirectUser(shorten_slug: string) {
   await connectToDatabase()
@@ -11,12 +12,12 @@ async function redirectUser(shorten_slug: string) {
     if (shareableLink) {
       return {
         destination: `${process.env.NEXT_PUBLIC_BASE_URL}/download/${shareableLink._id}`,
-      };
+      }
     }
 
     return {
       destination: '/404',
-    };
+    }
   } catch (error) {
     console.error("Error retrieving link:", error);
     return {

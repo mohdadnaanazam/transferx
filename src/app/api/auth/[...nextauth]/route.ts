@@ -1,13 +1,27 @@
+import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
-import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 
-const authOptions = {
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET!
+
+const authOptions: NextAuthOptions = {
+  session: {
+    strategy: 'jwt',
+  },
   providers: [
-    GithubProvider({
-      clientId: process.env.GITHUB_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? ''
+    GoogleProvider({
+      clientId: GOOGLE_CLIENT_ID,
+      clientSecret: GOOGLE_CLIENT_SECRET
     })
-  ]
+  ],
+  callbacks: {
+    async signIn({ account, profile }) {
+      console.log(account, profile, 'hey here is my info')
+      return true
+    }
+
+  }
 }
 
 const handler = NextAuth(authOptions)

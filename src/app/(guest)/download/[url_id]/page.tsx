@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
-import connectToDatabase from "../../../../config/mongodb"
+import connectToDatabase from "../../../../../config/mongodb"
 import ShareableLink from "@/models/shareableSchema"
 
 async function getS3_link(id: string) {
