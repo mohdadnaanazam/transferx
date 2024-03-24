@@ -3,8 +3,11 @@ import Link from "next/link"
 import { useTheme } from "next-themes"
 
 export const Header = () => {
-  const {setTheme, theme}= useTheme()
+  const { setTheme, theme } = useTheme()
   setTheme('dark')
+  const { data: session, status } = useSession()
+  const isLoggedIn = status === 'authenticated'
+  console.log(session, status, 'hello')
 
   return (
     <div className="py-3 flex max-w-7xl w-full md:mx-auto px-5 flex-row justify-between">
@@ -14,10 +17,11 @@ export const Header = () => {
       </div>
 
       <div className="flex flex-row gap-3 justify-around items-center">
-        <Link href='/pricing'>Pricing</Link>
-
+        <button onClick={() => signIn()}>Login</button>
         {/* <ThemeToggle /> */}
+        <UserAvatar user={session?.user} />
       </div>
     </div>
+
   )
 }
