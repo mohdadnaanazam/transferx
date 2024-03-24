@@ -27,15 +27,12 @@ export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
             Preview uploaded file
           </SheetDescription>
         </SheetHeader>
-
         <div className="flex-1">
           <div className="flex relative h-[100%] mt-auto justify-center items-center">
             <RenderPreview url={url} type={type} />
-
           </div>
         </div>
-
-        <SheetFooter>
+        <SheetFooter className="mt-32 bottom-0">
           <SheetClose asChild>
             <Button type="submit">Download</Button>
           </SheetClose>
