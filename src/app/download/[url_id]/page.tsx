@@ -1,10 +1,10 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
+import { redirect } from 'next/navigation'
 
-import connectToDatabase from "../../../../config/mongodb"
-import ShareableLink from "@/models/shareableSchema"
 import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
-import { redirect } from 'next/navigation';
+import connectToDatabase from "../../../../config/mongodb"
+import ShareableLink from "@/models/shareableSchema"
 
 async function getS3_link(id: string) {
   await connectToDatabase()
@@ -14,7 +14,7 @@ async function getS3_link(id: string) {
 
     if (shareableLink) {
       if (shareableLink.expiry < new Date()) {
-        return {destination: '/download/link-expired'}
+        return { destination: '/download/link-expired' }
       }
       return shareableLink
     }
