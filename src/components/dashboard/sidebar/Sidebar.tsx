@@ -34,5 +34,5 @@ export const Sidebar = () => {
       ))}
     </ul>
   </div>
-  );
-};
+  )
+}
