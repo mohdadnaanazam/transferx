@@ -20,13 +20,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()
   const { data: session, status } = useSession()
 
-  useEffect(() => {
-    if (!session) {
-      router.replace('/')
-    } else {
-      router.replace('/me')
-    }
-  }, [status, session])
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.replace('/')
+  //   } else {
+  //     router.replace('/me')
+  //   }
+  // }, [status, session])
 
   return (
     <AuthContext.Provider value={{ session, status }}>
