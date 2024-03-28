@@ -1,7 +1,16 @@
 import { Button } from "@/components/ui/button"
 
-import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
+
+
+type PreviewPanelProps = {
+  url: string,
+  type: string,
+  downloadableURL: string,
+  fileName: string,
+  handleDownload: (s3Url: string, filename: string, file_type: string) => void
+}
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   if (type.includes('video')) {
@@ -13,7 +22,7 @@ const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   }
 }
 
-export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
+export const PreviewPanel = ({ url, type, downloadableURL, fileName, handleDownload }: PreviewPanelProps) => {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -33,11 +42,8 @@ export const PreviewPanel = ({ url, type }: { url: string, type: string }) => {
           </div>
         </div>
         <SheetFooter className="mt-32 bottom-0">
-          <SheetClose asChild>
-            <Button type="submit">Download</Button>
-          </SheetClose>
+          <Button onClick={() => handleDownload(downloadableURL, fileName, type)}>Download</Button>
         </SheetFooter>
-
       </SheetContent>
     </Sheet>
   )
