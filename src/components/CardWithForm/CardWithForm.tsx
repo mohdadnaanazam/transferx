@@ -23,12 +23,19 @@ export const CardWithForm = () => {
 
   const { handleSubmit, progress, setShareLink, shareLink, handleSetFile } = useUploadFile()
 
+  const defaultExpiryDate = new Date()
+  defaultExpiryDate.setDate(defaultExpiryDate.getDate() + 7)
 
   const handleChangeFilename = (value: string) => {
     dispatch({ type: SET_FILE_NAME, payload: value })
   }
 
   const handleDateChange = (value?: Date) => {
+    const currentDate = new Date()
+    if (value && value < currentDate) {
+      alert("You can't select past dates.")
+      return
+    }
     dispatch({ type: SET_EXPIRY_DATE, payload: value })
   }
 
@@ -98,7 +105,7 @@ export const CardWithForm = () => {
                   </Tooltip>
                 </Label>
 
-                <DatePicker value={expiryDate} onChange={handleDateChange} />
+                <DatePicker value={expiryDate || defaultExpiryDate} onChange={handleDateChange} />
               </div>
             </div>
           </form>
