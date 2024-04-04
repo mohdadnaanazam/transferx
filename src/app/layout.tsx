@@ -11,6 +11,7 @@ import { AuthProvider } from "@/context/auth-context"
 
 import { SessionProvider } from "next-auth/react"
 import { Analytics } from "@vercel/analytics/react"
+import { ViewProvider } from "@/context/view-context"
 
 interface RootLayoutProps {
   children: React.ReactNode
