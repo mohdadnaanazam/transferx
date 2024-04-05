@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { Sidebar } from "@/components/dashboard/sidebar"
 import { Gridview } from "@/components/Gridview"
 import { Listview } from "@/components/Listview"
-import { ViewContext, ViewProvider } from '@/context/view-context'
+import { ViewContext } from '@/context/view-context'
 import { ViewToggleHeader } from '@/components/ThemeToggleHeader'
 import { UplaodDialog } from '@/components/UploadDialog'
 

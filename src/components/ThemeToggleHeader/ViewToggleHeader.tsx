@@ -13,12 +13,20 @@ export const ViewToggleHeader: React.FC = () => {
 
   return (
     <div className="flex justify-end p-2 space-x-3">
-      <button className="flex items-center justify-center w-9 h-9 rounded-full focus:outline-none transition duration-300 hover:bg-gray-100 hover:text-gray-800" onClick={toggleViewMode('grid')} >
-        <Grid2X2 size={20} strokeWidth={1.25} />
-      </button>
-      <button className="flex items-center justify-center w-9 h-9 rounded-full focus:outline-none transition duration-300 hover:bg-gray-100 hover:text-gray-800" onClick={toggleViewMode('list')} >
-        <AlignJustify size={20} strokeWidth={1.25} />
-      </button>
+      <div className=' flex border rounded-xl space-x-2'>
+        <button
+          className={`flex items-center justify-center w-9 h-9 focus:outline-none transition duration-300 hover:bg-slate-500 hover:text-gray-800 rounded-l-xl ${currentView === 'grid' ? 'bg-gray-100 text-gray-800' : ''}`}
+          onClick={toggleViewMode('grid')}
+        >
+          <Grid2X2 size={20} strokeWidth={1.25} />
+        </button>
+        <button
+          className={`flex items-center justify-center w-9 h-9 focus:outline-none transition duration-300 hover:bg-slate-500 hover:text-gray-800 rounded-r-xl ${currentView === 'list' ? 'bg-gray-100 text-gray-800' : ''}`}
+          onClick={toggleViewMode('list')}
+        >
+          <AlignJustify size={20} strokeWidth={1.25} />
+        </button>
+      </div>
     </div>
   )
 }
