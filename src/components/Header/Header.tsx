@@ -1,7 +1,6 @@
 'use client'
 import Link from "next/link"
 
-import { ThemeToggle } from "../ThemeToggle"
 
 export const Header = () => {
   return (
@@ -14,7 +13,6 @@ export const Header = () => {
       <div className="flex flex-row gap-3 justify-around items-center">
         <Link href='/pricing'>Pricing</Link>
 
-        <ThemeToggle />
       </div>
     </div>
   )
