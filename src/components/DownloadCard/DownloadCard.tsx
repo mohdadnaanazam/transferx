@@ -46,8 +46,8 @@ export const DownloadCard: React.FC<DownloadCardProps> = ({ s3URL, fileType, fil
       </CardHeader>
 
       <CardContent className="space-x-6">
-        <PreviewPanel url={s3URL} type={fileType} />
-        
+        <PreviewPanel url={s3URL} type={fileType} downloadableURL={downloadableURL} fileName={fileName} handleDownload={handleDownload} />
+
         <Button onClick={() => handleDownload(downloadableURL, fileName, fileType)}>Download</Button>
       </CardContent>
     </Card>
