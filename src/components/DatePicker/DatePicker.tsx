@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { CalendarIcon } from "lucide-react"
-import { format } from "date-fns"
+import { format, addDays } from "date-fns"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -17,6 +17,8 @@ interface Props {
 
 export const DatePicker = (props: Props) => {
   const { onChange, value } = props
+  const today = new Date()
+  const maxDate = addDays(today, 31) 
 
   return (
     <Popover>
@@ -36,6 +38,10 @@ export const DatePicker = (props: Props) => {
           mode="single"
           onSelect={(e) => onChange(e) }
           initialFocus
+          disabled={{
+            before: today, 
+            after: maxDate
+          }}
         />
       </PopoverContent>
     </Popover>
