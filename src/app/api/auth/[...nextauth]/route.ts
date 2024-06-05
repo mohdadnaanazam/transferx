@@ -1,5 +1,5 @@
-import { NextAuthOptions } from "next-auth";
-import NextAuth from "next-auth/next";
+import { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth/next"
 import GoogleProvider from 'next-auth/providers/google'
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID!

@@ -27,7 +27,7 @@ async function redirectUser(shorten_slug: string) {
 }
 
 export default async function Page({ params }: { params: { shorten_slug: string } }) {
-  const url = await redirectUser(params.shorten_slug);
-  
-  redirect(url.destination);
+  const url = await redirectUser(params.shorten_slug)
+
+  redirect(url.destination)
 }

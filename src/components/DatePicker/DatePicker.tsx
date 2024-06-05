@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { DayPickerSingleProps, SelectSingleEventHandler } from "react-day-picker"
 
 interface Props {
   onChange: (e: Date | undefined) => void
@@ -18,7 +17,7 @@ interface Props {
 export const DatePicker = (props: Props) => {
   const { onChange, value } = props
   const today = new Date()
-  const maxDate = addDays(today, 31) 
+  const maxDate = addDays(today, 31)
 
   return (
     <Popover>
@@ -36,10 +35,10 @@ export const DatePicker = (props: Props) => {
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"
-          onSelect={(e) => onChange(e) }
+          onSelect={(e) => onChange(e)}
           initialFocus
           disabled={{
-            before: today, 
+            before: today,
             after: maxDate
           }}
         />
