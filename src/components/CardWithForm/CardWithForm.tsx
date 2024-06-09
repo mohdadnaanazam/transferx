@@ -15,6 +15,7 @@ import { RESET, SET_EXPIRY_DATE, SET_FILE_NAME, SET_PIN, UploadContext } from "@
 import { SetPin } from "../AskPin/SetPin"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 import { useUploadFile } from "@/hooks/use-upload-file"
+import Link from "next/link"
 
 export const CardWithForm = () => {
   // init
@@ -99,7 +100,9 @@ export const CardWithForm = () => {
                   Expiry
                   <Tooltip>
                     <TooltipTrigger>
-                      <Info size={15} />
+                      <Link href="#">
+                        <Info size={15} />
+                      </Link>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>The link will not be accessible after the expiry date.</p>
