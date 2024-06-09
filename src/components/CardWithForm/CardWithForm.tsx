@@ -99,10 +99,8 @@ export const CardWithForm = () => {
                 <Label htmlFor="framework" className="flex gap-2 items-center">
                   Expiry
                   <Tooltip>
-                    <TooltipTrigger>
-                      <Link href="#">
+                    <TooltipTrigger onClick={(e) => e.preventDefault()}>
                         <Info size={15} />
-                      </Link>
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>The link will not be accessible after the expiry date.</p>
