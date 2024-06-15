@@ -15,7 +15,6 @@ import { RESET, SET_EXPIRY_DATE, SET_FILE_NAME, SET_PIN, UploadContext } from "@
 import { SetPin } from "../AskPin/SetPin"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip"
 import { useUploadFile } from "@/hooks/use-upload-file"
-import Link from "next/link"
 
 export const CardWithForm = () => {
   // init
@@ -40,7 +39,7 @@ export const CardWithForm = () => {
     dispatch({ type: SET_EXPIRY_DATE, payload: value })
   }
 
-  const handleResetForm = (e: MouseEvent) => {
+  const handleResetForm = (e: React.MouseEvent) => {
     e.stopPropagation()
     dispatch({ type: RESET })
     setShareLink('')
@@ -99,8 +98,8 @@ export const CardWithForm = () => {
                 <Label htmlFor="framework" className="flex gap-2 items-center">
                   Expiry
                   <Tooltip>
-                    <TooltipTrigger onClick={(e) => e.preventDefault()}>
-                        <Info size={15} />
+                    <TooltipTrigger onClick={(e: MouseEvent) => e.preventDefault()}>
+                      <Info size={15} />
                     </TooltipTrigger>
                     <TooltipContent>
                       <p>The link will not be accessible after the expiry date.</p>
