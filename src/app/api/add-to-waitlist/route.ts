@@ -1,5 +1,5 @@
 import connectToDatabase from "../../../../config/mongodb"
-import Waitlist from "@/models/waitlistSchema"
+import Waitlist from "@/models/waitlist-schema"
 
 export async function POST(request: Request) {
   try {

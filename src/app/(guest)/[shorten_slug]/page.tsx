@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 import connectToDatabase from "../../../../config/mongodb"
-import ShareableLink from "@/models/shareableSchema"
+import ShareableLink from "@/models/shareable-schema"
 
 async function redirectUser(shorten_slug: string) {
   await connectToDatabase()

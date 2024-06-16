@@ -24,7 +24,7 @@ export async function POST(request: Request) {
       Bucket: process.env.AWS_S3_BUCKET ?? '',
       Key: objectKey,
       ContentType: contentType,
-      Expires: new Date(expiryDate),
+      Expires: new Date(expiryDate)
     })
 
     const url = await getSignedUrl(client, putObjectCommand, { expiresIn: 24 * 60 * 60 })

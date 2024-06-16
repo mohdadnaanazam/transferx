@@ -1,10 +1,10 @@
 import connectToDatabase from "../../../../config/mongodb"
-import ShareableLink from '@/models/shareableSchema'
+import ShareableLink from '@/models/shareable-schema'
 import { generateUniqueKey as generateUniqueSlug } from "@/utils/generate-unique-key"
 
 export async function POST(request: Request) {
   try {
-    const { s3_url, pin, file_type, file_name, downloadable_url, expiry } = await request.json();
+    const { s3_url, pin, file_type, file_name, downloadable_url, expiry, s3_key } = await request.json();
 
     await connectToDatabase();
 
@@ -15,7 +15,9 @@ export async function POST(request: Request) {
     }
     const shorten_slug = generateUniqueSlug();
 
-    const newEntry = new ShareableLink({ s3_url, shorten_slug, pin, file_type, file_name, downloadable_url, expiry })
+    const newEntry = new ShareableLink({ s3_url, shorten_slug, pin, file_type, file_name, downloadable_url, expiry, s3_key })
+
+    console.log(newEntry, 'newEntry')
 
     try {
       await newEntry.save()

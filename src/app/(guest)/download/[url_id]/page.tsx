@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
 import connectToDatabase from "../../../../../config/mongodb"
-import ShareableLink from "@/models/shareableSchema"
+import ShareableLink from "@/models/shareable-schema"
 
 async function getS3_link(id: string) {
   await connectToDatabase()

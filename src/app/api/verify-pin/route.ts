@@ -1,5 +1,5 @@
 import { limiter } from '@/utils/limiter'
-import shareableLinkSchema from '../../../models/shareableSchema'
+import shareableLinkSchema from '../../../models/shareable-schema'
 
 export async function POST(request: Request) {
   const remaining = await limiter.removeTokens(1)

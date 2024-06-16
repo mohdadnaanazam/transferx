@@ -1,5 +1,5 @@
 import { CardWithForm } from '@/components/CardWithForm'
-import { GlobeDemo } from '@/components/HomeGlobe'
+import { MainHero } from '@/components/MainHero/MainHero'
 import { SalesProvider } from '@/context/upload-context'
 
 export default function Page() {
@@ -13,7 +13,7 @@ export default function Page() {
       </div>
 
       <div className='flex-1 hidden md:flex items-center relative'>
-        <GlobeDemo />
+        <MainHero />
       </div>
     </main>
   )

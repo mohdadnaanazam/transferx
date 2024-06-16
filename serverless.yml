@@ -1,0 +1,18 @@
+service: transferx-lambda
+frameworkVersion: '4'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-south-1
+  stage: dev
+
+functions:
+  sayHelloFn:
+    handler: ./say-hello-lambda/index.handler
+    events:
+      - httpApi:
+          path: /say-hello
+          method: get
+  cleanupExpiredFilesFn:
+    handler: ./cleanup-expired-files-lambda/index.handler

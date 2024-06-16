@@ -63,7 +63,7 @@ export const useUploadFile = () => {
       const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/short-url', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ s3_url: s3_url.url, pin, file_type: file.type, file_name: filename, downloadable_url: s3_url.downloadableURL, expiry: expiryDate })
+        body: JSON.stringify({ s3_url: s3_url.url, pin, file_type: file.type, file_name: filename, downloadable_url: s3_url.downloadableURL, expiry: expiryDate, s3_key: objectKey })
       })
 
       if (response.ok) {

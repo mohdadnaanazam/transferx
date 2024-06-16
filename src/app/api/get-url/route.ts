@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     const downloadableURL = await getSignedUrl(client, getObjectCommandAttachment, { expiresIn: 24 * 60 * 60 })
 
-    return Response.json({ url, downloadableURL })
+    return Response.json({ url, downloadableURL, key })
   } catch (error: any) {
     return Response.json({ error: error.message })
   }

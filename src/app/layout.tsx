@@ -22,7 +22,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <body className={cn("min-h-screen bg-background font-sans antialiased", dmSans.variable)}>
           <Toaster />
           <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme={'dark'} enableSystem>
+            <ThemeProvider attribute="class" defaultTheme='dark' enableSystem>
               <AuthProvider>
                 <div className="relative h-full flex min-h-screen flex-col">
                   <Header />

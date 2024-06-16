@@ -40,6 +40,14 @@ const shareableLinkSchema = new Schema({
   downloadable_url: {
     type: String,
     required: true
+  },
+  is_expired: {
+    type: Boolean,
+    default: false
+  },
+  s3_key: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true

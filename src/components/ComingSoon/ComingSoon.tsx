@@ -106,7 +106,7 @@ export const ComingSoon = () => {
             ease: "easeInOut"
           }}
           className='flex flex-row space-x-3 items-center justify-center'>
-          <motion.input onChange={handleChange} placeholder='hi@transferr.me' disabled={isSubmitting} value={email} className={cn("rounded-lg border py-2 px-2 min-w-72 border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10  bg-neutral-950 placeholder:text-neutral-700", { 'border-cyan-500': isInvalidEmail })}>
+          <motion.input onChange={handleChange} placeholder='hi@transferx.in' disabled={isSubmitting} value={email} className={cn("rounded-lg border py-2 px-2 min-w-72 border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10  bg-neutral-950 placeholder:text-neutral-700", { 'border-cyan-500': isInvalidEmail })}>
           </motion.input>
           
           <Button disabled={!email} type='submit' variant="outline" size="icon">
