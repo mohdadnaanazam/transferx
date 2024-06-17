@@ -17,6 +17,8 @@ interface Props {
 export const DatePicker = (props: Props) => {
   const { onChange, value } = props
   const today = new Date()
+  const defaultDate = addDays(today, 7)
+  const selectedDate = value ?? defaultDate
   const maxDate = addDays(today, 31)
 
   return (
@@ -26,15 +28,16 @@ export const DatePicker = (props: Props) => {
           variant={"outline"}
           className={cn(
             "w-[240px] justify-start text-left font-normal border-0 border-b rounded-none pl-0 hover:bg-transparent",
-            !value && "text-muted-foreground"
+            !selectedDate && "text-muted-foreground"
           )}>
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {value ? format(value, "PPP") : <span>Pick a date</span>}
+          {format(selectedDate, "PPP")}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"
+          selected={selectedDate}
           onSelect={(e) => onChange(e)}
           initialFocus
           disabled={{
