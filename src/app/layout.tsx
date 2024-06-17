@@ -19,14 +19,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <>
       <html lang="en" suppressHydrationWarning>
         <head />
-        <body className={cn("min-h-screen bg-background font-sans antialiased", dmSans.variable)}>
+        <body className={cn("h-full bg-background font-sans antialiased", dmSans.variable)}>
           <Toaster />
           <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme='dark' enableSystem>
+            <ThemeProvider attribute="class" defaultTheme={'dark'} enableSystem>
               <AuthProvider>
-                <div className="relative h-full flex min-h-screen flex-col">
+                <div className="h-full flex flex-col">
                   <Header />
-                  <div className="flex-1">{children}</div>
+                  <div className="flex-1">
+                    {children}
+                  </div>
                 </div>
               </AuthProvider>
             </ThemeProvider>
