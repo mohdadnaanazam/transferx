@@ -21,15 +21,24 @@ export const DatePicker = (props: Props) => {
   const selectedDate = value ?? defaultDate
   const maxDate = addDays(today, 31)
 
+  const [popoverOpen, setPopoverOpen] = React.useState(false)
+
+  const handleSelect = (e: Date | undefined) => {
+    onChange(e)
+    setPopoverOpen(false)
+  }
+
   return (
-    <Popover>
+    <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
           className={cn(
             "w-[240px] justify-start text-left font-normal border-0 border-b rounded-none pl-0 hover:bg-transparent",
             !selectedDate && "text-muted-foreground"
-          )}>
+          )}
+          onClick={() => setPopoverOpen(!popoverOpen)}
+        >
           <CalendarIcon className="mr-2 h-4 w-4" />
           {format(selectedDate, "PPP")}
         </Button>
@@ -38,7 +47,7 @@ export const DatePicker = (props: Props) => {
         <Calendar
           mode="single"
           selected={selectedDate}
-          onSelect={(e) => onChange(e)}
+          onSelect={handleSelect}
           initialFocus
           disabled={{
             before: today,
