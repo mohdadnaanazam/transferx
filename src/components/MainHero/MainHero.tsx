@@ -21,7 +21,7 @@ export function MainHero() {
           minSize={0.4}
           maxSize={1}
           particleDensity={1200}
-          className="w-full h-full"
+          className="w-[50%] lg:w-full h-full mx-auto"
           particleColor="#FFFFFF"
         />
 
