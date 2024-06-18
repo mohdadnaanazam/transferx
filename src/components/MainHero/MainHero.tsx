@@ -26,7 +26,7 @@ export function MainHero() {
         />
 
         {/* Radial Gradient to prevent sharp edges */}
-        <div className="absolute inset-0 w-full h-full bg-[#020817] [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+        <div className="absolute inset-0 w-full h-full bg-[#020817] [mask-image:radial-gradient(200px_200px_at_top,transparent_20%,white)] lg:[mask-image:radial-gradient(300px_200px_at_top,transparent_20%,white)]"></div>
       </div>
     </div>
   );
