@@ -1,7 +1,7 @@
 'use client'
 
 import { CirclePlus, Info, RotateCcw } from "lucide-react"
-import { MouseEvent, useContext, useRef } from "react"
+import { MouseEvent, useContext, useEffect, useRef } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -25,6 +25,10 @@ export const CardWithForm = () => {
 
   const defaultExpiryDate = new Date()
   defaultExpiryDate.setDate(defaultExpiryDate.getDate() + 7)
+  
+  useEffect(()=>{
+    dispatch({ type: RESET })
+  },[shareLink])
 
   const handleChangeFilename = (value: string) => {
     dispatch({ type: SET_FILE_NAME, payload: value })
