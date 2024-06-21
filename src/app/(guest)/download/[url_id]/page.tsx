@@ -5,6 +5,7 @@ import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
 import connectToDatabase from "../../../../../config/mongodb"
 import ShareableLink from "@/models/shareable-schema"
+import { MainHero } from '@/components/MainHero/MainHero'
 
 async function getS3_link(id: string) {
   await connectToDatabase()
@@ -38,20 +39,17 @@ export default async function Download({ params }: { params: { url_id: string } 
   }
 
   return (
-    <main className="flex max-w-7xl md:mx-auto px-5 h-[91vh] justify-center items-center overflow-y-hidden">
+
+    <main className='flex max-w-7xl md:mx-auto px-5 h-[91vh] flex-row'>
       {url && <AskPin visible={url.is_pin_protected} linkId={params.url_id} />}
-      <div className="flex justify-between w-full">
+      <div className='flex-1 h-full flex justify-start items-center'>
         <DownloadCard s3URL={url.s3_url} downloadableURL={url.downloadable_url} fileType={url.file_type} fileName={url.file_name} />
+      </div>
 
-        <div className='w-1/2 hidden md:flex justify-center flex-col items-end'>
-          <div className='flex items-center flex-row space-x-5 relative'>
-            <div className='bg-green-0 w-2 h-28 mt-6' />
-            <h1 className='text-[120px] font-medium'>transferr</h1>
-          </div>
-
-          <p>Where files fly faster</p>
-        </div>
+      <div className='flex-1 hidden md:flex items-center relative'>
+        <MainHero />
       </div>
     </main>
+
   )
 }
