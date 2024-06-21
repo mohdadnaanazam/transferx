@@ -1,7 +1,7 @@
 'use client'
 
 import { CirclePlus, Info, RotateCcw } from "lucide-react"
-import { MouseEvent, useContext, useEffect, useRef } from "react"
+import { MouseEvent, useContext, useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -17,8 +17,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 import { useUploadFile } from "@/hooks/use-upload-file"
 
 export const CardWithForm = () => {
-  // init
   const inputRef = useRef<HTMLInputElement>(null)
+  const [resetPINSymbol, setResetPINSymbol] = useState(false)
   const [{ file, isUploading, filename, expiryDate, pin }, dispatch] = useContext(UploadContext)
 
   const { handleSubmit, progress, setShareLink, shareLink, handleSetFile } = useUploadFile()
@@ -26,9 +26,11 @@ export const CardWithForm = () => {
   const defaultExpiryDate = new Date()
   defaultExpiryDate.setDate(defaultExpiryDate.getDate() + 7)
   
-  useEffect(()=>{
-    dispatch({ type: RESET })
-  },[shareLink])
+  useEffect(() => {
+    if (shareLink !== '') {
+      dispatch({ type: RESET })
+    }
+  }, [shareLink])
 
   const handleChangeFilename = (value: string) => {
     dispatch({ type: SET_FILE_NAME, payload: value })
@@ -47,7 +49,14 @@ export const CardWithForm = () => {
     e.stopPropagation()
     dispatch({ type: RESET })
     setShareLink('')
+    setResetPINSymbol(true)
   }
+
+  useEffect(() => {
+    if (resetPINSymbol) {
+      setResetPINSymbol(false)
+    }
+  }, [resetPINSymbol])
 
   return (
     <TooltipProvider>
@@ -97,7 +106,6 @@ export const CardWithForm = () => {
                 <Input onChange={(e) => handleChangeFilename(e.target.value)} id="name" placeholder="filename" className="border-0 border-b rounded-none pl-0 focus:outline-none" value={filename} />
               </div>
 
-
               <div className="flex flex-col mt-3 space-y-2 ">
                 <Label htmlFor="framework" className="flex gap-2 items-center">
                   Expiry
@@ -119,7 +127,7 @@ export const CardWithForm = () => {
 
         <CardFooter className="flex justify-between">
           <CopyURLDialog progress={progress} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`} />
-          <SetPin setPin={(pin) => dispatch({ type: SET_PIN, payload: pin })} />
+          <SetPin setPin={(pin) => dispatch({ type: SET_PIN, payload: pin })} shareLink={shareLink} resetPIN={resetPINSymbol} />
           <Button disabled={isUploading} onClick={handleSubmit}>Generate Link</Button>
         </CardFooter>
       </Card>

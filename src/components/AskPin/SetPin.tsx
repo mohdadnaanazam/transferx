@@ -1,21 +1,28 @@
 'use client'
 
-import { Dispatch, SetStateAction, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { Lock, LockOpen } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot } from "@/components/ui/input-otp"
 
-export const SetPin = (props: { setPin: Dispatch<SetStateAction<string | null>> }): JSX.Element => {
-  const { setPin } = props
+export const SetPin = (props: { setPin: Dispatch<SetStateAction<string | null>>, shareLink: string, resetPIN: boolean }): JSX.Element => {
+  const { setPin, shareLink, resetPIN } = props
 
   const [userEnteredPin, setUserEnteredPin] = useState('')
   const [lockStatus, setLockStatus] = useState(false)
 
+  useEffect(() => {
+    if (shareLink !== '' || resetPIN) {
+      setLockStatus(false)
+      setUserEnteredPin('') // Clear the user entered PIN on reset
+    }
+  }, [shareLink, resetPIN])
+
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button disabled={lockStatus} variant="outline" className="space-x-2 p-3 flex flex-row justify-between">
+        <Button variant="outline" className="space-x-2 p-3 flex flex-row justify-between">
           <span className="pr-1">{lockStatus ? '******' : 'Lock with pin'}</span>
           {lockStatus ? <Lock size={16} className="text-green-0" strokeWidth={1.25} /> : <LockOpen size={16} strokeWidth={1.25} />}</Button>
       </DialogTrigger>
