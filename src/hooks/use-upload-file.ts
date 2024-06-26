@@ -78,10 +78,10 @@ export const useUploadFile = () => {
   }
 
   const handleSetFile = (file: any) => {
-    if (file && file?.size <= 15 * 1024 * 1024 * 1024) {
+    if (file && file?.size <= 50 * 1024 * 1024 * 1024) {
       dispatch({ type: SET_FILE, payload: file })
     } else {
-      alert('File size should be less than 15GB')
+      alert('File size should be less than 50GB')
     }
   }
 
