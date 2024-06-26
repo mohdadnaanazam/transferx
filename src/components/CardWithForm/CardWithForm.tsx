@@ -51,7 +51,7 @@ export const CardWithForm = () => {
         <CardHeader>
           <CardTitle onClick={() => inputRef?.current?.click()} className="flex items-center cursor-pointer">
             <CirclePlus size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-0" />
-            <p> Upload files <span className="text-xs text-end opa50 font-light text-white">(up to 15GB)</span></p>
+            <p> Upload files <span className="text-xs text-end opa50 font-light text-white">(up to 50GB)</span></p>
 
             {(file || filename || pin) && (
               <Tooltip>
