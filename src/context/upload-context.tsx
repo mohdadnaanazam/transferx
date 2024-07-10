@@ -44,7 +44,7 @@ const SalesReducer = (state: IInitialState, action: IAction) => {
       return {
         ...state,
         file: action.payload,
-        filename: action.payload.name
+        filename: action.payload.name  || action.payload
       }
     case IS_UPLOADING:
       return {
