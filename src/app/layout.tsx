@@ -1,7 +1,6 @@
 'use client'
 
 import "../app/globals.css"
-
 import { cn } from "@/lib/utils"
 import { dmSans } from "../lib/fonts"
 import { Header } from "@/components/Header"
@@ -9,7 +8,7 @@ import { ThemeProvider } from '../components/Providers/Theme/ProviderTheme'
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/context/auth-context"
 import { SessionProvider } from "next-auth/react"
-
+import Head from "next/head"
 interface RootLayoutProps {
   children: React.ReactNode
 }
@@ -18,7 +17,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <Head>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
+        </Head>
         <body className={cn("h-full bg-background font-sans antialiased", dmSans.variable)}>
           <Toaster />
           <SessionProvider>
