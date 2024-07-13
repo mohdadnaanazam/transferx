@@ -3,6 +3,17 @@ import { redirect } from "next/navigation";
 import connectToDatabase from "../../../../config/mongodb"
 import ShareableLink from "@/models/shareable-schema"
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'transferX',
+  openGraph: {
+    images: ['https://transferx-prod.s3.ap-south-1.amazonaws.com/transferx_og.png']
+  },
+  description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.'
+}
+
+
 async function redirectUser(shorten_slug: string) {
   await connectToDatabase()
 
