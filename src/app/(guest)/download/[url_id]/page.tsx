@@ -1,11 +1,17 @@
 import mongoose from 'mongoose'
 import { redirect } from 'next/navigation'
+import type { Metadata } from 'next'
 
 import { AskPin } from "@/components/AskPin"
 import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
+import { MainHero } from '@/components/MainHero/MainHero'
 import connectToDatabase from "../../../../../config/mongodb"
 import ShareableLink from "@/models/shareable-schema"
-import { MainHero } from '@/components/MainHero/MainHero'
+
+export const metadata: Metadata = {
+  title: 'transferX',
+  description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.',
+}
 
 async function getS3_link(id: string) {
   await connectToDatabase()
@@ -14,7 +20,7 @@ async function getS3_link(id: string) {
     const shareableLink = await ShareableLink.findOne({ _id: new mongoose.Types.ObjectId(id) }).exec()
 
     if (shareableLink) {
-      if (shareableLink.expiry < new Date()) {
+      if (shareableLink.is_expired) {
         return { destination: '/download/link-expired' }
       }
       return shareableLink

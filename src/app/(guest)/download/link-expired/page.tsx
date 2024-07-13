@@ -1,5 +1,12 @@
 import Link from 'next/link'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Link Expired',
+  description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.',
+}
+
 export default function ExpiredLink() {
   return (
     <section className="flex items-center h-full p-16">

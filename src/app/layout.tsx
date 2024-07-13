@@ -8,6 +8,7 @@ import { Header } from "@/components/Header"
 import { ThemeProvider } from '../components/Providers/Theme/ProviderTheme'
 import { Toaster } from "@/components/ui/toaster"
 import { AuthProvider } from "@/context/auth-context"
+
 import { SessionProvider } from "next-auth/react"
 
 interface RootLayoutProps {
@@ -18,7 +19,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>
-        <head />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+
         <body className={cn("h-full bg-background font-sans antialiased", dmSans.variable)}>
           <Toaster />
           <SessionProvider>

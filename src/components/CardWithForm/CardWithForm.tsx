@@ -49,9 +49,9 @@ export const CardWithForm = () => {
     <TooltipProvider>
       <Card className="w-full md:max-w-[450px]">
         <CardHeader>
-          <CardTitle onClick={() => inputRef?.current?.click()} className="flex items-center cursor-pointer">
-            <CirclePlus size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-0" />
-            <p> Upload files <span className="text-xs text-end opa50 font-light text-white">(up to 50GB)</span></p>
+          <CardTitle className="flex items-center cursor-pointer">
+            <CirclePlus onClick={() => inputRef?.current?.click()} size={30} strokeWidth={1.25} className="mr-2 my-2 text-green-0" />
+            <p onClick={() => inputRef?.current?.click()}> Upload files <span className="text-xs text-end opa50 font-light text-white">(up to 50GB)</span></p>
 
             {(file || filename || pin) && (
               <Tooltip>

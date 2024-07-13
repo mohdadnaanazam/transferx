@@ -2,6 +2,13 @@ import { CardWithForm } from '@/components/CardWithForm'
 import { MainHero } from '@/components/MainHero/MainHero'
 import { SalesProvider } from '@/context/upload-context'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'transferX',
+  description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.',
+}
+
 export default function Page() {
 
   return (

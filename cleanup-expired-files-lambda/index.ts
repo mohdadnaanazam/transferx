@@ -7,18 +7,17 @@ let cachedClient: any = null;
 
 const client = new S3Client({
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? '' ,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? '',
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? ''
   },
 });
 
 const handleUpateFileExpiryInDB = async (id: string) => {
   try {
-    await ShareableLink.findOneAndUpdate({ s3_key: id }, { is_expired: true})
+    await ShareableLink.findOneAndUpdate({ s3_key: id }, { is_expired: true })
   } catch (error) {
     console.error(`Error updating file expiry for ${id}: ${error}`)
   }
-
 }
 
 
@@ -26,10 +25,10 @@ module.exports.handler = async () => {
   const params = {
     Bucket: process.env.AWS_S3_BUCKET ?? '',
   }
-  
+
   try {
     // connect to DB
-    if(cachedClient === null) {
+    if (cachedClient === null) {
       cachedClient = await mongoose.connect(DB_URI, { dbName: process.env.DB_NAME })
     }
     const response = await client.send(new ListObjectsV2Command(params))
@@ -56,21 +55,21 @@ module.exports.handler = async () => {
 
         if (headResponse && headResponse.Expires) {
           const expiryDate = new Date(headResponse.Expires)
-          
+
           if (expiryDate < currentDate) {
             // Object has expired, delete it
             await client.send(new DeleteObjectCommand({ Bucket: process.env.AWS_S3_BUCKET, Key: key }))
             console.log(`Deleted object: ${key}`)
-            
+
             await handleUpateFileExpiryInDB(key as string)
-            
+
             console.log(`Updated DB for object: ${key}`)
           }
         }
       } catch (error) {
         console.error(`Error getting metadata for object ${key}: ${error}`)
       }
-      
+
     }
   } catch (err) {
     console.error(err)
