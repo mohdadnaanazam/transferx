@@ -21,7 +21,7 @@ export const useUploadFile = () => {
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ filename: file.name, contentType: file.type, expiryDate }),
+        body: JSON.stringify({ filename: file.name, contentType: file.type, expiryDate: expiryDate.toDateString() }),
       }
 
       dispatch({ type: IS_UPLOADING, payload: true })
@@ -40,7 +40,7 @@ export const useUploadFile = () => {
       await axios.put(signedURL, file, {
         headers: {
           'Content-Type': file.type,
-          'Expires': new Date(expiryDate).toUTCString()
+          'Expires': new Date(expiryDate).toDateString()
         },
         onUploadProgress: (progressEvent: any) => {
           if (progressEvent.bytes) {
