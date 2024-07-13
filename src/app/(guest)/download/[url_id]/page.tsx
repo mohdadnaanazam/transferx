@@ -42,6 +42,7 @@ export default async function Download({ params }: { params: { url_id: string } 
 
     <main className='flex max-w-7xl md:mx-auto px-5 h-[91vh] flex-row'>
       {url && <AskPin visible={url.is_pin_protected} linkId={params.url_id} />}
+
       <div className='flex-1 h-full flex justify-start items-center'>
         <DownloadCard s3URL={url.s3_url} downloadableURL={url.downloadable_url} fileType={url.file_type} fileName={url.file_name} />
       </div>
