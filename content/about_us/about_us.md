@@ -18,3 +18,5 @@ Why choose TransferX?
 Discover the convenience and reliability of TransferX today. Visit [https://www.transferx.in](https://www.transferx.in) to get started!
 
 Thank you for choosing TransferX as your trusted file-sharing solution. We look forward to helping you connect and share with ease.
+
+For support, contact us at [support@transferx.in](mailto:support@transferx.in).
