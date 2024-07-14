@@ -46,7 +46,7 @@ export const Links = () => {
         {links?.map((link) => (
           <TableRow key={link.id}>
             <TableCell className="font-medium">
-              {link?.isExpired ? <X className="text-red-500" /> : <Check className="text-green-500" />}
+              {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
             </TableCell>
             <TableCell>{link?.name}</TableCell>
             <TableCell>
