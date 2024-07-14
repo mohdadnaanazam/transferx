@@ -11,6 +11,7 @@ import { AuthProvider } from "@/context/auth-context"
 
 import { SessionProvider } from "next-auth/react"
 import { Analytics } from "@vercel/analytics/react"
+import Footer from "@/components/Footer/Footer"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </AuthProvider>
             </ThemeProvider>
           </SessionProvider>
+          <Footer />
         </body>
       </html>
     </>
