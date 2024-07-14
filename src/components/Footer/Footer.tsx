@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Footer(): JSX.Element {
   return (
-    <footer className='flex flex-row justify-evenly items-center border-t md:w-10/12 p-2 mx-auto'>
+    <footer className='flex flex-row justify-evenly items-center border-t md:w-10/12 p-2 m-2 mx-auto'>
       <div className='flex-1 flex justify-center md:justify-start md:items-center'>
         <Link className="font-medium text-xl" href='/'>transferX</Link>
       </div>
