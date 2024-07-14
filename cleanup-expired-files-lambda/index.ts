@@ -7,14 +7,17 @@ let cachedClient: any = null;
 
 const client = new S3Client({
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? '',
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? ''
+    accessKeyId: process.env.LAMBDA_AWS_ACCESS_KEY_ID ?? '',
+    secretAccessKey: process.env.LAMBDA_AWS_SECRET_ACCESS_KEY ?? ''
   },
 });
 
 const handleUpateFileExpiryInDB = async (id: string) => {
+  console.log(`Setting expiry to true for file: ${id}`)
   try {
-    await ShareableLink.findOneAndUpdate({ s3_key: id }, { is_expired: true })
+    const updatedFile = await ShareableLink.findOneAndUpdate({ s3_key: id }, { is_expired: true })
+
+    console.log(updatedFile, 'setting expires to true in DB')
   } catch (error) {
     console.error(`Error updating file expiry for ${id}: ${error}`)
   }
