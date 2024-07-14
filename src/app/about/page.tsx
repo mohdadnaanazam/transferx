@@ -1,8 +1,7 @@
-import React from 'react'
-
 import ReactMarkdown from 'react-markdown'
-import { readFile } from '@/utils/fs'
 import { type Metadata } from 'next'
+
+import { readFile } from '@/utils/fs'
 
 export const metadata: Metadata = {
   title: 'transferX - About Us',
