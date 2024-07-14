@@ -2,6 +2,7 @@
 
 import { Check, X } from "lucide-react"
 import { useLiveQuery } from "dexie-react-hooks"
+import { useState } from "react"
 
 import { db } from "@/offline/db.model"
 import {
@@ -19,6 +20,15 @@ import { PreviewPanel } from "@/components/PreviewPanel"
 
 export const Links = () => {
   const links = useLiveQuery(() => db.links.toArray()) || []
+  const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null)
+
+  const handleCopy = (shortURL: string, id: string) => {
+    navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
+    setCopiedLinkId(id)
+    setTimeout(() => {
+      setCopiedLinkId(null)
+    }, 1000)
+  }
 
   return (
     <Table className="mt-6">
@@ -45,8 +55,12 @@ export const Links = () => {
               <BorderMagicButton onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</BorderMagicButton>
             </TableCell>
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
-            <TableCell className="cursor-pointer"><p onClick={() => { navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${link?.shortURL}`) }}>COPY</p></TableCell>
             <TableCell className="cursor-pointer">
+              <div onClick={() => handleCopy(link?.shortURL, link.id)}>
+                {copiedLinkId === link.id ? <span className="tooltip">Copied!</span> : "COPY"}
+              </div>
+            </TableCell>
+            <TableCell>
               <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
             </TableCell>
           </TableRow>
