@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import mime from 'mime'
 
 import { IS_UPLOADING, SET_FILE, UploadContext } from "@/context/upload-context"
+import { db } from "@/offline/db.model"
 
 export const useUploadFile = () => {
   // init
@@ -68,6 +69,22 @@ export const useUploadFile = () => {
 
       if (response.ok) {
         const { url } = await response.json()
+
+        const dexiePayload = {
+          id: objectKey,
+          name: filename,
+          isExpired: false,
+          downloadURL: s3_url.downloadableURL,
+          previewURL: s3_url.url,
+          expiryDate: new Date(expiryDate),
+          s3Id: objectKey,
+          shortURL: url
+        }
+
+        // storing the link in indexedDB
+        await db.links.add(dexiePayload)
+
+
         setShareLink(url)
       }
     } catch (error) {
