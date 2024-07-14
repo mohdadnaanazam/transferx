@@ -9,7 +9,8 @@ export interface Link {
   previewURL: string;
   expiryDate: Date;
   s3Id: string;
-  shortURL: string
+  shortURL: string,
+  file_type: string,
 }
 
 // Extend Dexie to create a typed database
@@ -19,7 +20,7 @@ class TransferXDatabase extends Dexie {
   constructor() {
     super('transferx');
     this.version(1).stores({
-      links: 'id, name, isExpired, downloadURL, previewURL, expiryDate, s3Id'
+      links: 'id, name, isExpired, downloadURL, previewURL, expiryDate, s3Id, file_type'
     });
   }
 }

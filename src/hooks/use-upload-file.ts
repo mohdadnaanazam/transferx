@@ -78,7 +78,8 @@ export const useUploadFile = () => {
           previewURL: s3_url.url,
           expiryDate: new Date(expiryDate),
           s3Id: objectKey,
-          shortURL: url
+          shortURL: url,
+          file_type: file.type
         }
 
         // storing the link in indexedDB

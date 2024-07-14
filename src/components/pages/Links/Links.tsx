@@ -42,12 +42,12 @@ export const Links = () => {
             {/* <TableCell className="font-medium">{link?.id}</TableCell> */}
             <TableCell>{link?.name}</TableCell>
             <TableCell>
-              <BorderMagicButton onClick={() => handleDownload(link?.downloadURL, link?.name, "image")}>Download</BorderMagicButton>
+              <BorderMagicButton onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</BorderMagicButton>
             </TableCell>
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
             <TableCell className="cursor-pointer"><p onClick={() => { navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${link?.shortURL}`) }}>COPY</p></TableCell>
             <TableCell className="cursor-pointer">
-              <PreviewPanel url={link?.previewURL} type={link?.file_type || 'image'} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
+              <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
             </TableCell>
           </TableRow>
         ))}
