@@ -36,7 +36,6 @@ export const Links = () => {
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Status</TableHead>
-          {/* <TableHead className="w-[100px]">Id</TableHead> */}
           <TableHead>Name</TableHead>
           <TableHead>Download URL</TableHead>
           <TableHead>Expiry</TableHead>
@@ -49,10 +48,9 @@ export const Links = () => {
             <TableCell className="font-medium">
               {link?.isExpired ? <X className="text-red-500" /> : <Check className="text-green-500" />}
             </TableCell>
-            {/* <TableCell className="font-medium">{link?.id}</TableCell> */}
             <TableCell>{link?.name}</TableCell>
             <TableCell>
-              <BorderMagicButton onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</BorderMagicButton>
+              <p className="cursor-pointer" onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</p>
             </TableCell>
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
             <TableCell className="cursor-pointer">
