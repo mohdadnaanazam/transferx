@@ -25,6 +25,7 @@ export const Links = () => {
   return (
     <Table className="mt-6">
       <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
+
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Status</TableHead>
