@@ -5,17 +5,8 @@ import { useLiveQuery } from "dexie-react-hooks"
 import { useState } from "react"
 
 import { db } from "@/offline/db.model"
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { handleDownload } from "@/components/DownloadCard/DownloadCard"
-import { BorderMagicButton } from "@/components/Buttons"
 import { PreviewPanel } from "@/components/PreviewPanel"
 
 export const Links = () => {
@@ -25,6 +16,7 @@ export const Links = () => {
   const handleCopy = (shortURL: string, id: string) => {
     navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
     setCopiedLinkId(id)
+
     setTimeout(() => {
       setCopiedLinkId(null)
     }, 1000)
@@ -40,24 +32,31 @@ export const Links = () => {
           <TableHead>Download URL</TableHead>
           <TableHead>Expiry</TableHead>
           <TableHead>Shareable URL</TableHead>
+          <TableHead />
         </TableRow>
       </TableHeader>
+
       <TableBody>
         {links?.map((link) => (
           <TableRow key={link.id}>
             <TableCell className="font-medium">
               {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
             </TableCell>
+
             <TableCell>{link?.name}</TableCell>
+
             <TableCell>
               <p className="cursor-pointer" onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</p>
             </TableCell>
+
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
+
             <TableCell className="cursor-pointer">
               <div onClick={() => handleCopy(link?.shortURL, link.id)}>
                 {copiedLinkId === link.id ? <span className="tooltip">Copied!</span> : "COPY"}
               </div>
             </TableCell>
+
             <TableCell>
               <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
             </TableCell>
