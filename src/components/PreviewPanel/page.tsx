@@ -1,9 +1,8 @@
+import { Button } from "@/components/ui/button"
+
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { useToast } from "../ui/use-toast"
-import { Download } from 'lucide-react'
 
 type PreviewPanelProps = {
   url: string,
@@ -24,7 +23,6 @@ const RenderPreview = ({ url, type }: { url: string, type: string }) => {
 }
 
 export const PreviewPanel = ({ url, type, downloadableURL, fileName, handleDownload }: PreviewPanelProps) => {
-  const { toast } = useToast()
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -34,25 +32,17 @@ export const PreviewPanel = ({ url, type, downloadableURL, fileName, handleDownl
       <SheetContent className="w-full h-full flex flex-col md:w-[70vw] overflow-y-scroll">
         <SheetHeader>
           <SheetTitle>Preview</SheetTitle>
-          <SheetDescription className="flex flex-col items-start md:flex-row md:justify-around md:items-center pb-[10px] pb-10">
-            <div className="font-semibold text-base">{fileName}</div>
-            <div>4.05MB</div>
-            <div>Expiry: 26 jul 2024 </div>
+          <SheetDescription>
+            Preview uploaded file
           </SheetDescription>
         </SheetHeader>
-        
         <div className="flex-1">
-          <div className="flex relative h-[100%] justify-end items-end">
+          <div className="flex relative h-[100%] mt-auto justify-center items-center">
             <RenderPreview url={url} type={type} />
           </div>
         </div>
-
-        <SheetFooter className="flex items-center mr-10 mt-6">
-          <div className="flex border-[1px] shadow-md justify-between items-center rounded-md mr-4">
-            <div className="px-2">{url.slice(0, 25)}</div>
-            <Button onClick={() => toast({ title: "Link Copied" })}>Copy</Button>
-          </div>
-          <Download onClick={() => handleDownload(downloadableURL, fileName, type)}>Download</Download>
+        <SheetFooter className="mt-32 bottom-0">
+          <Button onClick={() => handleDownload(downloadableURL, fileName, type)}>Download</Button>
         </SheetFooter>
       </SheetContent>
     </Sheet>
