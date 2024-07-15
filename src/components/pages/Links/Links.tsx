@@ -1,25 +1,24 @@
 'use client'
 
-import { Check, X } from "lucide-react"
+import { ArrowDownToLine, Check, Copy, X } from "lucide-react"
 import { useLiveQuery } from "dexie-react-hooks"
-import { useState } from "react"
 
 import { db } from "@/offline/db.model"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { handleDownload } from "@/components/DownloadCard/DownloadCard"
 import { PreviewPanel } from "@/components/PreviewPanel"
+import { useToast } from "@/components/ui/use-toast"
 
 export const Links = () => {
+  const { toast } = useToast()
   const links = useLiveQuery(() => db.links.toArray()) || []
-  const [copiedLinkId, setCopiedLinkId] = useState<string | null>(null)
 
   const handleCopy = (shortURL: string, id: string) => {
-    navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
-    setCopiedLinkId(id)
-
-    setTimeout(() => {
-      setCopiedLinkId(null)
-    }, 1000)
+    navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`).then(() => {
+      toast({ title: "Link Copied", description: "The link has been copied to the clipboard." })
+    }).catch((err) => {
+      toast({ title: "Error", description: "Unable to copy link to clipboard." })
+    })
   }
 
   return (
@@ -47,15 +46,13 @@ export const Links = () => {
             <TableCell>{link?.name}</TableCell>
 
             <TableCell>
-              <p className="cursor-pointer" onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)}>Download</p>
+              <ArrowDownToLine className="cursor-pointer ml-6" onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)} />
             </TableCell>
 
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
 
             <TableCell className="cursor-pointer">
-              <div onClick={() => handleCopy(link?.shortURL, link.id)}>
-                {copiedLinkId === link.id ? <span className="tooltip">Copied!</span> : "COPY"}
-              </div>
+              <Copy className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
             </TableCell>
 
             <TableCell>
