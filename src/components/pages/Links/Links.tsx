@@ -14,12 +14,13 @@ export const Links = () => {
   const { toast } = useToast()
   const links = useLiveQuery(() => db.links.toArray()) || []
 
-  const handleCopy = (shortURL: string, id: string) => {
-    navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`).then(() => {
-      toast({ title: "Link Copied", description: "The link has been copied to the clipboard." })
-    }).catch((err) => {
+  const handleCopy = async (shortURL: string, id: string) => {
+    try {
+      navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
+      await toast({ title: "Link Copied", description: "The link has been copied to the clipboard." })
+    } catch (error) {
       toast({ title: "Error", description: "Unable to copy link to clipboard." })
-    })
+    }
   }
 
   if (links?.length <= 0) {
