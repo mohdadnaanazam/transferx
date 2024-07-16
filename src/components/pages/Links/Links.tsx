@@ -17,7 +17,7 @@ export const Links = () => {
   const handleCopy = async (shortURL: string, id: string) => {
     try {
       navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
-      await toast({ title: "Link Copied", description: "The link has been copied to the clipboard." })
+      await toast({ title: "Link Copied", description: "The link copied to the clipboard." })
     } catch (error) {
       toast({ title: "Error", description: "Unable to copy link to clipboard." })
     }
