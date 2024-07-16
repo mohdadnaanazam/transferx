@@ -18,9 +18,9 @@ export default function Footer(): JSX.Element {
   };
 
   return (
-    <footer className="py-6 mx-4 lg:mx-16">
+    <footer className="py-2 mx-4">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center px-6 space-y-4 lg:space-y-0">
+        <div className="flex flex-col md:flex-row justify-between items-start px-6 space-y-4 lg:space-y-0 py-2">
           <div className="flex justify-center items-center space-x-2">
             <div className="bg-green-500 w-[2px] h-7"></div>
             <Link className="font-medium text-2xl" href='/'>transferX</Link>
@@ -39,7 +39,7 @@ export default function Footer(): JSX.Element {
             </div>
           </div>
 
-          <div className="w-full md:w-auto flex flex-col md:flex-row md:items-start">
+          <div className="w-full md:w-auto flex flex-col md:flex-row md:items-start lg:pr-10">
             <button onClick={toggleQuickLinks} className="md:hidden flex justify-between items-center font-semibold mb-2 w-full text-left">
               Quick Links
               {isQuickLinksOpen ? <ChevronUp /> : <ChevronDown />}
@@ -54,7 +54,7 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
         
-        <div className="border-t border-white mt-4 pt-4 text-center">
+        <div className="border-t border-white py-2 text-center mx-6">
           <p>© Copyright 2023 transferx.in All Rights Reserved</p>
         </div>
       </div>
