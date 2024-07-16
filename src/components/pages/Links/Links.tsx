@@ -17,7 +17,7 @@ export const Links = () => {
   const handleCopy = async (shortURL: string, id: string) => {
     try {
       navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_BASE_URL}/${shortURL}`)
-      await toast({ title: "Link Copied", description: "The link copied to the clipboard." })
+      toast({ title: "Link Copied", description: "The link copied to the clipboard." })
     } catch (error) {
       toast({ title: "Error", description: "Unable to copy link to clipboard." })
     }
@@ -52,7 +52,7 @@ export const Links = () => {
             <TableCell>{link?.name}</TableCell>
 
             <TableCell>
-              <ArrowDownToLine className="cursor-pointer ml-6" onClick={() => handleDownload(link?.downloadURL, link?.name, link?.file_type)} />
+              <ArrowDownToLine className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
             </TableCell>
 
             <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
