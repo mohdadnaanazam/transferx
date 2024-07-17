@@ -18,9 +18,9 @@ export default function Footer(): JSX.Element {
   };
 
   return (
-    <footer className="py-2 mx-4">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start px-6 space-y-4 lg:space-y-0 py-2">
+    <footer className="w-full py-2 md:mx-4">
+      <div className="container md:px-6">
+        <div className="flex flex-col md:flex-row justify-between items-start px-2 md:px-6 space-y-4 md:space-y-0 py-2 w-full">
           <div className="flex justify-center items-center space-x-2">
             <div className="bg-green-500 w-[2px] h-7"></div>
             <Link className="font-medium text-2xl" href='/'>transferX</Link>
@@ -54,7 +54,7 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
         
-        <div className="border-t border-white py-2 text-center mx-6">
+        <div className="border-t border-white py-2 text-center md:mx-6">
           <p>© Copyright 2023 transferx.in All Rights Reserved</p>
         </div>
       </div>
