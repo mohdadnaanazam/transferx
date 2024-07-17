@@ -28,45 +28,48 @@ export const Links = () => {
   }
 
   return (
-    <Table className="mt-6">
-      <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
+    <div className="mt-7">
+      <h2 className="text-3xl ml-3">Recent Links</h2>
+      <Table className="mt-6">
+        <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
 
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Status</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Download URL</TableHead>
-          <TableHead>Expiry</TableHead>
-          <TableHead>Shareable URL</TableHead>
-          <TableHead />
-        </TableRow>
-      </TableHeader>
-
-      <TableBody>
-        {links?.map((link) => (
-          <TableRow key={link.id}>
-            <TableCell className="font-medium">
-              {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
-            </TableCell>
-
-            <TableCell>{link?.name}</TableCell>
-
-            <TableCell>
-              <ArrowDownToLine className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
-            </TableCell>
-
-            <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
-
-            <TableCell className="cursor-pointer">
-              <Copy className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
-            </TableCell>
-
-            <TableCell>
-              <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
-            </TableCell>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[100px]">Status</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Download URL</TableHead>
+            <TableHead>Expiry</TableHead>
+            <TableHead>Shareable URL</TableHead>
+            <TableHead />
           </TableRow>
-        ))}
-      </TableBody>
-    </Table>
+        </TableHeader>
+
+        <TableBody>
+          {links?.map((link) => (
+            <TableRow key={link.id}>
+              <TableCell className="font-medium">
+                {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
+              </TableCell>
+
+              <TableCell>{link?.name}</TableCell>
+
+              <TableCell>
+                <ArrowDownToLine strokeWidth={1} className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
+              </TableCell>
+
+              <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
+
+              <TableCell className="cursor-pointer">
+                <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
+              </TableCell>
+
+              <TableCell>
+                <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
   )
 }
