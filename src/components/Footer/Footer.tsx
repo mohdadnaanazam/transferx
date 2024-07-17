@@ -55,7 +55,7 @@ export default function Footer(): JSX.Element {
         </div>
         
         <div className="border-t border-white py-2 text-center md:mx-6">
-          <p>© Copyright 2023 transferx.in All Rights Reserved</p>
+          <p>© Copyright 2024 transferx.in All Rights Reserved</p>
         </div>
       </div>
     </footer>
