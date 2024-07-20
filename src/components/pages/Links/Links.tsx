@@ -29,7 +29,7 @@ export const Links = () => {
 
   return (
     <div className="mt-7">
-      <h2 className="text-3xl ml-3">Recent Links</h2>
+      <h2 className="text-3xl ml-3 font-semibold">Recent Links</h2>
       <Table className="mt-6">
         <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
 
@@ -51,7 +51,7 @@ export const Links = () => {
                 {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
               </TableCell>
 
-              <TableCell>{link?.name}</TableCell>
+              <TableCell>{link?.name?.length > 15 ? link?.name.slice(0, 15) + '....' : link?.name}</TableCell>
 
               <TableCell>
                 <ArrowDownToLine strokeWidth={1} className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />

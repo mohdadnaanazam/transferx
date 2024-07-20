@@ -97,7 +97,7 @@ export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
               </Button>
             </DialogClose>
 
-            <Link href='/links'>Show Recent Links</Link>
+            <Link href='/links' className="text-sm underline underline-offset-2">Show recent links</Link>
           </div>
         </DialogFooter>
       </DialogContent>
