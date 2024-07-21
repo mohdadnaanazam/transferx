@@ -9,6 +9,7 @@ import { handleDownload } from "@/components/DownloadCard/DownloadCard"
 import { PreviewPanel } from "@/components/PreviewPanel"
 import { useToast } from "@/components/ui/use-toast"
 import TableShimmer from "@/components/TableShimmer/TableShimmer"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const Links = () => {
   const { toast } = useToast()
@@ -29,7 +30,7 @@ export const Links = () => {
 
   return (
     <div className="mt-7">
-      <h2 className="text-3xl ml-3 font-semibold">Recent Links</h2>
+      <h2 className="text-3xl mx-4 font-semibold">Recent Links</h2>
       <Table className="mt-6">
         <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
 
@@ -44,31 +45,42 @@ export const Links = () => {
           </TableRow>
         </TableHeader>
 
-        <TableBody>
-          {links?.map((link) => (
-            <TableRow key={link.id}>
-              <TableCell className="font-medium">
-                {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
-              </TableCell>
+        <TooltipProvider>
+          <TableBody>
+            {links?.map((link) => (
+              <TableRow key={link.id}>
+                <TableCell className="font-medium">
+                  {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
+                </TableCell>
 
-              <TableCell>{link?.name?.length > 15 ? link?.name.slice(0, 15) + '....' : link?.name}</TableCell>
+                <TableCell>
+                  <Tooltip>
+                    <TooltipTrigger className="ml-auto">
+                      {link?.name?.length > 15 ? link?.name.slice(0, 15) + '....' : link?.name}
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      {link?.name}
+                    </TooltipContent>
+                  </Tooltip>
+                </TableCell>
 
-              <TableCell>
-                <ArrowDownToLine strokeWidth={1} className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
-              </TableCell>
+                <TableCell>
+                  <ArrowDownToLine strokeWidth={1} className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
+                </TableCell>
 
-              <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
+                <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
 
-              <TableCell className="cursor-pointer">
-                <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
-              </TableCell>
+                <TableCell className="cursor-pointer">
+                  <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
+                </TableCell>
 
-              <TableCell>
-                <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+                <TableCell>
+                  <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </TooltipProvider>
       </Table>
     </div>
   )
