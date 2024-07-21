@@ -3,14 +3,16 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
-
 type PreviewPanelProps = {
   url: string,
   type: string,
   downloadableURL: string,
   fileName: string,
   handleDownload: (s3Url: string, filename: string, file_type: string) => void
+  s3Key: string
 }
+
+const CLOUD_FRONT_URL = process.env.NEXT_PUBLIC_AWS_CLOUDFRONT_URL
 
 const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   if (type.includes('video')) {
@@ -22,7 +24,9 @@ const RenderPreview = ({ url, type }: { url: string, type: string }) => {
   }
 }
 
-export const PreviewPanel = ({ url, type, downloadableURL, fileName, handleDownload }: PreviewPanelProps) => {
+export const PreviewPanel = (props: PreviewPanelProps) => {
+  const { url, type, downloadableURL, fileName, handleDownload, s3Key } = props
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -38,7 +42,7 @@ export const PreviewPanel = ({ url, type, downloadableURL, fileName, handleDownl
         </SheetHeader>
         <div className="flex-1">
           <div className="flex relative h-[100%] mt-auto justify-center items-center">
-            <RenderPreview url={url} type={type} />
+            <RenderPreview url={`${CLOUD_FRONT_URL}/${s3Key}`} type={type} />
           </div>
         </div>
         <SheetFooter className="mt-32 bottom-0">

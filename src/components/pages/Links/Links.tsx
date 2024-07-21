@@ -75,7 +75,7 @@ export const Links = () => {
                 </TableCell>
 
                 <TableCell>
-                  <PreviewPanel url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
+                  <PreviewPanel s3Key={link.s3Id} url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
                 </TableCell>
               </TableRow>
             ))}
