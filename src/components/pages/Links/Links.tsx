@@ -24,7 +24,7 @@ export const Links = () => {
     }
   }
 
-  if (links?.length <= 0) {
+  if (!links) {
     return <TableShimmer />;
   }
 
@@ -37,7 +37,7 @@ export const Links = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Status</TableHead>
-            <TableHead>Name</TableHead>
+            <TableHead className="min-w-[120px]">Name</TableHead>
             <TableHead>Download URL</TableHead>
             <TableHead>Expiry</TableHead>
             <TableHead>Shareable URL</TableHead>
