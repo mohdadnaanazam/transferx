@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { useTheme } from "next-themes"
+import { signIn, useSession } from "next-auth/react"
+import { UserAvatar } from "../dashboard/Avatar"
 
 export const Header = () => {
   const { setTheme, theme } = useTheme()
