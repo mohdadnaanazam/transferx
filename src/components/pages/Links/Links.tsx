@@ -74,8 +74,7 @@ export const Links = () => {
                   <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
                 </TableCell>
 
-                <TableCell>
-                  <PreviewPanel s3Key={link.s3Id} url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />
+                <TableCell>{!(new Date(link?.expiryDate) < new Date()) && <PreviewPanel s3Key={link.s3Id} url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />}
                 </TableCell>
               </TableRow>
             ))}
