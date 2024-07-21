@@ -29,7 +29,7 @@ export const Links = () => {
   }
 
   return (
-    <div className="mt-7">
+    <div className="pt-7 h-full">
       <h2 className="text-3xl mx-4 font-semibold">Recent Links</h2>
       <Table className="mt-6">
         <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
