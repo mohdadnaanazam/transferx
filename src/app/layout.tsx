@@ -40,7 +40,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </AuthProvider>
             </ThemeProvider>
           </SessionProvider>
-          <Footer />
         </body>
       </html>
     </>
