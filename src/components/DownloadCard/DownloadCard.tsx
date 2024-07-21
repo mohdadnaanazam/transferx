@@ -12,7 +12,7 @@ type DownloadCardProps = {
   downloadableURL: string
 }
 
-const handleDownload = async (s3Url: string, filename: string, file_type: string) => {
+export const handleDownload = async (s3Url: string, filename: string, file_type: string) => {
   try {
     const extension = file_type.split('/')[1] || 'unknown'
 

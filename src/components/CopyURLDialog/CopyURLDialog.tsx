@@ -1,4 +1,9 @@
+import { useEffect, useRef } from "react"
+import Link from "next/link"
+import { CopyIcon } from "lucide-react"
+
 import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 import {
   Dialog,
   DialogClose,
@@ -9,11 +14,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { CopyIcon } from "lucide-react"
 import { useToast } from "../ui/use-toast"
-import { useEffect, useRef } from "react"
+import { Label } from "@/components/ui/label"
 
 interface CopyURLDialogProps {
   progress: null | number
@@ -48,7 +50,7 @@ export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
     try {
       navigator.clipboard.writeText(shareLink)
         .then(() => {
-          toast({ title: "Link Copied", description: "The link has been copied to the clipboard."})
+          toast({ title: "Link Copied", description: "The link has been copied to the clipboard." })
         })
         .catch((err) => {
           toast({ title: "Error", description: "Unable to copy link to clipboard." })
@@ -87,12 +89,16 @@ export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
             <CopyIcon className="h-4 w-4" />
           </Button>
         </div>
-        <DialogFooter className="sm:justify-start">
-          <DialogClose asChild>
-            <Button type="button" variant="secondary">
-              Close
-            </Button>
-          </DialogClose>
+        <DialogFooter className="sm:justify-start ">
+          <div className="flex flex-row justify-between items-center w-full">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Close
+              </Button>
+            </DialogClose>
+
+            <Link href='/links' className="text-sm underline underline-offset-2">Show recent links</Link>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
