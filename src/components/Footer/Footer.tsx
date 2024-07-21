@@ -18,18 +18,18 @@ export default function Footer(): JSX.Element {
   };
 
   return (
-    <footer className="w-full py-2 md:mx-4">
+    <footer className="w-full py-2">
       <div className="container md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-start px-2 md:px-6 space-y-4 md:space-y-0 py-2 w-full">
           <div className="flex justify-center items-center space-x-2">
             <div className="bg-green-500 w-[2px] h-7"></div>
             <Link className="font-medium text-2xl" href='/'>transferX</Link>
           </div>
-          
+
           <div className="w-full md:w-auto flex flex-col md:flex-row md:items-start">
             <button onClick={toggleCompany} className="md:hidden flex justify-between items-center font-semibold mb-2 w-full text-left">
               Company
-              {isCompanyOpen ? <ChevronUp /> : <ChevronDown />}
+              {isCompanyOpen ? <ChevronUp strokeWidth={1} /> : <ChevronDown strokeWidth={1} />}
             </button>
             <div className={`md:block ${isCompanyOpen ? 'block' : 'hidden'}`}>
               <h3 className="font-semibold mb-2 hidden md:block">Company</h3>
@@ -39,10 +39,10 @@ export default function Footer(): JSX.Element {
             </div>
           </div>
 
-          <div className="w-full md:w-auto flex flex-col md:flex-row md:items-start lg:pr-10">
+          <div className="w-full md:w-auto flex flex-col md:flex-row md:items-start">
             <button onClick={toggleQuickLinks} className="md:hidden flex justify-between items-center font-semibold mb-2 w-full text-left">
               Quick Links
-              {isQuickLinksOpen ? <ChevronUp /> : <ChevronDown />}
+              {isQuickLinksOpen ? <ChevronUp strokeWidth={1} /> : <ChevronDown strokeWidth={1} />}
             </button>
             <div className={`md:block ${isQuickLinksOpen ? 'block' : 'hidden'}`}>
               <h3 className="font-semibold mb-2 hidden md:block">Quick Links</h3>
@@ -53,9 +53,9 @@ export default function Footer(): JSX.Element {
             </div>
           </div>
         </div>
-        
-        <div className="border-t border-white py-2 text-center md:mx-6">
-          <p>© Copyright 2024 transferx.in All Rights Reserved</p>
+
+        <div className="border-t-2 mt-4 border-opacity-40 border-[#1e293b] py-2 text-center md:mx-6">
+          <p className='font-normal text-sm mt-2'>Made with ❤️ in India</p>
         </div>
       </div>
     </footer>
