@@ -9,7 +9,7 @@ interface User {
   image?: string | null | undefined
 }
 
-export const CustomAvatar = ({ user }: { user: User | undefined }) => {
+export const CustomAvatar = ({ user, allowPopover = true }: { user: User | undefined, allowPopover?: boolean }) => {
   console.log(user)
   return (
     <Popover>
@@ -18,10 +18,12 @@ export const CustomAvatar = ({ user }: { user: User | undefined }) => {
           {user?.image ? <AvatarImage src={user.image} alt={user.name ?? 'User image'} /> : <AvatarFallback>{user?.name?.charAt(0)}</AvatarFallback>}
         </Avatar>
       </PopoverTrigger>
-      <PopoverContent className='w-fit p-3 m-2'>
-        <p className="block px-4 py-2 text-sm w-full text-left">{user?.name || 'Anonymous'}</p>
-        <button onClick={() => signOut()} className="block px-4 py-2 text-sm  w-full text-left">Logout</button>
-      </PopoverContent>
+      {allowPopover && (
+        <PopoverContent className='w-fit p-3 m-2'>
+          <p className="block px-4 py-2 text-sm w-full text-left">{user?.name || 'Anonymous'}</p>
+          <button onClick={() => signOut()} className="block px-4 py-2 text-sm  w-full text-left">Logout</button>
+        </PopoverContent>
+      )}
     </Popover>
   )
 }
