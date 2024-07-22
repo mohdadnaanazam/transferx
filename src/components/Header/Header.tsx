@@ -8,7 +8,7 @@ import { Navbar } from "../Navbar"
 export const Header = () => {
   const { setTheme, theme } = useTheme()
   const { data: session, status } = useSession()
-  setTheme('dark')
+  // setTheme('dark')
   const isLoggedIn = status === 'authenticated'
 
   return (

@@ -23,7 +23,7 @@ export default function SideNavbar() {
   const links = [
     {
       label: "Dashboard",
-      href: "#",
+      href: "/me",
       icon: (
         <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -59,7 +59,7 @@ export default function SideNavbar() {
   ]
 
   return (
-    <div className={cn("rounded-md flex flex-col bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10")}>
+    <div className={cn("rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10")}>
       <Sidebar open={open} setOpen={setOpen} animate={true}>
         <SidebarBody className="justify-between gap-10 dark:bg-[#020817]">
           <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
@@ -80,10 +80,7 @@ export default function SideNavbar() {
 
 const LogoIcon = () => {
   return (
-    <Link
-      href="#"
-      className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
-    >
+    <Link href="#" className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20" >
       <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
     </Link>
   )
