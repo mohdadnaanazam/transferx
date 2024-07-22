@@ -10,7 +10,6 @@ export const Header = () => {
   const { data: session, status } = useSession()
   setTheme('dark')
   const isLoggedIn = status === 'authenticated'
-  console.log(session, status, 'hello')
 
   return (
     isLoggedIn ? <Navbar /> : <div className="py-3 flex max-w-7xl w-full md:mx-auto px-5 flex-row justify-between">
