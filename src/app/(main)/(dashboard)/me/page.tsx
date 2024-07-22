@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import Image from "next/image"
+import { useSession } from "next-auth/react"
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -13,9 +13,11 @@ import {
 import { cn } from "@/lib/utils"
 import { Sidebar, SidebarBody, SidebarLink } from '../../../../components/ui/sidebar'
 import { Dashboard } from "@/components/Dashboard"
+import { CustomAvatar } from "@/components/Avatar"
 
 export default function SideNavbar() {
   const [open, setOpen] = useState(false)
+  const { data: session, status } = useSession()
 
   const links = [
     {
@@ -67,23 +69,7 @@ export default function SideNavbar() {
               ))}
             </div>
           </div>
-          <div>
-            <SidebarLink
-              link={{
-                label: "Manu Arora",
-                href: "#",
-                icon: (
-                  <Image
-                    src=""
-                    className="h-7 w-7 flex-shrink-0 rounded-full"
-                    width={50}
-                    height={50}
-                    alt="Avatar"
-                  />
-                ),
-              }}
-            />
-          </div>
+          <CustomAvatar user={session?.user} />
         </SidebarBody>
       </Sidebar>
       <Dashboard />
