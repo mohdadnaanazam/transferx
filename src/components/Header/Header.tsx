@@ -8,7 +8,7 @@ import { MaxWidthContainer } from "../MaxWidthContainer"
 import { Navbar } from "../Navbar"
 
 export const Header = () => {
-  const { setTheme, theme } = useTheme()
+  const { setTheme } = useTheme()
   const { status } = useSession()
   const isLoggedIn = status === 'authenticated'
   setTheme('dark')
