@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
@@ -9,7 +9,7 @@ export default function SideNavbar() {
   const { status } = useSession()
 
   if (status === "unauthenticated") {
-    redirect('/')
+    redirect("/");
   }
 
   return <Dashboard />
