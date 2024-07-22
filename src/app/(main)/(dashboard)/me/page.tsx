@@ -8,6 +8,7 @@ import {
   IconBrandTabler,
   IconSettings,
   IconUserBolt,
+  IconHistory
 } from "@tabler/icons-react"
 
 import { cn } from "@/lib/utils"
@@ -39,6 +40,13 @@ export default function SideNavbar() {
       href: "#",
       icon: (
         <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "History",
+      href: "/links",
+      icon: (
+        <IconHistory strokeWidth={2} className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
