@@ -24,9 +24,9 @@ export const Links = () => {
     }
   }
 
-  if (!links) {
-    return <TableShimmer />;
-  }
+  // if (links?.length <= 0) {
+  //   return <TableShimmer />;
+  // }
 
   return (
     <div className="pt-7 h-full">
@@ -37,7 +37,7 @@ export const Links = () => {
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Status</TableHead>
-            <TableHead className="min-w-[120px]">Name</TableHead>
+            <TableHead>Name</TableHead>
             <TableHead>Download URL</TableHead>
             <TableHead>Expiry</TableHead>
             <TableHead>Shareable URL</TableHead>
