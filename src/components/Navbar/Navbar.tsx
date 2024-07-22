@@ -13,15 +13,14 @@ export const Navbar = () => {
 			<div className="container mx-auto flex items-center justify-between">
 				<div className='flex justify-center items-center flex-row space-x-2'>
 					<div className='bg-green-0 w-[2px] h-7' />
-					<Link className="font-medium text-2xl" href='/'>transferX</Link>
+					<Link className="font-medium text-2xl" href='/me'>transferX</Link>
 				</div>
 				<div className="flex items-center space-x-4">
 					<div className="hidden md:flex space-x-4">
-						<Link href="me" className="dark:text-gray-300 text-gray-900 hover:text-white">Home</Link>
-						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-white">Assets</Link>
-						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-white">Folders</Link>
-						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-white">Collections</Link>
-						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-white">Moderation</Link>
+						<Link href="/me" className="dark:text-gray-300 text-gray-900 hover:text-gray-500">Home</Link>
+						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-gray-500">Assets</Link>
+						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-gray-500">Folders</Link>
+						<Link href="#" className="dark:text-gray-300 text-gray-900 hover:text-gray-500">Collections</Link>
 					</div>
 				</div>
 				<div className="hidden md:flex items-center space-x-4">
@@ -36,11 +35,11 @@ export const Navbar = () => {
 			</div>
 			{isOpen && (
 				<div className="md:hidden mt-4 space-y-2">
-					<Link href="#" className="block text-gray-300 hover:text-white">Home</Link>
-					<Link href="#" className="block text-gray-300 hover:text-white">Assets</Link>
-					<Link href="#" className="block text-gray-300 hover:text-white">Folders</Link>
-					<Link href="#" className="block text-gray-300 hover:text-white">Collections</Link>
-					<Link href="#" className="block text-gray-300 hover:text-white">Moderation</Link>
+					<Link href="#" className="block text-gray-300 hover:text-gray-500">Home</Link>
+					<Link href="#" className="block text-gray-300 hover:text-gray-500">Assets</Link>
+					<Link href="#" className="block text-gray-300 hover:text-gray-500">Folders</Link>
+					<Link href="#" className="block text-gray-300 hover:text-gray-500">Collections</Link>
+					<Link href="#" className="block text-gray-300 hover:text-gray-500">Moderation</Link>
 					<input type="text" placeholder="Search Media Library" className="p-2 w-full rounded bg-gray-700 text-white" />
 					<button className="w-full bg-blue-600 text-white px-4 py-2 rounded">Upload</button>
 				</div>
