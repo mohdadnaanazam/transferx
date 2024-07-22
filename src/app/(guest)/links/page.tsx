@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Links as OfflineLinks } from '@/components/pages/Links'
+import { Links as OfflineLinks } from '@/components/Links'
 
 export const metadata: Metadata = {
   title: 'TransferX | Links',

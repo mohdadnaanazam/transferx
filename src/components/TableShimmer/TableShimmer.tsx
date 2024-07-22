@@ -1,7 +1,5 @@
-import React from 'react';
-
 const TableShimmer: React.FC = () => {
-  const rows = Array.from({ length: 6 });
+  const rows = Array.from({ length: 6 })
 
   return (
     <div className="overflow-x-auto">
@@ -41,7 +39,7 @@ const TableShimmer: React.FC = () => {
         </tbody>
       </table>
     </div>
-  );
-};
+  )
+}
 
-export default TableShimmer;
+export default TableShimmer
