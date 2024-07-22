@@ -10,7 +10,6 @@ interface User {
 }
 
 export const CustomAvatar = ({ user, allowPopover = true }: { user: User | undefined, allowPopover?: boolean }) => {
-  console.log(user)
   return (
     <Popover>
       <PopoverTrigger>
