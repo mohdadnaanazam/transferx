@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 import {
   IconArrowLeft,
   IconBrandTabler,
@@ -43,7 +43,7 @@ export default function SideNavbar() {
     },
     {
       label: "Logout",
-      href: "#",
+      onClick: signOut,
       icon: (
         <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
@@ -60,16 +60,14 @@ export default function SideNavbar() {
       <Sidebar open={open} setOpen={setOpen} animate={true}>
         <SidebarBody className="justify-between gap-10 dark:bg-[#020817]">
           <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
-            <>
-              <LogoIcon />
-            </>
+            <LogoIcon />
             <div className="mt-8 flex flex-col gap-2">
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
             </div>
           </div>
-          <CustomAvatar user={session?.user} />
+          <CustomAvatar user={session?.user} allowPopover={false} />
         </SidebarBody>
       </Sidebar>
       <Dashboard />
