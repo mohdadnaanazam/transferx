@@ -87,7 +87,7 @@ export const ComingSoon = () => {
   }
 
   return (
-    <LampContainer>
+    <LampContainer className="h-[90vh]">
       <motion.h1
         initial={{ opacity: 0.5, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -108,7 +108,7 @@ export const ComingSoon = () => {
           className='flex flex-row space-x-3 items-center justify-center'>
           <motion.input onChange={handleChange} placeholder='hi@transferx.in' disabled={isSubmitting} value={email} className={cn("rounded-lg border py-2 px-2 min-w-72 border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10  bg-neutral-950 placeholder:text-neutral-700", { 'border-cyan-500': isInvalidEmail })}>
           </motion.input>
-          
+
           <Button disabled={!email} type='submit' variant="outline" size="icon">
             <ChevronRight className={cn("h-4 w-4", { 'hidden': isSubmitting })} />
             <LoaderIcon className={cn("animate-spin h-4 ml-1", { 'hidden': !isSubmitting })} />
@@ -116,7 +116,7 @@ export const ComingSoon = () => {
 
         </motion.div>
 
-        <p className={cn("text-sm font-light mt-2 opacity-0 h-2 text-cyan-500", { 'opacity-1': isInvalidEmail  })}>{errors?.['email']}</p>
+        <p className={cn("text-sm font-light mt-2 opacity-0 h-2 text-cyan-500", { 'opacity-1': isInvalidEmail })}>{errors?.['email']}</p>
 
       </motion.form>
     </LampContainer>
