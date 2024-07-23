@@ -18,7 +18,7 @@ export default function Footer(): JSX.Element {
 
   return (
     <footer className="w-full py-2">
-      <div className="container px-2">
+      <div className="container lg:px-6 px-2">
         <div className="flex flex-col md:flex-row justify-between items-start md:px-6 space-y-4 md:space-y-0 py-2 w-full">
           <div className="flex justify-center items-center space-x-2">
             <div className="bg-green-500 w-[2px] h-7"></div>
