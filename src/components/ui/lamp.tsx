@@ -30,11 +30,11 @@ export const LampContainer = ({
   className?: string;
 }) => {
   return (
-    <div className={cn("relative  flex h-full flex-col items-center justify-center overflow-hidden w-full rounded-md z-0", className)}>
+    <div className={cn("relative flex h-full flex-col items-center justify-center overflow-hidden w-full rounded-md z-0", className)}>
       <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
+          whileInView={{ opacity: 1, width: "27rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -45,12 +45,12 @@ export const LampContainer = ({
           }}
           className="absolute inset-auto right-1/2 h-56 overflow-visible w-[30rem] bg-gradient-conic from-cyan-500 via-transparent to-transparent text-white [--conic-position:from_70deg_at_center_top]"
         >
-          <div className="absolute  w-[100%] left-0 bg-slate-950 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
-          <div className="absolute  w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
+          <div className="absolute w-[100%] left-0 bg-slate-950 h-40 bottom-0 z-20 [mask-image:linear-gradient(to_top,white,transparent)]" />
+          <div className="absolute w-40 h-[100%] left-0 bg-slate-950  bottom-0 z-20 [mask-image:linear-gradient(to_right,white,transparent)]" />
         </motion.div>
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
-          whileInView={{ opacity: 1, width: "30rem" }}
+          whileInView={{ opacity: 1, width: "27rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
@@ -78,7 +78,7 @@ export const LampContainer = ({
         ></motion.div>
         <motion.div
           initial={{ width: "15rem" }}
-          whileInView={{ width: "30rem" }}
+          whileInView={{ width: "27rem" }}
           transition={{
             delay: 0.3,
             duration: 0.8,
