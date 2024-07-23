@@ -11,7 +11,7 @@ export const Navbar = () => {
 	const path = usePathname()
 
 	return (
-		<MaxWidthContainer className="hidden md:block border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg w-[90%] mx-auto py-2 sticky top-0 z-10">
+		<MaxWidthContainer className="hidden md:block border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto py-2 sticky top-0 z-10 max-w-screen-3xl">
 			<div className="mx-auto flex items-center justify-between">
 				<div className='flex justify-center items-center flex-row space-x-2'>
 					<div className='bg-green-0 w-[2px] h-7' />
