@@ -8,6 +8,7 @@ import { IconMenu2, IconX } from "@tabler/icons-react"
 interface Links {
   label: string
   href?: string
+  type?: String
   onClick?: () => void;
   icon: React.JSX.Element | React.ReactNode
 }
@@ -114,9 +115,7 @@ export const MobileSidebar = ({
   const { open, setOpen } = useSidebar()
   return (
     <>
-      <div className='flex justify-center items-center flex-row space-x-2'>
-
-      </div>
+      <div className='flex justify-center items-center flex-row space-x-2' />
       <div className={cn("h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-[#020817] w-full")} {...props} >
         <>
           <div className='bg-green-0 w-[2px] h-5 mr-1' />
@@ -138,7 +137,7 @@ export const MobileSidebar = ({
               }}
               className={cn(
                 "fixed h-full w-full inset-0 bg-white dark:bg-neutral-900 p-10 z-[100] flex flex-col justify-between",
-                className,'h-full'
+                className, 'h-full'
               )}
             >
               <div

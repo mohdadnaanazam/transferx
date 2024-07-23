@@ -1,41 +1,34 @@
 'use client'
 
 import { useState } from "react"
-import Link from "next/link"
 import { signOut, useSession } from "next-auth/react"
+import {
+  IconArrowLeft,
+  IconHistory,
+  IconFolder,
+  IconFile3d
+} from "@tabler/icons-react"
 
 import { cn } from "@/lib/utils"
 import { Sidebar, SidebarBody, SidebarLink } from '../../../../components/ui/sidebar'
 import { CustomAvatar } from "@/components/Avatar"
-import {
-  IconArrowLeft,
-  IconBrandTabler,
-  IconSettings,
-  IconUserBolt,
-  IconHistory
-} from "@tabler/icons-react"
 import { Navbar } from "@/components/Navbar"
 
 const links = [
   {
-    label: "Dashboard",
-    href: "/me",
+    label: "Assets",
+    href: "/me/assets",
+    type: "navigation",
     icon: (
-      <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      <IconFile3d className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
   {
-    label: "Profile",
-    href: "#",
+    label: "Folders",
+    href: "/me/folders",
+    type: "navigation",
     icon: (
-      <IconUserBolt className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-    ),
-  },
-  {
-    label: "Settings",
-    href: "#",
-    icon: (
-      <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      <IconFolder className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
   {
