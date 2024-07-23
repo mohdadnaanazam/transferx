@@ -20,9 +20,9 @@ export const Navbar = () => {
 				</div>
 				<div className="flex items-center w-2/6 space-x-4 justify-center">
 					<div className="hidden md:flex space-x-4">
-						<Link href="/me" className={`dark:text-gray-300 text-gray-900 hover:text-gray-500 ${path === '/me' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Home</Link>
-						<Link href="/me/assets" className={`dark:text-gray-300 text-gray-900 hover:text-gray-500 ${path === '/me/assets' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Assets</Link>
-						<Link href="/me/folders" className={`dark:text-gray-300 text-gray-900 hover:text-gray-500 ${path === '/me/folders' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Folders</Link>
+						<Link href="/me" className={`dark:text-gray-200 py-1 px-3 rounded-b-md rounded-t hover:bg-green-300 hover:border-[#00fd4b] ${path === '/me' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Home</Link>
+						<Link href="/me/assets" className={`dark:text-gray-200 py-1 px-3 rounded-md rounded-t text-gray-900 hover:text-gray-500 hover:border-b-2 hover:bg-green-300 hover:border-[#00fd4b] ${path === '/me/assets' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Assets</Link>
+						<Link href="/me/folders" className={`dark:text-gray-200 py-1 px-3 rounded-md rounded-t text-gray-900 hover:text-gray-500 hover:border-b-2 hover:bg-green-300 hover:border-[#00fd4b] ${path === '/me/folders' ? 'border-b-2 border-[#00fd4b]' : ''}`}>Folders</Link>
 					</div>
 				</div>
 				<div className="hidden md:flex items-center space-x-4">
