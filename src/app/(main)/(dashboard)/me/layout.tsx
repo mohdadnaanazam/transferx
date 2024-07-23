@@ -9,7 +9,6 @@ import {
   IconFile3d
 } from "@tabler/icons-react"
 
-import { cn } from "@/lib/utils"
 import { Sidebar, SidebarBody, SidebarLink } from '../../../../components/ui/sidebar'
 import { CustomAvatar } from "@/components/Avatar"
 import { Navbar } from "@/components/Navbar"
@@ -54,7 +53,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
   return (
     <>
       <Navbar />
-      <div className={cn("rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10")}>
+      <div className={"rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10"}>
         <Sidebar open={open} setOpen={setOpen} animate={true}>
           <SidebarBody className="justify-between gap-10 dark:bg-[#020817] h-[90vh]">
             <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
