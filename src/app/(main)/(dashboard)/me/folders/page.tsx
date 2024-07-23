@@ -1,6 +1,6 @@
 import DashboardCard from "@/components/DashboardCard/DashboardCard"
 
-export const Folders = ({ }) => {
+const Folders = ({ }) => {
 
   return (
     <div className="flex flex-1">
