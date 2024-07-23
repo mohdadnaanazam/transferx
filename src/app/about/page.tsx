@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 export default async function AboutUs(): Promise<JSX.Element> {
   const content: string = await readFile(`${process.cwd()}/content/about_us/about_us.md`)
   return (
-    <MaxWidthContainer className="mt-4 p-4 text-gray-100 mx-auto text-lg space-y-6 pb-16">
+    <MaxWidthContainer className="mt-4 text-gray-100 mx-auto text-lg space-y-6 pb-16">
       <ReactMarkdown>{content}</ReactMarkdown>
     </MaxWidthContainer>
   )
