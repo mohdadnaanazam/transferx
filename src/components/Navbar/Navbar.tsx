@@ -4,13 +4,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
+import { MaxWidthContainer } from '../MaxWidthContainer'
 
 export const Navbar = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const path = usePathname()
 
 	return (
-		<nav className="border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg w-[90%] mx-auto py-2 sticky top-0 z-10">
+		<MaxWidthContainer className="hidden md:block border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg w-[90%] mx-auto py-2 sticky top-0 z-10">
 			<div className="mx-auto flex items-center justify-between">
 				<div className='flex justify-center items-center flex-row space-x-2'>
 					<div className='bg-green-0 w-[2px] h-7' />
@@ -27,18 +28,8 @@ export const Navbar = () => {
 				<div className="hidden md:flex items-center space-x-4">
 					<Button variant="outline">Upload</Button>
 				</div>
-				<button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)} > ☰ </button>
 			</div>
-
-			{isOpen && (
-				<div className="md:hidden mt-4 space-y-2 mb-2">
-					<Link href="/me" className={`block text-gray-300 hover:text-gray-500 ${path === '/me' ? 'border-b-2 border-[#00fd4b] w-fit p-1' : ''}`}>Home</Link>
-					<Link href="/me/assets" className={`block text-gray-300 hover:text-gray-500 ${path === '/me/assets' ? 'border-b-2 border-[#00fd4b] w-fit p-1' : ''}`}>Assets</Link>
-					<Link href="/me/folders" className={`block text-gray-300 hover:text-gray-500 ${path === '/me/folders' ? 'border-b-2 border-[#00fd4b] w-fit p-1' : ''}`}>Folders</Link>
-					<button className="w-full bg-blue-600 text-white px-4 py-2 rounded">Upload</button>
-				</div>
-			)}
-		</nav>
+		</MaxWidthContainer>
 	)
 }
 

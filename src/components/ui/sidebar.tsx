@@ -114,17 +114,17 @@ export const MobileSidebar = ({
   const { open, setOpen } = useSidebar()
   return (
     <>
-      <div
-        className={cn(
-          "h-10 px-4 py-4 flex flex-row md:hidden  items-center justify-between bg-neutral-100 dark:bg-neutral-800 w-full"
-        )}
-        {...props}
-      >
+      <div className='flex justify-center items-center flex-row space-x-2'>
+
+      </div>
+      <div className={cn("h-10 px-4 py-4 flex flex-row md:hidden items-center justify-between bg-neutral-100 dark:bg-[#020817] w-full")} {...props} >
+        <>
+          <div className='bg-green-0 w-[2px] h-5 mr-1' />
+          <Link className="font-base text-xl" href='/me'>transferX</Link>
+        </>
         <div className="flex justify-end z-20 w-full">
-          <IconMenu2
-            className="text-neutral-800 dark:text-neutral-200"
-            onClick={() => setOpen(!open)}
-          />
+
+          <IconMenu2 className="text-neutral-800 dark:text-neutral-200" onClick={() => setOpen(!open)} />
         </div>
         <AnimatePresence>
           {open && (
