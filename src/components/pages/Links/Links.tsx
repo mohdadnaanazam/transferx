@@ -8,7 +8,6 @@ import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, Tabl
 import { handleDownload } from "@/components/DownloadCard/DownloadCard"
 import { PreviewPanel } from "@/components/PreviewPanel"
 import { useToast } from "@/components/ui/use-toast"
-import TableShimmer from "@/components/TableShimmer/TableShimmer"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 export const Links = () => {
@@ -24,19 +23,15 @@ export const Links = () => {
     }
   }
 
-  // if (links?.length <= 0) {
-  //   return <TableShimmer />;
-  // }
-
   return (
     <div className="pt-7 h-full">
-      <h2 className="text-3xl mx-4 font-semibold">Recent Links</h2>
+      <h2 className="text-3xl font-semibold">Recent Links</h2>
       <Table className="mt-6">
-        <TableCaption>{(links?.length > 0) ? '' : 'No data available'}</TableCaption>
+        <TableCaption className="text-xl mt-24 font-semibold tracking-wide ">{(links?.length > 0) ? '' : 'No links found'}</TableCaption>
 
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">Status</TableHead>
+            <TableHead className="w-[100px] px-0">Status</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Download URL</TableHead>
             <TableHead>Expiry</TableHead>

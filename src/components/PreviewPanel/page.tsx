@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button"
-
-import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
-type PreviewPanelProps = {
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+
+interface PreviewPanelProps {
   url: string,
   type: string,
   downloadableURL: string,
@@ -42,7 +42,9 @@ export const PreviewPanel = (props: PreviewPanelProps) => {
         </SheetHeader>
         <div className="flex-1">
           <div className="flex relative h-[100%] mt-auto justify-center items-center">
-            <RenderPreview url={`${CLOUD_FRONT_URL}/${s3Key}`} type={type} />
+            <RenderPreview url={url} type={type} />
+            {/* TODO: Enable when cloudfront is enabled */}
+            {/* <RenderPreview url={`${CLOUD_FRONT_URL}/${s3Key}`} type={type} /> */}
           </div>
         </div>
         <SheetFooter className="mt-32 bottom-0">

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { MaxWidthContainer } from '../MaxWidthContainer';
 
 export default function Footer(): JSX.Element {
   const [isCompanyOpen, setIsCompanyOpen] = useState(false);
@@ -18,10 +19,10 @@ export default function Footer(): JSX.Element {
 
   return (
     <footer className="w-full py-2">
-      <div className="container md:px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start px-2 md:px-6 space-y-4 md:space-y-0 py-2 w-full">
+      <MaxWidthContainer>
+        <div className="flex flex-col md:flex-row justify-between items-start gap-3 md:gap-3">
           <div className="flex justify-center items-center space-x-2">
-            <div className="bg-green-500 w-[2px] h-7"></div>
+            <div className="bg-green-500 w-[2px] h-7" />
             <Link className="font-medium text-2xl" href='/'>transferX</Link>
           </div>
 
@@ -53,10 +54,10 @@ export default function Footer(): JSX.Element {
           </div>
         </div>
 
-        <div className="border-t-2 mt-4 border-opacity-40 border-[#1e293b] py-2 text-center md:mx-6">
+        <div className="border-t-2 mt-4 border-opacity-40 border-[#1e293b] py-2 text-center">
           <p className='font-normal text-sm mt-2'>Made with ❤️ in India</p>
         </div>
-      </div>
+      </MaxWidthContainer>
     </footer>
   );
 }

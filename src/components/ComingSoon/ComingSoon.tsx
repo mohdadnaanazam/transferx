@@ -44,15 +44,12 @@ export const ComingSoon = () => {
         if (err instanceof z.ZodError) {
           const errValues: IValidationError = {}
 
-          console.log(err, 'hey')
-
           err.issues.forEach((item) => {
             if (item.path[0] === 'email') {
               errValues[String(item.path[0])] = item.message
             }
           })
 
-          console.log(errValues, 'hey there i am errValues')
           return setErrors({ ...errors, ...errValues })
         }
       }

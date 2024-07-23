@@ -2,6 +2,7 @@ import ReactMarkdown from 'react-markdown'
 import { type Metadata } from 'next'
 
 import { readFile } from '@/utils/fs'
+import { MaxWidthContainer } from '@/components/MaxWidthContainer'
 
 export const metadata: Metadata = {
   title: 'transferX - About Us',
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
 export default async function AboutUs(): Promise<JSX.Element> {
   const content: string = await readFile(`${process.cwd()}/content/about_us/about_us.md`)
   return (
-    <main className="mt-4 p-4 text-gray-100 max-w-7xl mx-auto text-lg space-y-6 pb-16">
+    <MaxWidthContainer className="mt-4 p-4 text-gray-100 mx-auto text-lg space-y-6 pb-16">
       <ReactMarkdown>{content}</ReactMarkdown>
-    </main>
+    </MaxWidthContainer>
   )
 }

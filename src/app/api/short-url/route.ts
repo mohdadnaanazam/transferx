@@ -17,8 +17,6 @@ export async function POST(request: Request) {
 
     const newEntry = new ShareableLink({ s3_url, shorten_slug, pin, file_type, file_name, downloadable_url, expiry, s3_key })
 
-    console.log(newEntry, 'newEntry')
-
     try {
       await newEntry.save()
 

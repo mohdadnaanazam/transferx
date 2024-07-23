@@ -1,13 +1,14 @@
 'use client'
 import Link from "next/link"
 import { useTheme } from "next-themes"
+import { MaxWidthContainer } from "../MaxWidthContainer"
 
 export const Header = () => {
-  const {setTheme, theme}= useTheme()
+  const { setTheme, theme } = useTheme()
   setTheme('dark')
 
   return (
-    <div className="py-3 flex max-w-7xl w-full md:mx-auto px-5 flex-row justify-between">
+    <MaxWidthContainer className="py-3 flex flex-row justify-between">
       <div className='flex justify-center items-center flex-row space-x-2'>
         <div className='bg-green-0 w-[2px] h-7' />
         <Link className="font-medium text-2xl" href='/'>transferX</Link>
@@ -18,6 +19,6 @@ export const Header = () => {
 
         {/* <ThemeToggle /> */}
       </div>
-    </div>
+    </MaxWidthContainer>
   )
 }

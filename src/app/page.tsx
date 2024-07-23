@@ -1,5 +1,6 @@
 import { CardWithForm } from '@/components/CardWithForm'
 import { MainHero } from '@/components/MainHero/MainHero'
+import { MaxWidthContainer } from '@/components/MaxWidthContainer'
 import { SalesProvider } from '@/context/upload-context'
 
 import type { Metadata } from 'next'
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function Page() {
 
   return (
-    <main className='flex max-w-7xl md:mx-auto px-5 h-[91vh] flex-row'>
+    <MaxWidthContainer className='flex h-[91vh] flex-row'>
       <div className='flex-1 h-full flex justify-start items-center'>
         <SalesProvider>
           <CardWithForm />
@@ -22,6 +23,6 @@ export default function Page() {
       <div className='flex-1 hidden md:flex items-center relative'>
         <MainHero />
       </div>
-    </main>
+    </MaxWidthContainer>
   )
 }

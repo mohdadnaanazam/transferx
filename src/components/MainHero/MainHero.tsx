@@ -8,7 +8,7 @@ export function MainHero() {
       <h1 className="md:text-7xl text-3xl lg:text-9xl font-bold text-center text-white relative z-20">
         transferX
       </h1>
-      <div className="md:w-[30rem] lg:w-[40rem] h-40 relative mx-auto">
+      <div className="md:w-[20rem] lg:w-[40rem] h-40 relative mx-auto">
         {/* Gradients */}
         <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
         <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
