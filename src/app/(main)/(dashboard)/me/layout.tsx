@@ -14,6 +14,7 @@ import {
   IconUserBolt,
   IconHistory
 } from "@tabler/icons-react"
+import { Navbar } from "@/components/Navbar"
 
 const links = [
   {
@@ -58,29 +59,23 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
   const { data: session } = useSession()
 
   return (
-    <div className={cn("rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10")}>
-      <Sidebar open={open} setOpen={setOpen} animate={true}>
-        <SidebarBody className="justify-between gap-10 dark:bg-[#020817] h-[90vh]">
-          <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
-            <LogoIcon />
-            <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
+    <>
+      <Navbar />
+      <div className={cn("rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10")}>
+        <Sidebar open={open} setOpen={setOpen} animate={true}>
+          <SidebarBody className="justify-between gap-10 dark:bg-[#020817] h-[90vh]">
+            <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
+              <div className="mt-8 flex flex-col gap-2">
+                {links.map((link, idx) => (
+                  <SidebarLink key={idx} link={link} />
+                ))}
+              </div>
             </div>
-          </div>
-          <CustomAvatar user={session?.user} allowPopover={false} />
-        </SidebarBody>
-      </Sidebar>
-      {children}
-    </div>
-  )
-}
-
-const LogoIcon = () => {
-  return (
-    <Link href="#" className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20" >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />
-    </Link>
+            <CustomAvatar user={session?.user} allowPopover={false} />
+          </SidebarBody>
+        </Sidebar>
+        {children}
+      </div>
+    </>
   )
 }
