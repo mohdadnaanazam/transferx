@@ -1,6 +1,6 @@
 import DashboardCard from "@/components/DashboardCard/DashboardCard"
 
-export const Assets = ({ }) => {
+export default function Assets() {
 
   return (
     <div className="flex flex-1">
@@ -16,5 +16,3 @@ export const Assets = ({ }) => {
     </div>
   )
 }
-
-export default Assets
