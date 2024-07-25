@@ -1,5 +1,3 @@
-import DashboardCard from "../DashboardCard/DashboardCard"
-
 export const Dashboard = ({ }) => {
 
   return (
@@ -8,7 +6,6 @@ export const Dashboard = ({ }) => {
         <div className="flex flex-wrap justify-start gap-2 w-full m-2">
           {[...new Array(8)].map((_, i) => (
             <div key={i} className="w-full sm:w-[48%] lg:w-[32%] h-56 rounded-lg bg-gray-100 dark:bg-neutral-800">
-              <DashboardCard />
             </div>
           ))}
         </div>

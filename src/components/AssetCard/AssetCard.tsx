@@ -1,21 +1,21 @@
 "use client"
 
-import Image from "next/image";
-import { useState } from "react";
-import { EllipsisVertical, PackageOpen, Pickaxe, Pencil, FolderOpen, ArrowDownToLine, Share2, ChevronsLeftRight, FolderPen, Images, Trash2 } from 'lucide-react';
+import Image from "next/image"
+import { useState } from "react"
+import { EllipsisVertical, PackageOpen, Pickaxe, Pencil, FolderOpen, ArrowDownToLine, Share2, ChevronsLeftRight, FolderPen, Images, Trash2 } from 'lucide-react'
 
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 function AssetCard() {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false)
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
+    setIsHovered(true)
+  }
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
+    setIsHovered(false)
+  }
 
   const popOverContent = [
     {
@@ -68,7 +68,7 @@ function AssetCard() {
       "icon": <Trash2 strokeWidth={1} />,
       "text": "Delete"
     }
-  ];
+  ]
 
   return (
     <div className="w-full sm:w-[48%] lg:w-[32%] h-56 rounded-lg bg-gray-100 dark:bg-neutral-800 relative"
@@ -131,4 +131,4 @@ function AssetCard() {
   )
 }
 
-export default AssetCard;
+export default AssetCard
