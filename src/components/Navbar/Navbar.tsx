@@ -1,20 +1,18 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '../ui/button'
 import { CloudUpload } from 'lucide-react'
+
 import { MaxWidthContainer } from '../MaxWidthContainer'
 
 export const Navbar = () => {
-	const [isOpen, setIsOpen] = useState(false)
 	const path = usePathname()
 
 	return (
 		<MaxWidthContainer className="hidden md:block border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto sticky top-0 z-10 max-w-screen-3xl">
 			<div className="mx-auto flex items-center justify-between">
-				<div className='flex justify-center items-center flex-row space-x-2'>
+				<div className='flex justify-center items-center flex-row space-x-1'>
 					<div className='bg-green-0 w-[2px] h-5' />
 					<Link className="font-medium text-xl" href='/me'>transferX</Link>
 				</div>
@@ -28,7 +26,7 @@ export const Navbar = () => {
 				</div>
 
 				<div className="hidden md:flex items-center space-x-4">
-					<CloudUpload/>
+					<CloudUpload className='cursor-pointer' />
 				</div>
 			</div>
 		</MaxWidthContainer>
