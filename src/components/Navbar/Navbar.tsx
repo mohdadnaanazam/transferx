@@ -11,21 +11,23 @@ export const Navbar = () => {
 	const path = usePathname()
 
 	return (
-		<MaxWidthContainer className="hidden md:block border-b-[1px] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto py-2 sticky top-0 z-10 max-w-screen-3xl">
-			<div className="mx-auto flex items-center justify-between">
-				<div className='flex justify-center items-center flex-row space-x-2'>
-					<div className='bg-green-0 w-[2px] h-7' />
-					<Link className="font-medium text-2xl" href='/me'>transferX</Link>
-				</div>
+		<MaxWidthContainer className="hidden md:block bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto sticky top-0 pt-4 z-10 max-w-screen-3xl">
+			<div className="mx-auto flex items-center justify-between h-full relative">
+				<div className='flex justify-between items-center flex-row space-x-0'>
+					<div className='flex space-x-1'>
+						<div className='bg-green-0 w-[2px] h-7' />
+						<Link className="font-medium text-2xl" href='/me'>transferX</Link>
+					</div>
 
-				<div className="flex items-center w-2/6 space-x-4 justify-center">
-					<div className="hidden md:flex space-x-4">
-						<Link href="/me" className={`dark:text-gray-300 py-1 px-3 hover:text-gray-600 ${path === '/me' ? 'border-b-2 border-white' : ''}`}>Home</Link>
-						<Link href="/me/assets" className={`dark:text-gray-300 py-1 px-3  text-gray-900 hover:text-gray-600 ${path === '/me/assets' ? 'border-b-2 border-white' : ''}`}>Assets</Link>
-						<Link href="/me/folders" className={`dark:text-gray-300 py-1 px-3  text-gray-900 hover:text-gray-600 ${path === '/me/folders' ? 'border-b-2 border-white' : ''}`}>Folders</Link>
+					<div className="flex items-center w-2/6 space-x-4 justify-center">
+						<div className="hidden md:flex space-x-4">
+							<NavLink href='/me' name='Home' path={path} />
+							<NavLink href='/me/assets' name='Assets' path={path} />
+							<NavLink href='/me/folders' name='Folders' path={path} />
+						</div>
 					</div>
 				</div>
-				<div className="hidden md:flex items-center space-x-4">
+				<div className="hidden md:block space-x-4 absolute bottom-1 right-2">
 					<Button variant="outline">Upload</Button>
 				</div>
 			</div>
@@ -34,3 +36,7 @@ export const Navbar = () => {
 }
 
 export default Navbar
+
+function NavLink({ href, name, path }: { href: string, name: string, path: string }) {
+	return <Link href={href} className={`dark:text-gray-400 py-1 px-3  text-gray-900 dark:hover:text-white dark:hover:bg-gray-900 hover:rounded-t-lg ${path === href ? 'border-b-2 border-white dark:text-white' : ''}`}>{name}</Link>
+}
