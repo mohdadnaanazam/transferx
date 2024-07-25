@@ -53,7 +53,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
   return (
     <>
       <Navbar />
-      <div className={"rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10"}>
+      <div className={"rounded-md flex flex-col dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto overflow-hidden mb-10 mr-10 h-[88vh]"}>
         <Sidebar open={open} setOpen={setOpen} animate={true}>
           <SidebarBody className="justify-between gap-10 dark:bg-[#020817] h-[90vh]">
             <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
@@ -66,7 +66,9 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
             <CustomAvatar user={session?.user} allowPopover={false} />
           </SidebarBody>
         </Sidebar>
-        {children}
+        <div className={"mx-auto overflow-y-scroll"}>
+          {children}
+        </div>
       </div>
     </>
   )
