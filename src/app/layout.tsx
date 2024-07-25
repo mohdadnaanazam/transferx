@@ -1,9 +1,10 @@
 'use client'
 
 import "../app/globals.css"
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from 'geist/font/mono'
 
 import { cn } from "@/lib/utils"
-import { dmSans } from "../lib/fonts"
 import { Header } from "@/components/Header"
 import { ThemeProvider } from '../components/Providers/Theme/ProviderTheme'
 import { Toaster } from "@/components/ui/toaster"
@@ -20,10 +21,10 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
         <link rel="icon" href="/favicon.ico" sizes="any" />
 
-        <body className={cn("h-full bg-background font-sans antialiased", dmSans.variable)}>
+        <body className={cn("h-full bg-background font-sans antialiased")}>
           <Toaster />
 
           <SessionProvider>
