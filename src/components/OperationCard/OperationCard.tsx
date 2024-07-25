@@ -1,4 +1,3 @@
-import React from 'react';
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 interface PopoverLink {
