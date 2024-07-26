@@ -36,5 +36,5 @@ export const Navbar = () => {
 export default Navbar
 
 function NavLink({ href, name, path }: { href: string, name: string, path: string }) {
-	return <Link href={href} className={`dark:text-gray-400 py-1 px-3  text-gray-900 dark:hover:text-white dark:hover:bg-gray-900 hover:rounded-t-lg ${path === href ? 'border-b-2 border-white dark:text-white' : ''}`}>{name}</Link>
+	return <Link href={href} className={`dark:text-gray-400 py-1 px-3  text-gray-900 dark:hover:text-white dark:hover:bg-accent hover:rounded-t-lg ${path === href ? 'border-b-2 border-white dark:text-white' : ''}`}>{name}</Link>
 }
