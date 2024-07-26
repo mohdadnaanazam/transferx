@@ -19,14 +19,14 @@ const OperationCard: React.FC<OperationCardProps> = ({ triggerIcon, links }) => 
           {triggerIcon}
         </div>
       </PopoverTrigger>
-      <PopoverContent className="w-72">
+      <PopoverContent className="w-[200px]">
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <div className="grid gap-4">
+            <div className="grid gap-2">
               {links.map((link) => (
-                <button key={link.index} className="flex justify-start items-center w-full">
-                  {link.icon}
-                  <span className="ml-4">{link.text}</span>
+                <button key={link.index} className="flex justify-between items-center w-full">
+                  <span className="text-sm">{link.text}</span>
+                  <p>{link.icon}</p>
                 </button>
               ))}
             </div>
