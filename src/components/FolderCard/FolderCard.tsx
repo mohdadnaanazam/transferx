@@ -1,4 +1,4 @@
-import { Folder, EllipsisVertical } from 'lucide-react';
+import { Folder, EllipsisVertical } from 'lucide-react'
 
 function FolderCard() {
   return (
@@ -16,4 +16,4 @@ function FolderCard() {
   )
 }
 
-export default FolderCard;
+export default FolderCard
