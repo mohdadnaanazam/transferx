@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
-import { Dashboard } from "@/components/Dashboard"
+import { Home } from "@/components/pages/Home"
 
 export default function SideNavbar() {
   const { status } = useSession()
@@ -12,5 +12,5 @@ export default function SideNavbar() {
     redirect("/")
   }
 
-  return <Dashboard />
+  return <Home />
 }
