@@ -1,19 +1,19 @@
-import { Folder, EllipsisVertical } from 'lucide-react'
+import { Folder, EllipsisVertical } from 'lucide-react';
 
 function FolderCard() {
-	return (
-		<div className="w-full sm:w-[48%] md:w-[30%] lg:w-[23%] rounded-lg dark:hover:bg-accent border p-2">
-			<div className='flex justify-between items-center'>
-				<button className='flex justify-start gap-x-4'>
-					<Folder strokeWidth={1} />
-					<p>Photos</p>
-				</button>
-				<button>
-					<EllipsisVertical strokeWidth={1} />
-				</button>
-			</div>
-		</div>
-	)
+  return (
+    <div className="w-full rounded-lg dark:hover:bg-accent border p-2 overflow-hidden">
+      <div className="flex justify-between items-center">
+        <button className="flex items-center gap-x-4">
+          <Folder strokeWidth={1} />
+          <p className="truncate">Photos</p>
+        </button>
+        <button>
+          <EllipsisVertical strokeWidth={1} />
+        </button>
+      </div>
+    </div>
+  )
 }
 
-export default FolderCard
+export default FolderCard;

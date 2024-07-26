@@ -66,7 +66,7 @@ export default function AccountPageLayout({ children }: { children: React.ReactN
             <CustomAvatar user={session?.user} allowPopover={false} />
           </SidebarBody>
         </Sidebar>
-        <div className={"mx-auto overflow-y-scroll"}>
+        <div className={"mx-auto overflow-y-scroll w-full"}>
           {children}
         </div>
       </div>

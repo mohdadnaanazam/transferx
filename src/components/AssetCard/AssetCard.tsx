@@ -71,7 +71,7 @@ function AssetCard() {
   ]
 
   return (
-    <div className="w-full sm:w-[48%] lg:w-[32%] h-56 rounded-lg bg-gray-100 dark:bg-neutral-800 relative"
+    <div className="w-full h-56 rounded-lg bg-gray-100 dark:bg-neutral-800 relative"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
       <div className="relative h-full w-full rounded-lg">
