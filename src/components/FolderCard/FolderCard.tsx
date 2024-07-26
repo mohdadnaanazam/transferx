@@ -6,10 +6,10 @@ function FolderCard() {
       <div className="flex justify-between items-center">
         <button className="flex items-center gap-x-4">
           <Folder strokeWidth={1} />
-          <p className="truncate">Photos</p>
+          <p className="truncate text-sm">Photos</p>
         </button>
         <button>
-          <EllipsisVertical strokeWidth={1} />
+          <EllipsisVertical strokeWidth={1} size={18} />
         </button>
       </div>
     </div>
