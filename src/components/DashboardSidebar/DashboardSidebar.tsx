@@ -35,7 +35,7 @@ const links = [
     label: "Logout",
     onClick: signOut,
     icon: (
-      <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+      <IconArrowLeft strokeWidth={1} className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
     ),
   },
 ]
@@ -54,7 +54,7 @@ export const DashboardSidebar = ({ }: Props) => {
             <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
               <div className="mt-8 flex flex-col gap-2">
                 {links.map((link, idx) => (
-                  <SidebarLink key={idx} link={link} />
+                  <SidebarLink key={idx} link={link} className='gap-4' />
                 ))}
               </div>
             </div>
