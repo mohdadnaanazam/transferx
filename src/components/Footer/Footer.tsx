@@ -2,10 +2,15 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import { MaxWidthContainer } from '../MaxWidthContainer';
+import { useSession } from 'next-auth/react';
 
 export default function Footer(): JSX.Element {
-  const [isCompanyOpen, setIsCompanyOpen] = useState(false);
-  const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false);
+  // init
+  const { data: session } = useSession()
+
+  // states
+  const [isCompanyOpen, setIsCompanyOpen] = useState(false)
+  const [isQuickLinksOpen, setIsQuickLinksOpen] = useState(false)
 
   const toggleCompany = () => {
     setIsCompanyOpen(!isCompanyOpen);
@@ -16,6 +21,10 @@ export default function Footer(): JSX.Element {
     setIsQuickLinksOpen(!isQuickLinksOpen);
     setIsCompanyOpen(false);
   };
+
+  if (session) {
+    return <></>
+  }
 
   return (
     <footer className="w-full py-2">
