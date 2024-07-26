@@ -1,18 +1,16 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { Button } from '../ui/button'
 import { MaxWidthContainer } from '../MaxWidthContainer'
 
 export const Navbar = () => {
-	const [isOpen, setIsOpen] = useState(false)
 	const path = usePathname()
 
 	return (
-		<MaxWidthContainer className="hidden md:block bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto sticky top-0 pt-4 z-10 max-w-screen-3xl">
-			<div className="mx-auto flex items-center justify-between h-full relative">
+		<MaxWidthContainer className="hidden md:block bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto sticky top-0 py-2 z-10 max-w-screen-3xl">
+			<div className="mx-auto flex items-center justify-between h-full">
 				<div className='flex justify-between items-center flex-row space-x-0'>
 					<div className='flex space-x-1'>
 						<div className='bg-green-0 w-[2px] h-7' />
@@ -27,7 +25,7 @@ export const Navbar = () => {
 						</div>
 					</div>
 				</div>
-				<div className="hidden md:block space-x-4 absolute bottom-1 right-2">
+				<div className="hidden md:block space-x-4">
 					<Button variant="outline">Upload</Button>
 				</div>
 			</div>
