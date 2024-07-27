@@ -1,9 +1,11 @@
-import { redirect } from "next/navigation";
+import type { Metadata } from 'next'
 
 import connectToDatabase from "../../../../config/mongodb"
 import ShareableLink from "@/models/shareable-schema"
-
-import type { Metadata } from 'next'
+import { AskPin } from "@/components/AskPin"
+import { DownloadCard } from '@/components/DownloadCard/DownloadCard'
+import { MainHero } from '@/components/MainHero/MainHero'
+import { redirect } from 'next/navigation'
 
 export const metadata: Metadata = {
   title: 'transferX',
@@ -13,32 +15,41 @@ export const metadata: Metadata = {
   description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.'
 }
 
-
-async function redirectUser(shorten_slug: string) {
+async function getS3_link(shorten_slug: string) {
   await connectToDatabase()
 
   try {
-    const shareableLink = await ShareableLink.findOne({ shorten_slug }).exec();
+    const url = await ShareableLink.findOne({ shorten_slug }).exec();
 
-    if (shareableLink) {
-      return {
-        destination: `${process.env.NEXT_PUBLIC_BASE_URL}/download/${shareableLink._id}`,
+    if (url) {
+      if (url.is_expired) {
+        redirect('/link-expired')
       }
+      return url
     }
+    redirect('/404')
 
-    return {
-      destination: '/404',
-    }
   } catch (error) {
-    console.error("Error retrieving link:", error);
-    return {
-      destination: '/404',
-    };
+    redirect('/404')
   }
 }
 
 export default async function Page({ params }: { params: { shorten_slug: string } }) {
-  const url = await redirectUser(params.shorten_slug)
+  const url = await getS3_link(params.shorten_slug)
 
-  redirect(url.destination)
+  return (
+
+    <main className='flex max-w-7xl md:mx-auto px-5 h-[91vh] flex-row'>
+      {url && <AskPin visible={url.is_pin_protected} linkId={url._id.toString()} />}
+
+      <div className='flex-1 h-full flex justify-start items-center'>
+        <DownloadCard s3URL={url.s3_url} downloadableURL={url.downloadable_url} fileType={url.file_type} fileName={url.file_name} s3Key={url?.s3_key} />
+      </div>
+
+      <div className='flex-1 hidden md:flex items-center relative'>
+        <MainHero />
+      </div>
+    </main>
+
+  )
 }
