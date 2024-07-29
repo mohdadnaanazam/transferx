@@ -2,7 +2,7 @@
 
 import { ArrowDownToLine, Check, Copy, X, ArrowUp, ArrowDown } from "lucide-react"
 import { useLiveQuery } from "dexie-react-hooks"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 
 import { db } from "@/offline/db.model"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -11,25 +11,16 @@ import { PreviewPanel } from "@/components/PreviewPanel"
 import { useToast } from "@/components/ui/use-toast"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-interface Link {
-  id: string;
-  name: string;
-  expiryDate: string;
-  shortURL: string;
-  downloadURL: string;
-  file_type: string;
-  previewURL: string;
-  s3Id: string;
-}
-
 export const Links = () => {
   const { toast } = useToast()
   const [ascSorted, setAscSorted] = useState(false);
-  const [sortedLinks, setSortedLinks] = useState<Link[]>([]);
+  const [sortedLinks, setSortedLinks] = useState<any>([]);
 
-  const links = useLiveQuery(() => db.links.toArray()) || []
+ const liveLinks = useLiveQuery(() => db.links.toArray(), [db]);
+ const links = useMemo(() => liveLinks || [], [liveLinks])
 
   useEffect(() => {
+    console.log('check')
     setSortedLinks(links)
   }, [links])
 
@@ -73,7 +64,7 @@ export const Links = () => {
 
         <TooltipProvider>
           <TableBody>
-            {sortedLinks?.map((link) => (
+            {sortedLinks?.map((link: any) => (
               <TableRow key={link?.id}>
                 <TableCell className="font-medium">
                   {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
