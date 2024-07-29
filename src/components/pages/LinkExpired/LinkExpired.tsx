@@ -4,11 +4,11 @@ import type { Metadata } from 'next'
 import { BorderMagicButton } from '@/components/Buttons'
 
 export const metadata: Metadata = {
-  title: 'Link Expired',
+  title: 'transferX | Link Expired',
   description: 'Streamline your file transfers with our secure and user-friendly platform. Easily send and receive files of any size, ensuring quick and reliable delivery every time.',
 }
 
-export default function ExpiredLink() {
+export const LinkExpired = () => {
   return (
     <section className="flex items-center h-full p-16">
       <div className="container flex flex-col items-center justify-center px-5 mx-auto my-8">
