@@ -1,7 +1,8 @@
 'use client'
 
-import { ArrowDownToLine, Check, Copy, X } from "lucide-react"
+import { ArrowDownToLine, Check, Copy, X, ArrowUp, ArrowDown } from "lucide-react"
 import { useLiveQuery } from "dexie-react-hooks"
+import { useState, useEffect } from "react"
 
 import { db } from "@/offline/db.model"
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
@@ -10,9 +11,27 @@ import { PreviewPanel } from "@/components/PreviewPanel"
 import { useToast } from "@/components/ui/use-toast"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
+interface Link {
+  id: string;
+  name: string;
+  expiryDate: string;
+  shortURL: string;
+  downloadURL: string;
+  file_type: string;
+  previewURL: string;
+  s3Id: string;
+}
+
 export const Links = () => {
   const { toast } = useToast()
+  const [ascSorted, setAscSorted] = useState(false);
+  const [sortedLinks, setSortedLinks] = useState<Link[]>([]);
+
   const links = useLiveQuery(() => db.links.toArray()) || []
+
+  useEffect(() => {
+    setSortedLinks(links)
+  }, [links])
 
   const handleCopy = async (shortURL: string, id: string) => {
     try {
@@ -21,6 +40,16 @@ export const Links = () => {
     } catch (error) {
       toast({ title: "Error", description: "Unable to copy link to clipboard." })
     }
+  }
+
+  const handleSort = () => {
+    const sorted = [...sortedLinks].sort((a, b) => {
+      return ascSorted
+        ? new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime()
+        : new Date(a.expiryDate).getTime() - new Date(b.expiryDate).getTime()
+    })
+    setAscSorted(!ascSorted)
+    setSortedLinks(sorted)
   }
 
   return (
@@ -34,7 +63,9 @@ export const Links = () => {
             <TableHead className="w-[100px] px-0">Status</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Download URL</TableHead>
-            <TableHead>Expiry</TableHead>
+            <TableHead className="flex justify-start items-center gap-x-1">
+              Expiry {ascSorted ? <ArrowUp strokeWidth={1} onClick={handleSort} /> : <ArrowDown strokeWidth={1} onClick={handleSort} />}
+            </TableHead>
             <TableHead>Shareable URL</TableHead>
             <TableHead />
           </TableRow>
@@ -42,8 +73,8 @@ export const Links = () => {
 
         <TooltipProvider>
           <TableBody>
-            {links?.map((link) => (
-              <TableRow key={link.id}>
+            {sortedLinks?.map((link) => (
+              <TableRow key={link?.id}>
                 <TableCell className="font-medium">
                   {(new Date(link?.expiryDate) < new Date()) ? <X className="text-red-500" /> : <Check className="text-green-500" />}
                 </TableCell>
@@ -69,7 +100,7 @@ export const Links = () => {
                   <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
                 </TableCell>
 
-                <TableCell>{!(new Date(link?.expiryDate) < new Date()) && <PreviewPanel s3Key={link.s3Id} url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />}
+                <TableCell>{!(new Date(link?.expiryDate) < new Date()) && <PreviewPanel s3Key={link?.s3Id} url={link?.previewURL} type={link?.file_type} downloadableURL={link?.downloadURL} fileName={link?.name} handleDownload={handleDownload} />}
                 </TableCell>
               </TableRow>
             ))}
