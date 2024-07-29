@@ -47,10 +47,10 @@ export const DashboardSidebar = ({ }: Props) => {
   const { data: session } = useSession()
 
   return (
-    <aside className='h-full relative'>
-      <div className='sticky top-14 left-0 border-r-[0.1px] h-[calc(100vh-3.5rem)] bg-red-50'>
+    <aside className='h-[93vh] relative z-50'>
+      <div className='fixed top-0 bottom-0 border-r-[0.1px] h-full'>
         <Sidebar open={open} setOpen={setOpen} animate={true}>
-          <SidebarBody className="justify-between gap-10 dark:bg-[#020817]">
+          <SidebarBody className="justify-between gap-10 pt-10 dark:bg-[#020817]">
             <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
               <div className="mt-8 flex flex-col gap-2">
                 {links.map((link, idx) => (

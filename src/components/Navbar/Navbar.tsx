@@ -9,7 +9,7 @@ export const Navbar = () => {
   const path = usePathname()
 
   return (
-    <MaxWidthContainer className="hidden md:block bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto sticky top-0 py-2 z-10 max-w-screen-3xl">
+    <MaxWidthContainer className="fixed hidden md:block z-[51] bg-gray-900 bg-opacity-30 backdrop-filter backdrop-blur-lg mx-auto top-0 py-2 max-w-screen-3xl">
       <div className="mx-auto flex items-center justify-between h-full">
         <div className='flex justify-between items-center flex-row space-x-0'>
           <div className='flex space-x-1'>

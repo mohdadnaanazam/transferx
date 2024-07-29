@@ -2,10 +2,16 @@ import { DashboardSidebar } from "@/components/DashboardSidebar/DashboardSidebar
 
 export default function AccountPageLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex flex-col h-full relative dark:bg-[#020817] md:flex-row w-full flex-1 mx-auto mb-10 pr-10">
-      <DashboardSidebar />
-      <div className="mx-auto overflow-hidden w-full">
-        {children}
+    <div className="flex-1 h-full flex flex-col">
+      <div className="h-full flex-1 w-full">
+        <div className="flex h-full relative w-full flex-1">
+
+          <DashboardSidebar />
+
+          <div className="h-full w-full pl-10 pt-10">
+            {children}
+          </div>
+        </div>
       </div>
     </div>
   )
