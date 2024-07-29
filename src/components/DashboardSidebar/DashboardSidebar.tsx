@@ -48,7 +48,7 @@ export const DashboardSidebar = ({ }: Props) => {
 
   return (
     <aside className='h-[93vh] relative z-50'>
-      <div className='fixed top-0 bottom-0 border-r-[0.1px] h-full'>
+      <div className='fixed top-0 bottom-0 md:border-r-[0.1px] h-full'>
         <Sidebar open={open} setOpen={setOpen} animate={true}>
           <SidebarBody className="justify-between gap-10 pt-10 dark:bg-[#020817]">
             <div className="flex flex-col flex-1 overflow-y-hidden overflow-x-hidden">
