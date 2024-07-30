@@ -54,7 +54,7 @@ export const StyledDropzone = () => {
     <div className="mt-5">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
-        <p>Drag 'n' drop some files here, or click to select files</p>
+        <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
       </div>
       {fileNames.length > 0 && (
         <aside className='mt-4'>
