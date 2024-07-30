@@ -2,8 +2,18 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Button } from '../ui/button'
+
 import { MaxWidthContainer } from '../MaxWidthContainer'
+import { Button } from '../ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { StyledDropzone } from '../StyledDropzone'
 
 export const Navbar = () => {
   const path = usePathname()
@@ -26,7 +36,19 @@ export const Navbar = () => {
           </div>
         </div>
         <div className="hidden md:block space-x-4">
-          <Button variant="outline">Upload</Button>
+          <Dialog>
+            <DialogTrigger>
+              <Button variant="outline">Upload</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Upload Files here</DialogTitle>
+                <DialogDescription>
+                  <StyledDropzone />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </MaxWidthContainer>
