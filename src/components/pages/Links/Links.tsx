@@ -1,6 +1,7 @@
 'use client'
 
-import { ArrowDownToLine, Check, Copy, X } from "lucide-react"
+import { useState, useEffect, useMemo, SetStateAction } from "react"
+import { ArrowDownToLine, Check, Copy, X, ArrowUp, ArrowDown } from "lucide-react"
 import { useLiveQuery } from "dexie-react-hooks"
 
 import { db } from "@/offline/db.model"
@@ -10,9 +11,26 @@ import { PreviewPanel } from "@/components/PreviewPanel"
 import { useToast } from "@/components/ui/use-toast"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
+interface Link {
+  id: string;
+  name: string;
+  expiryDate: Date;
+  shortURL: string;
+  downloadURL: string;
+  file_type: string;
+  previewURL: string;
+  s3Id: string;
+}
+
 export const Links = () => {
   const { toast } = useToast()
+  const [ascSorted, setAscSorted] = useState(false)
   const links = useLiveQuery(() => db.links.toArray()) || []
+  const [sortedLinks, setSortedLinks] = useState<Link[]>([])
+  
+  useEffect(() => {
+    setSortedLinks(links)
+  }, [links])
 
   const handleCopy = async (shortURL: string, id: string) => {
     try {
@@ -21,6 +39,14 @@ export const Links = () => {
     } catch (error) {
       toast({ title: "Error", description: "Unable to copy link to clipboard." })
     }
+  }
+
+  const handleSort = () => {
+    const sorted = sortedLinks.sort((a, b) => {
+      return ascSorted ? new Date(b.expiryDate).getTime() - new Date(a.expiryDate).getTime() : new Date(a.expiryDate).getTime() - new Date(b.expiryDate).getTime()
+    })
+    setAscSorted(!ascSorted)
+    setSortedLinks(sorted)
   }
 
   return (
@@ -34,7 +60,9 @@ export const Links = () => {
             <TableHead className="w-[100px] px-0">Status</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Download URL</TableHead>
-            <TableHead>Expiry</TableHead>
+            <TableHead className="flex justify-start items-center gap-x-1">
+              Expiry {ascSorted ? <ArrowUp className='cursor-pointer mt-1' size={20} strokeWidth={1} onClick={handleSort} /> : <ArrowDown className='cursor-pointer mt-1' strokeWidth={1} size={20} onClick={handleSort} />}
+            </TableHead>
             <TableHead>Shareable URL</TableHead>
             <TableHead />
           </TableRow>
