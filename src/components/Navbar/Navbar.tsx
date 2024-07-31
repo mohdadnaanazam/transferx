@@ -28,7 +28,7 @@ export const Navbar = () => {
           </div>
 
           <div className="flex items-center w-2/6 space-x-4 justify-center">
-            <div className="hidden md:flex space-x-4">
+            <div className="hidden md:flex">
               <NavLink href='/me' name='Home' path={path} />
               <NavLink href='/me/assets' name='Assets' path={path} />
               <NavLink href='/me/folders' name='Folders' path={path} />
@@ -58,5 +58,12 @@ export const Navbar = () => {
 export default Navbar
 
 function NavLink({ href, name, path }: { href: string, name: string, path: string }) {
-  return <Link href={href} className={`dark:text-gray-400 py-1 px-3 text-sm text-gray-900 dark:hover:text-white dark:hover:bg-accent hover:rounded-lg hover:animate-pulse tracking-wide underline-offset-4 ${path === href ? ' dark:text-white hover:underline' : ''}`}>{name}</Link>
+  const isActive = path === href;
+
+  return (
+    <div className="relative group">
+      <Link href={href} className="dark:text-gray-400 py-2 px-4 text-sm text-gray-900 dark:hover:text-white dark:hover:bg-accent hover:rounded tracking-wide transition-all duration-700 ease-in-out">{name}</Link>
+      <div className={`absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-full h-[2px] bg-white transition-all duration-700 ease-in-out ${isActive ? 'opacity-100' : 'opacity-0'}`} />
+    </div>
+  );
 }
