@@ -27,7 +27,7 @@ export const Links = () => {
   const [ascSorted, setAscSorted] = useState(false)
   const links = useLiveQuery(() => db.links.toArray()) || []
   const [sortedLinks, setSortedLinks] = useState<Link[]>([])
-  
+
   useEffect(() => {
     setSortedLinks(links)
   }, [links])
@@ -61,7 +61,17 @@ export const Links = () => {
             <TableHead>Name</TableHead>
             <TableHead>Download URL</TableHead>
             <TableHead className="flex justify-start items-center gap-x-1">
-              Expiry {ascSorted ? <ArrowUp className='cursor-pointer mt-1' size={20} strokeWidth={1} onClick={handleSort} /> : <ArrowDown className='cursor-pointer mt-1' strokeWidth={1} size={20} onClick={handleSort} />}
+              Expiry
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    {ascSorted ? <ArrowUp className='cursor-pointer mt-1' size={20} strokeWidth={1} onClick={handleSort} /> : <ArrowDown className='cursor-pointer mt-1' strokeWidth={1} size={20} onClick={handleSort} />}
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {ascSorted ? 'Sort Ascending' : 'Sort Descending'}
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </TableHead>
             <TableHead>Shareable URL</TableHead>
             <TableHead />
