@@ -62,16 +62,7 @@ export const Links = () => {
             <TableHead>Download URL</TableHead>
             <TableHead className="flex justify-start items-center gap-x-1">
               Expiry
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    {ascSorted ? <ArrowUp className='cursor-pointer mt-1' size={20} strokeWidth={1} onClick={handleSort} /> : <ArrowDown className='cursor-pointer mt-1' strokeWidth={1} size={20} onClick={handleSort} />}
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {ascSorted ? 'Sort Ascending' : 'Sort Descending'}
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              {ascSorted ? <ArrowUp className='cursor-pointer mt-1' size={20} strokeWidth={1} onClick={handleSort} /> : <ArrowDown className='cursor-pointer mt-1' strokeWidth={1} size={20} onClick={handleSort} />}
             </TableHead>
             <TableHead>Shareable URL</TableHead>
             <TableHead />
