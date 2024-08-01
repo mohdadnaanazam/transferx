@@ -1,21 +1,21 @@
 import connectToDatabase from "../../../../config/mongodb"
-import ShareableLink from '@/models/shareable-schema'
+import SnipLink from '@/models/snip-schema'
 import { generateUniqueKey as generateUniqueSlug } from "@/utils/generate-unique-key"
 
 export async function POST(request: Request) {
   try {
-    const { s3_url, pin, file_type, file_name, downloadable_url, expiry, s3_key } = await request.json();
+    const { url, alias } = await request.json()
 
-    await connectToDatabase();
+    await connectToDatabase()
 
-    const existingUrl = await ShareableLink.findOne({ s3_url }).exec()
+    const existingUrl = await SnipLink.findOne({ url }).exec()
 
     if (existingUrl) {
       return Response.json({ shorten_slug: existingUrl.shorten_slug })
     }
-    const shorten_slug = generateUniqueSlug({ type: 'transfer', alias: '' });
+    const shorten_slug = generateUniqueSlug({ type: 'snip', alias: alias })
 
-    const newEntry = new ShareableLink({ s3_url, shorten_slug, pin, file_type, file_name, downloadable_url, expiry, s3_key })
+    const newEntry = new SnipLink({ url, shorten_slug, alias })
 
     try {
       await newEntry.save()

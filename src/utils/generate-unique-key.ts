@@ -1,6 +1,11 @@
 import { v4 as uuidv4 } from 'uuid'
 
-export const generateUniqueKey = () => {
+interface Props {
+  type: String
+  alias: String
+}
+
+export const generateUniqueKey = ({ type = '', alias = '' }: Props) => {
   const characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789' + uuidv4();
   const shortUrlLength = 6;
 
@@ -10,5 +15,5 @@ export const generateUniqueKey = () => {
     shortUrl += characters.charAt(randomIndex);
   }
 
-  return 'trnsfr.' + shortUrl;
+  return (type === 'snip') ? ('trnsfr-snip.' + shortUrl + '/' + alias) : ('trnsfr.' + shortUrl);
 }
