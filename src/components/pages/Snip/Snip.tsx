@@ -38,7 +38,6 @@ export const Snip = ({ }: Props) => {
     }
     const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
     const { url } = await response.json()
-    console.log(url)
     setSnipURL(url)
   }
 
