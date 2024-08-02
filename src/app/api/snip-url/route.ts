@@ -9,17 +9,15 @@ export async function POST(request: Request) {
     await connectToDatabase()
 
     const existingUrl = await SnipLink.findOne({ url }).exec()
-
     if (existingUrl) {
-      return Response.json({ shorten_slug: existingUrl.shorten_slug })
+      return Response.json({ url: existingUrl.shorten_slug })
     }
-    const shorten_slug = generateUniqueSlug({ type: 'snip', alias: alias })
 
+    const shorten_slug = generateUniqueSlug({ type: 'snip', alias: alias })
     const newEntry = new SnipLink({ url, shorten_slug, alias })
 
     try {
       await newEntry.save()
-
       return Response.json({ url: shorten_slug })
     } catch (saveError) {
       return Response.json({ error: 'Error saving entry' })

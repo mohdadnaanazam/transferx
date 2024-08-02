@@ -20,9 +20,11 @@ import { Label } from "@/components/ui/label"
 interface CopyURLDialogProps {
   progress: null | number
   shareLink: '' | string
+  description: '' | string
+  historyURL: '' | string
 }
 
-export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
+export function CopyURLDialog({ progress, shareLink, description, historyURL }: CopyURLDialogProps) {
   const { toast } = useToast()
   const buttonRef = useRef<HTMLButtonElement | null>(null)
 
@@ -68,15 +70,11 @@ export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
-            <Label htmlFor="link" className="sr-only">
-              Link
-            </Label>
+            <Label htmlFor="link" className="sr-only">Link</Label>
             <Input
               id="link"
               defaultValue=""
@@ -97,7 +95,7 @@ export function CopyURLDialog({ progress, shareLink }: CopyURLDialogProps) {
               </Button>
             </DialogClose>
 
-            <Link href='/links' className="text-sm underline underline-offset-2">Show recent links</Link>
+            <Link href={historyURL} className="text-sm underline underline-offset-2">Show recent links</Link>
           </div>
         </DialogFooter>
       </DialogContent>

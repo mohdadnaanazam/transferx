@@ -114,9 +114,10 @@ export const CardWithForm = () => {
         </CardContent>
 
         <CardFooter className="flex justify-between">
-          <CopyURLDialog progress={progress} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`} />
+          <CopyURLDialog progress={progress} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${shareLink}`} description={'Anyone who has this link will be able to view this.'} historyURL={'/links'} />
           <SetPin setPin={(pin) => dispatch({ type: SET_PIN, payload: pin })} />
-          <Button disabled={isUploading} onClick={handleSubmit}>Generate Link</Button>        </CardFooter>
+          <Button disabled={isUploading} onClick={handleSubmit}>Generate Link</Button>
+        </CardFooter>
       </Card>
     </TooltipProvider>
   )
