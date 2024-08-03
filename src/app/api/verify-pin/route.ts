@@ -1,7 +1,7 @@
 import { limiter } from '@/utils/limiter'
 import shareableLinkSchema from '../../../models/shareable-schema'
+import connectToDatabase from '../../../../config/mongodb'
 
-export const maxDuration = 30
 
 export async function POST(request: Request) {
   // TODO: add limiter
@@ -13,6 +13,8 @@ export async function POST(request: Request) {
 
   try {
     const data = await request.json()
+
+    await connectToDatabase()
 
     const shareableLink = await shareableLinkSchema.findById(data.linkId).select('pin')
 
