@@ -43,7 +43,7 @@ export const Snip = ({ }: Props) => {
 
   return (
     <MaxWidthContainer>
-      <div className='flex justify-between items-center'>
+      <div className='flex flex-col md:flex-row py-10 md:py-0 justify-between items-center'>
         <Card className='w-full md:max-w-[450px]'>
           <CardHeader>
             <CardTitle></CardTitle>
@@ -63,7 +63,7 @@ export const Snip = ({ }: Props) => {
             <Button onClick={handleSubmit} className="ml-auto py-1 text-base">Snip</Button>
           </CardFooter>
         </Card>
-        <div>
+        <div className='hidden md:block'>
           <div className="h-[35rem] w-full flex flex-col items-center justify-center overflow-hidden rounded-md">
             <h1 className="md:text-7xl text-2xl lg:text-9xl font-bold text-center text-white relative z-20">Snip URL</h1>
             <div className="md:w-[20rem] lg:w-[40rem] h-40 relative mx-auto">
