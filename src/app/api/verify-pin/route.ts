@@ -1,6 +1,8 @@
 import { limiter } from '@/utils/limiter'
 import shareableLinkSchema from '../../../models/shareable-schema'
 
+export const maxDuration = 30
+
 export async function POST(request: Request) {
   // TODO: add limiter
   // const remaining = await limiter.removeTokens(1)
