@@ -30,6 +30,15 @@ export const Snip = ({ }: Props) => {
     }))
   }
 
+  function isValidURL(string: string): boolean {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  } 
+
   const handleSubmit = async () => {
     const options = {
       method: 'POST',
@@ -37,10 +46,16 @@ export const Snip = ({ }: Props) => {
       body: JSON.stringify({ url: data.url, alias: data.alias })
     }
     const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
-    const { url } = await response.json()
-    setSnipURL(url)
+    console.log(response, "**8")
+    const url   = response.headers.get('url')
+  
+    if (url && isValidURL(url)) {
+      setSnipURL(url)
+    } else {
+      setSnipURL('');
+    }
   }
-
+  
   return (
     <MaxWidthContainer>
       <div className='flex justify-between items-center'>
@@ -60,7 +75,7 @@ export const Snip = ({ }: Props) => {
           </CardContent>
           <CardFooter>
             <CopyURLDialog progress={100} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${snipURL}`} description={'Anyone who has this link will be able to access the URL.'} historyURL={'/snip/links'} />
-            <Button onClick={handleSubmit} className="ml-auto py-1 text-base">Snip</Button>
+            <Button disabled={!data.url} onClick={handleSubmit} className="ml-auto py-1 text-base">Snip</Button>
           </CardFooter>
         </Card>
         <div>
