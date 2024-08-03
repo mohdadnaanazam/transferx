@@ -21,7 +21,7 @@ type Props = {}
 export const Snip = ({ }: Props) => {
   const [data, setData] = useState({ url: '', alias: '' })
   const [snipURL, setSnipURL] = useState('')
-
+  const [isValidUrl, SetIsValidUrl] = useState(true)
   const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setData((prev) => ({
@@ -30,15 +30,31 @@ export const Snip = ({ }: Props) => {
     }))
   }
 
+  function isValidURL(string: string): boolean {
+    try {
+      new URL(string);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   const handleSubmit = async () => {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url: data.url, alias: data.alias })
     }
-    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
-    const { url } = await response.json()
-    setSnipURL(url)
+
+    if (data.url && isValidURL(data.url)) {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
+      const { url } = await response.json()
+      setSnipURL(url)
+      SetIsValidUrl(true)
+    } else {
+      SetIsValidUrl(false)
+      setSnipURL('');
+    }
   }
 
   return (
@@ -53,14 +69,15 @@ export const Snip = ({ }: Props) => {
               <Label htmlFor="url">Url</Label>
               <Input name="url" value={data.url} onChange={handleFormChange} className='border-0 border-b rounded-none pl-0 focus:outline-none w-full' />
             </div>
+            {!isValidUrl && <p id='errorType' className='text-sm text-red-600'>Enter the url</p>}
             <div className="flex flex-col w-full">
               <Label htmlFor="alias">Alias</Label>
               <Input type="text" name="alias" value={data.alias} onChange={handleFormChange} className="border-0 border-b rounded-none pl-0 focus:outline-none w-full" />
             </div>
           </CardContent>
           <CardFooter>
-            <CopyURLDialog progress={100} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${snipURL}`} description={'Anyone who has this link will be able to access the URL.'} historyURL={'/snip/links'} />
-            <Button onClick={handleSubmit} className="ml-auto py-1 text-base">Snip</Button>
+            {isValidUrl && <CopyURLDialog progress={100} shareLink={`${process.env.NEXT_PUBLIC_BASE_URL}/${snipURL}`} description={'Anyone who has this link will be able to access the URL.'} historyURL={'/snip/links'} />}
+            <Button disabled={!data.url} onClick={handleSubmit} className="ml-auto py-1 text-base">Snip</Button>
           </CardFooter>
         </Card>
         <div className='hidden md:block'>
