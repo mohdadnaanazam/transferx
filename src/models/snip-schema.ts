@@ -7,10 +7,6 @@ const snipSchema = new Schema({
     type: String,
     required: true
   },
-  alias: {
-    type: String,
-    required: true
-  },
   shorten_slug: {
     type: String,
     required: true

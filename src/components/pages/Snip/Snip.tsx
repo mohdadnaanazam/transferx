@@ -19,7 +19,7 @@ import { CopyURLDialog } from '@/components/CopyURLDialog'
 type Props = {}
 
 export const Snip = ({ }: Props) => {
-  const [data, setData] = useState({ url: '', alias: '' })
+  const [data, setData] = useState({ url: '' })
   const [snipURL, setSnipURL] = useState('')
 
   const handleFormChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,11 +34,24 @@ export const Snip = ({ }: Props) => {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url: data.url, alias: data.alias })
+      body: JSON.stringify({ url: data.url })
     }
-    const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
-    const { url } = await response.json()
-    setSnipURL(url)
+    try {
+      const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/snip-url', options)
+
+      if (!response.ok) {
+        console.error('Failed to snip URL:', response.statusText)
+        return
+      }
+      const result = await response.json()
+      if (result.url) {
+        setSnipURL(result.url)
+      } else {
+        console.error('No URL returned:', result)
+      }
+    } catch (error) {
+      console.error('Error in handleSubmit:', error)
+    }
   }
 
   return (
@@ -52,10 +65,6 @@ export const Snip = ({ }: Props) => {
             <div className="flex flex-col w-full">
               <Label htmlFor="url">Url</Label>
               <Input name="url" value={data.url} onChange={handleFormChange} className='border-0 border-b rounded-none pl-0 focus:outline-none w-full' />
-            </div>
-            <div className="flex flex-col w-full">
-              <Label htmlFor="alias">Alias</Label>
-              <Input type="text" name="alias" value={data.alias} onChange={handleFormChange} className="border-0 border-b rounded-none pl-0 focus:outline-none w-full" />
             </div>
           </CardContent>
           <CardFooter>

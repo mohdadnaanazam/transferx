@@ -4,7 +4,7 @@ import { generateUniqueKey as generateUniqueSlug } from "@/utils/generate-unique
 
 export async function POST(request: Request) {
   try {
-    const { url, alias } = await request.json()
+    const { url } = await request.json()
 
     await connectToDatabase()
 
@@ -13,8 +13,8 @@ export async function POST(request: Request) {
       return Response.json({ url: existingUrl.shorten_slug })
     }
 
-    const shorten_slug = generateUniqueSlug({ type: 'snip', alias: alias })
-    const newEntry = new SnipLink({ url, shorten_slug, alias })
+    const shorten_slug = generateUniqueSlug({ type: 'snip' })
+    const newEntry = new SnipLink({ url, shorten_slug })
 
     try {
       await newEntry.save()
