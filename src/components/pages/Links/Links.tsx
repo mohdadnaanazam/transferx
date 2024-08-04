@@ -92,7 +92,7 @@ export const Links = () => {
                   <ArrowDownToLine strokeWidth={1} className={`ml-6 ${(new Date(link?.expiryDate) < new Date()) ? 'cursor-not-allowed' : 'cursor-pointer'}`} onClick={!(new Date(link?.expiryDate) < new Date()) ? () => handleDownload(link?.downloadURL, link?.name, link?.file_type) : undefined} />
                 </TableCell>
 
-                <TableCell>{new Date(link?.expiryDate).toLocaleDateString()}</TableCell>
+                <TableCell>{new Date(link?.expiryDate).toLocaleDateString('en-GB')}</TableCell>
 
                 <TableCell className="cursor-pointer">
                   <Copy strokeWidth={1} className="ml-6" onClick={() => handleCopy(link?.shortURL, link.id)} />
